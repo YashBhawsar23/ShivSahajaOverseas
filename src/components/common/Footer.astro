@@ -1,0 +1,127 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import Container from './Container.astro';
+
+const currentYear = new Date().getFullYear();
+
+const productCategories = [
+  { name: 'Cotton Commodities', href: '/products/category/cotton' },
+  { name: 'Spices & Seasonings', href: '/products/category/spices' },
+  { name: 'Grains, Millets & Flour', href: '/products/category/grains-flour' },
+  { name: 'Seeds & Pulses', href: '/products/category/seeds-pulses' },
+  { name: 'Fresh Vegetables', href: '/products/category/vegetables' },
+  { name: 'Fresh Fruits', href: '/products/category/fruits' },
+];
+
+const companyLinks = [
+  { name: 'About Shivsahaja', href: '/about' },
+  { name: 'Export Solutions', href: '/export' },
+  { name: 'Import Capabilities', href: '/import' },
+  { name: 'Quality Certifications', href: '/certifications' },
+  { name: 'Facility & Trade Gallery', href: '/gallery' },
+  { name: 'Trade Inquiries', href: '/contact' },
+];
+---
+
+<footer class="bg-[#0A1C33] text-slate-300 border-t-2 border-[#B69A63]/30 pt-16 pb-12">
+  <Container>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
+      <!-- Col 1 & 2: Brand & Positioning -->
+      <div class="lg:col-span-2 space-y-4">
+        <BrandLogo variant="light" showTagline={true} />
+        
+        <p class="text-sm text-slate-300 leading-relaxed max-w-sm mt-3">
+          Shivsahaja Overseas is a premier Indian trading enterprise specializing in the sourcing, processing, and global distribution of verified agricultural commodities, spices, grains, and raw cotton.
+        </p>
+
+        <div class="pt-2 text-xs text-slate-400 space-y-1.5">
+          <p class="font-medium text-[#CBB482]">Government & Regulatory Alignment:</p>
+          <p class="leading-relaxed">
+            Registered under the Director General of Foreign Trade (DGFT), compliant with APEDA, Spices Board of India, and FSSAI export standards.
+          </p>
+        </div>
+      </div>
+
+      <!-- Col 3: Product Catalogue -->
+      <div>
+        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
+          Product Catalogue
+        </h3>
+        <ul class="space-y-2.5 text-sm">
+          {productCategories.map((cat) => (
+            <li>
+              <a href={cat.href} class="text-slate-300 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 group">
+                <span class="text-[#B69A63] group-hover:translate-x-0.5 transition-transform">&rsaquo;</span>
+                {cat.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 4: Corporate Quick Links -->
+      <div>
+        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
+          Trade & Company
+        </h3>
+        <ul class="space-y-2.5 text-sm">
+          {companyLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-slate-300 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 group">
+                <span class="text-[#B69A63] group-hover:translate-x-0.5 transition-transform">&rsaquo;</span>
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 5: Verified Trade Desk & Contact -->
+      <div>
+        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
+          Trade Desk
+        </h3>
+        <div class="space-y-3 text-xs text-slate-300">
+          <div>
+            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Corporate Office:</span>
+            <p class="leading-relaxed text-slate-200">
+              Shivsahaja Overseas<br />
+              <span class="text-slate-400">[Official Address - Maharashtra / Gujarat, India]</span>
+            </p>
+          </div>
+
+          <div>
+            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Trade Inquiries:</span>
+            <a href="mailto:enquiry@shivsahajaoverseas.com" class="text-[#CBB482] hover:underline block break-all">
+              enquiry@shivsahajaoverseas.com
+            </a>
+          </div>
+
+          <div>
+            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Operations & Logistics:</span>
+            <p class="text-slate-300">
+              JNPT Nhava Sheva &bull; Mundra Port &bull; Hazira Port
+            </p>
+          </div>
+
+          <div class="pt-2">
+            <span class="inline-block bg-[#183B63] text-slate-300 text-[10px] px-2.5 py-1 rounded border border-[#B69A63]/30">
+              IEC: Registered Exporter
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 mt-8 border-t border-[#183B63] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+      <p>
+        &copy; {currentYear} Shivsahaja Overseas. All rights reserved. Borderless Growth &bull; Trusted Partner.
+      </p>
+      <div class="flex items-center gap-6">
+        <span>Incoterms 2020: FOB &bull; CIF &bull; CFR</span>
+        <span>Made for International B2B Trade</span>
+      </div>
+    </div>
+  </Container>
+</footer>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import Button from '../components/common/Button.astro';
+---
+
+<BaseLayout
+  title="Global Trade & Agricultural Commodity Exports"
+  description="Connecting Global Markets Through Trusted Trade. Shivsahaja Overseas is your trusted Indian partner for sourcing quality agricultural commodities, spices, cotton, and grains."
+>
+  <section class="py-24 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white">
+    <Container class="text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-semibold tracking-wider uppercase mb-6">
+        Global Trade &bull; Trusted Partner &bull; Borderless Growth
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight text-white">
+        Connecting Global Markets Through <span class="text-[#B69A63]">Trusted Trade</span>
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
+        Your trusted partner for sourcing and supplying quality agricultural commodities and products across international markets.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <Button href="/products" variant="gold" size="lg">
+          Explore Product Catalogue
+        </Button>
+        <Button href="/contact" variant="outline" size="lg" class="border-white text-white hover:bg-white hover:text-[#102C50]">
+          Contact Trade Desk
+        </Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

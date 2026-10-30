@@ -1,0 +1,66 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL | string;
+  type?: 'website' | 'article' | 'product';
+}
+
+const siteTitleDefault = 'Shivsahaja Overseas | Global Trade & Commodity Exports';
+const siteDescriptionDefault = 'Your trusted partner for sourcing and supplying quality agricultural commodities, spices, grains, pulses, and raw cotton across international markets.';
+const siteUrl = 'https://shivsahajaoverseas.com';
+
+const {
+  title,
+  description = siteDescriptionDefault,
+  image = '/images/og-banner.jpg',
+  canonicalURL = Astro.url.href,
+  type = 'website',
+} = Astro.props;
+
+const pageTitle = title ? `${title} | Shivsahaja Overseas` : siteTitleDefault;
+const resolvedCanonical = typeof canonicalURL === 'string' ? canonicalURL : canonicalURL.href;
+const resolvedImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={resolvedCanonical} />
+
+<!-- Primary Meta Tags -->
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={description} />
+<meta name="keywords" content="Shivsahaja Overseas, Indian agricultural exports, cotton export India, spices exporter, grain supplier, Indian pulses, APEDA certified exporter, B2B agro trade" />
+<meta name="author" content="Shivsahaja Overseas" />
+<meta name="theme-color" content="#102C50" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={resolvedCanonical} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={resolvedImage} />
+<meta property="og:site_name" content="Shivsahaja Overseas" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={resolvedCanonical} />
+<meta property="twitter:title" content={pageTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={resolvedImage} />
+
+<!-- Google Fonts Preconnect for Premium Corporate Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+  rel="stylesheet"
+/>

@@ -1,0 +1,49 @@
+---
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  class?: string;
+  theme?: 'light' | 'dark';
+}
+
+const {
+  badge,
+  title,
+  subtitle,
+  align = 'center',
+  class: className = '',
+  theme = 'light',
+} = Astro.props;
+
+const isDark = theme === 'dark';
+const alignClasses = align === 'center' ? 'text-center mx-auto items-center' : 'text-left items-start';
+---
+
+<div class:list={['flex flex-col max-w-3xl mb-12', alignClasses, className]}>
+  {badge && (
+    <span class:list={[
+      'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 border',
+      isDark 
+        ? 'bg-[#183B63]/60 text-[#CBB482] border-[#B69A63]/30' 
+        : 'bg-[#B69A63]/10 text-[#91753C] border-[#B69A63]/25'
+    ]}>
+      {badge}
+    </span>
+  )}
+  <h2 class:list={[
+    'text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight',
+    isDark ? 'text-white' : 'text-[#102C50]'
+  ]}>
+    {title}
+  </h2>
+  {subtitle && (
+    <p class:list={[
+      'mt-3.5 text-base sm:text-lg leading-relaxed',
+      isDark ? 'text-slate-300' : 'text-slate-600'
+    ]}>
+      {subtitle}
+    </p>
+  )}
+</div>

@@ -1,0 +1,158 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import Button from './Button.astro';
+import Container from './Container.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Products', href: '/products' },
+  { label: 'Import', href: '/import' },
+  { label: 'Export', href: '/export' },
+  { label: 'Certifications', href: '/certifications' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<header class="sticky top-0 z-50 bg-[#102C50]/95 backdrop-blur-md border-b border-[#B69A63]/20 shadow-md transition-all duration-200">
+  <!-- Top Utility Bar: Trade credentials & International inquiries -->
+  <div class="bg-[#0A1C33] text-slate-300 text-xs py-1.5 border-b border-[#183B63] hidden md:block">
+    <Container class="flex justify-between items-center text-[11px] tracking-wide">
+      <div class="flex items-center gap-6">
+        <span class="inline-flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          Exporting Premium Agro Commodities Globally
+        </span>
+        <span class="text-slate-400">|</span>
+        <span class="text-slate-400">Standard: APEDA &bull; FSSAI &bull; Spices Board Compliant</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300">
+        <span>India Head Office &bull; Worldwide Port Shipments</span>
+        <a href="/contact" class="text-[#CBB482] hover:text-white transition-colors underline-offset-2 hover:underline">
+          Quick Trade Desk &rarr;
+        </a>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <div class="py-3 sm:py-3.5">
+    <Container class="flex items-center justify-between">
+      <!-- Company Logo -->
+      <BrandLogo variant="light" />
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main Navigation">
+        {navItems.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'px-3 py-2 rounded-md text-sm font-medium transition-all duration-150',
+                active
+                  ? 'text-white bg-[#183B63] border-b-2 border-[#B69A63] shadow-inner'
+                  : 'text-slate-200 hover:text-white hover:bg-[#183B63]/60'
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- CTA & Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:block">
+          <Button href="/contact" variant="gold" size="sm" class="shadow-md">
+            Request Quote
+          </Button>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          aria-expanded="false"
+          aria-controls="mobile-nav-drawer"
+          aria-label="Toggle navigation menu"
+          class="lg:hidden p-2 text-slate-200 hover:text-white hover:bg-[#183B63] rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63]"
+        >
+          <svg class="w-6 h-6 menu-open-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="w-6 h-6 menu-close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Mobile Drawer / Dropdown -->
+  <div
+    id="mobile-nav-drawer"
+    class="hidden lg:hidden bg-[#0A1C33] border-t border-[#183B63] shadow-2xl transition-all duration-300"
+  >
+    <Container class="py-4 space-y-1">
+      {navItems.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+              active
+                ? 'bg-[#183B63] text-white font-semibold border-l-4 border-[#B69A63]'
+                : 'text-slate-200 hover:bg-[#183B63]/60 hover:text-white'
+            ]}
+            aria-current={active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+      <div class="pt-3 pb-1 border-t border-[#183B63]/80 mt-2">
+        <Button href="/contact" variant="gold" size="md" class="w-full text-center">
+          Request Trade Quote
+        </Button>
+      </div>
+    </Container>
+  </div>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const openIcon = btn?.querySelector('.menu-open-icon');
+    const closeIcon = btn?.querySelector('.menu-close-icon');
+
+    if (!btn || !drawer) return;
+
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      drawer.classList.toggle('hidden');
+      openIcon?.classList.toggle('hidden');
+      closeIcon?.classList.toggle('hidden');
+    });
+  }
+
+  // Run on first load and client navigations
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

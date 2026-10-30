@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #102C50;
+  --color-navy-dark: #0A1C33;
+  --color-navy-light: #183B63;
+  --color-navy-subtle: #234E80;
+  
+  --color-gold: #B69A63;
+  --color-gold-light: #CBB482;
+  --color-gold-dark: #91753C;
+  --color-gold-muted: #E6DCBF;
+  
+  --color-offwhite: #F8F7F3;
+  --color-cream: #F0EFEA;
+  --color-card-border: #E8E5DC;
+  
+  --font-heading: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  --brand-navy: #102C50;
+  --brand-navy-light: #183B63;
+  --brand-gold: #B69A63;
+  --brand-offwhite: #F8F7F3;
+  --brand-white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #F8F7F3;
+  color: #1E293B;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #102C50;
+  letter-spacing: -0.02em;
+}
+
+/* Refined custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F7F3;
+}
+::-webkit-scrollbar-thumb {
+  background: #B69A63;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #91753C;
+}
+
+/* Accessibility focus styles */
+:focus-visible {
+  outline: 2px solid #B69A63;
+  outline-offset: 3px;
+}
+
+/* Subtle selection style */
+::selection {
+  background-color: #102C50;
+  color: #F8F7F3;
+}

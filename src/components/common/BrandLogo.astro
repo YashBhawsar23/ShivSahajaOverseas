@@ -1,0 +1,60 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+  showTagline?: boolean;
+  class?: string;
+}
+
+const { variant = 'dark', showTagline = true, class: className = '' } = Astro.props;
+
+const isLight = variant === 'light';
+const primaryTextColor = isLight ? 'text-white' : 'text-[#102C50]';
+const subtitleColor = isLight ? 'text-slate-300' : 'text-slate-600';
+---
+
+<a href="/" class:list={['inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] rounded-lg p-1', className]} aria-label="Shivsahaja Overseas Home">
+  <!-- Brand Emblem Vector -->
+  <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-sm">
+      <defs>
+        <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D4AF37"/>
+          <stop offset="50%" stop-color="#B69A63"/>
+          <stop offset="100%" stop-color="#91753C"/>
+        </linearGradient>
+        <linearGradient id="logoNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#183B63"/>
+          <stop offset="100%" stop-color="#102C50"/>
+        </linearGradient>
+      </defs>
+      
+      <!-- Hexagonal / Shield Base for Global Strength -->
+      <rect x="2" y="2" width="60" height="60" rx="14" fill={isLight ? '#183B63' : '#102C50'} stroke="url(#logoGold)" stroke-width="2"/>
+      
+      <!-- Global Trade Latitude & Longitude Meridians -->
+      <circle cx="32" cy="32" r="21" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
+      <ellipse cx="32" cy="32" rx="10" ry="21" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
+      <line x1="11" y1="32" x2="53" y2="32" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
+
+      <!-- Prominent Dynamic "S" Monogram -->
+      <path d="M42 22 C42 16.5 37.5 14.5 32 14.5 C25 14.5 21.5 18 21.5 23 C21.5 30 42.5 28 42.5 38.5 C42.5 45.5 36.5 49.5 31.5 49.5 C24 49.5 20.5 45 20 40" 
+            stroke="url(#logoGold)" 
+            stroke-width="5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Corporate Typography -->
+  <div class="flex flex-col leading-tight">
+    <div class:list={['font-bold tracking-tight text-lg sm:text-xl font-heading flex items-baseline gap-1.5', primaryTextColor]}>
+      <span>SHIVSAHAJA</span>
+      <span class="text-[#B69A63] font-light">OVERSEAS</span>
+    </div>
+    {showTagline && (
+      <span class:list={['text-[9px] sm:text-[10px] tracking-wider uppercase font-medium mt-0.5', subtitleColor]}>
+        Global Trade &bull; Trusted Partner
+      </span>
+    )}
+  </div>
+</a>
