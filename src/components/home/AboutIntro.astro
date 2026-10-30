@@ -1,0 +1,106 @@
+---
+import Container from '../common/Container.astro';
+import Button from '../common/Button.astro';
+---
+
+<section class="py-20 bg-white border-b border-[#E8E5DC]" aria-label="About Shivsahaja Overseas">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Left Imagery / Feature Box -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[#E8E5DC] aspect-4/5">
+          <img
+            src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&w=1000&q=80"
+            alt="Agricultural inspection and trade quality assurance"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#102C50]/80 via-transparent to-transparent"></div>
+          
+          <!-- Floating Credential Card -->
+          <div class="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-white/95 backdrop-blur-md border border-[#B69A63]/30 shadow-lg text-[#102C50]">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#102C50] text-[#B69A63] flex items-center justify-center font-bold text-lg flex-shrink-0">
+                SO
+              </div>
+              <div>
+                <h4 class="text-sm font-bold leading-tight">Shivsahaja Overseas</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">DGFT Registered &bull; Indian Export House</p>
+              </div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600 font-semibold">
+              <span>Port Deliveries</span>
+              <span class="text-[#B69A63]">JNPT &bull; Mundra &bull; Hazira</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative Accent Element -->
+        <div class="absolute -bottom-4 -right-4 w-28 h-28 bg-[#B69A63]/20 rounded-2xl -z-10 blur-xl"></div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B69A63]/10 border border-[#B69A63]/30 text-[#91753C] text-xs font-bold uppercase tracking-wider">
+          About The Enterprise
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#102C50] tracking-tight leading-tight">
+          Bridging India's Richest Agricultural Belts with Global Demand
+        </h2>
+
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Shivsahaja Overseas is an established Indian commodity trading house dedicated to delivering uncompromised agricultural commodities, raw cotton varieties, spices, pulses, and farm-fresh produce to overseas importers, mills, and food manufacturers.
+        </p>
+
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Operating with a foundation of strict quality control, verified farmer contracts, and transparent trade practices, we ensure that every container dispatched from Indian ports meets the stringent phytosanitary and regulatory specifications of destination markets across the Middle East, Southeast Asia, Europe, and the Americas.
+        </p>
+
+        <!-- Pillars Checklist -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+            <div>
+              <h4 class="text-sm font-bold text-[#102C50]">Traceable Farm Procurement</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Procured from audited farming clusters and certified ginners.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+            <div>
+              <h4 class="text-sm font-bold text-[#102C50]">Precision Optical Grading</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Sortex and gravity-separated for uniform purity and count.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+            <div>
+              <h4 class="text-sm font-bold text-[#102C50]">Unbroken Cold Chain Reefer</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Pre-cooling and CA reefers for fresh fruits and vegetables.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+            <div>
+              <h4 class="text-sm font-bold text-[#102C50]">Complete Trade Documentation</h4>
+              <p class="text-xs text-slate-500 mt-0.5">BL, Phytosanitary, Certificate of Origin, SGS Analysis.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center gap-4">
+          <Button href="/about" variant="primary" size="md">
+            Read Corporate Profile &rarr;
+          </Button>
+          <Button href="/certifications" variant="outline" size="md">
+            View Certifications
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import SectionHeader from '../components/common/SectionHeader.astro';
+import Button from '../components/common/Button.astro';
+
+const importCommodities = [
+  {
+    title: 'Pulses & Legumes',
+    desc: 'Facilitating bulk imports of yellow peas, chickpeas, lentils, and green mung beans to supplement Indian domestic culinary and processing demands.',
+  },
+  {
+    title: 'Specialty Raw Cotton & Synthetic Fibers',
+    desc: 'Sourcing extra-long staple (ELS) cotton (Pima/Giza varieties) for specialized high-count textile spinning mills across India.',
+  },
+  {
+    title: 'Food Grains & Oilseeds',
+    desc: 'Inward trade of milling wheat, feed-grade oilseed meals, and specialty grain varieties conforming to FSSAI import regulations.',
+  },
+  {
+    title: 'Spices & Botanicals',
+    desc: 'Importing select whole spices (cloves, star anise, cassia/cinnamon) from prime origins across Southeast Asia and Africa.',
+  },
+];
+
+const importServices = [
+  {
+    title: 'Customs Clearance & DGFT Compliant Documentation',
+    desc: 'Managing Indian Customs EDI filing, Bill of Entry processing, and mandatory Plant Quarantine (PQ) border inspections.',
+  },
+  {
+    title: 'Port Drayage & Bonded Warehousing',
+    desc: 'Safe decanting, de-stuffing, and secured bonded storage at major CFS (Container Freight Stations) adjacent to JNPT and Mundra ports.',
+  },
+  {
+    title: 'Domestic Last-Mile Distribution',
+    desc: 'Direct logistical transit from port CFS to processing hubs, flour mills, ginning units, and regional agricultural mandis across India.',
+  },
+  {
+    title: 'Quality Testing & FSSAI Clearance',
+    desc: 'Coordination with FSSAI-approved port testing laboratories for prompt clearance of food-grade consignments.',
+  },
+];
+---
+
+<BaseLayout
+  title="Import Capabilities & Domestic Trade Gateway"
+  description="Explore Shivsahaja Overseas import services: reliable inward supply chains, customs clearance, and distribution of agricultural commodities across India."
+>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white relative">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold uppercase tracking-wider mb-4">
+          Inward Trade Facilitation
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Your Strategic Import Gateway into the <span class="text-[#B69A63]">Indian Market</span>
+        </h1>
+        <p class="mt-5 text-base sm:text-lg text-slate-200 leading-relaxed font-light">
+          We partner with overseas agricultural producers, cooperatives, and trading houses to facilitate smooth commodity imports into India with total regulatory and customs compliance.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Key Commodities -->
+  <section class="py-20 bg-white border-b border-[#E8E5DC]">
+    <Container>
+      <SectionHeader
+        badge="Inward Commodity Sectors"
+        title="Commodities Handled for the Indian Market"
+        subtitle="Connecting international growers with India's large-scale food processors, millers, and textile manufacturers."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {importCommodities.map((item, idx) => (
+          <div class="p-6 rounded-2xl bg-[#F8F7F3] border border-[#E8E5DC] hover:border-[#B69A63] hover:shadow-lg transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#B69A63] block mb-2">
+                0{idx + 1}
+              </span>
+              <h3 class="text-lg font-bold text-[#102C50] mb-2 leading-snug">
+                {item.title}
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-200/60 text-[11px] font-semibold text-slate-400">
+              Indian Domestic Demand
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Import Infrastructure & Services -->
+  <section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B69A63]/15 text-[#91753C] text-xs font-bold uppercase tracking-wider">
+            Port Operations &amp; Distribution
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#102C50] leading-tight">
+            Navigating Indian Border Regulations with Confidence
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Importing agricultural produce into India requires careful attention to quarantine pests, maximum residue limits, FSSAI sampling guidelines, and tariff classifications.
+          </p>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Shivsahaja Overseas acts as your dependable in-country trade partner, ensuring cargo de-stuffing, custom bonded clearance, and on-time domestic delivery without costly port demurrage.
+          </p>
+          <div class="pt-2">
+            <Button href="/contact" variant="primary" size="md">
+              Discuss Import Collaboration &rarr;
+            </Button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {importServices.map((service) => (
+            <div class="p-6 rounded-2xl bg-white border border-[#E8E5DC] shadow-sm space-y-2.5">
+              <h3 class="text-base font-bold text-[#102C50] leading-snug">
+                {service.title}
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                {service.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

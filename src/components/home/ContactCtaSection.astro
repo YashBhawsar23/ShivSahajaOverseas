@@ -1,0 +1,53 @@
+---
+import Container from '../common/Container.astro';
+import Button from '../common/Button.astro';
+---
+
+<section class="py-20 bg-gradient-to-br from-[#102C50] via-[#183B63] to-[#0A1C33] text-white relative overflow-hidden" aria-label="Contact Trade Desk">
+  <!-- Decorative Background Glow -->
+  <div class="absolute -right-20 -top-20 w-80 h-80 bg-[#B69A63]/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-[#183B63]/40 rounded-full blur-3xl pointer-events-none"></div>
+
+  <Container class="relative z-10">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+        Direct Trade Engagement
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        Ready to Source Premium Commodities from India?
+      </h2>
+
+      <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl mx-auto font-light">
+        Connect with our export desk today. Receive comprehensive product specifications, current market pricing, and complete FOB/CIF port rate quotations.
+      </p>
+
+      <div class="pt-4 flex flex-wrap justify-center items-center gap-4">
+        <Button href="/contact" variant="gold" size="lg" class="shadow-2xl">
+          Submit Commercial Inquiry
+        </Button>
+        <Button href="/products" variant="outline" size="lg" class="border-white/80 text-white hover:bg-white hover:text-[#102C50]">
+          Explore Full Catalogue
+        </Button>
+      </div>
+
+      <!-- Quick Contacts -->
+      <div class="pt-8 border-t border-slate-700/60 flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-xs sm:text-sm text-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Response Guaranteed &le; 24h</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[#CBB482]">Email:</span>
+          <a href="mailto:enquiry@shivsahajaoverseas.com" class="text-white hover:underline">
+            enquiry@shivsahajaoverseas.com
+          </a>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[#CBB482]">Registered Exporter:</span>
+          <span class="text-white">Govt. of India DGFT</span>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

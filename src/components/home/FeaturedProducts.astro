@@ -1,0 +1,33 @@
+---
+import Container from '../common/Container.astro';
+import Button from '../common/Button.astro';
+import ProductGrid from '../products/ProductGrid.astro';
+import { getFeaturedProducts } from '../../utils/products';
+
+const featuredProducts = await getFeaturedProducts(6);
+---
+
+<section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Featured Commodities">
+  <Container>
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B69A63]/15 text-[#91753C] text-xs font-bold uppercase tracking-wider mb-3">
+          Prime Selections
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#102C50] tracking-tight">
+          Featured Export Commodities
+        </h2>
+        <p class="mt-2 text-base text-slate-600 max-w-2xl">
+          Consistently high-demand commodities prepared under standardized quality parameters for bulk containerized shipment.
+        </p>
+      </div>
+
+      <Button href="/products" variant="primary" size="md" class="flex-shrink-0 self-start md:self-auto">
+        Explore All 24+ Commodities &rarr;
+      </Button>
+    </div>
+
+    <!-- Product Grid -->
+    <ProductGrid products={featuredProducts} />
+  </Container>
+</section>

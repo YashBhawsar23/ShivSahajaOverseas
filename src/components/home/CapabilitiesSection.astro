@@ -1,0 +1,79 @@
+---
+import Container from '../common/Container.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+
+const capabilities = [
+  {
+    step: '01',
+    title: 'Farmgate Direct Sourcing',
+    desc: 'Contracted relationships with producer clusters and ginning units in Maharashtra, Gujarat, Madhya Pradesh, and Andhra Pradesh ensure authentic origin and consistent raw grade quality.',
+  },
+  {
+    step: '02',
+    title: 'Sortex & Mechanical Cleaning',
+    desc: 'State-of-the-art optical color sorters, gravity separators, and destoners eliminate foreign material, black kernels, and broken seeds to achieve up to 99.5% purity.',
+  },
+  {
+    step: '03',
+    title: 'Controlled Atmosphere Cold Chain',
+    desc: 'Dedicated pre-cooling and temperature-regulated reefer container transport for delicate perishables (bananas, pomegranates, mangoes, chillies) preserving natural sugar brix and firmness.',
+  },
+  {
+    step: '04',
+    title: 'Multi-Modal Port Logistics',
+    desc: 'Expedited container stuffing and vessel loading at prime western Indian container gateways: JNPT (Nhava Sheva), Mundra Port, and Hazira Port with real-time tracking.',
+  },
+  {
+    step: '05',
+    title: 'Export Compliance & Documentation',
+    desc: 'Full regulatory clearance: DGFT export documentation, APEDA / Spices Board phytosanitary certifications, Fumigation certificates, Non-GMO certificates, and SGS inspection reports.',
+  },
+  {
+    step: '06',
+    title: 'Customized B2B Packaging',
+    desc: 'From 500g nitrogen-flushed retail pouches to 25kg/50kg PP/Jute bags, 1-ton jumbo bulk tote bags, and hydraulically pressed 170kg cotton bales with private label buyer stenciling.',
+  },
+];
+---
+
+<section class="py-20 bg-white border-b border-[#E8E5DC]" aria-label="Trade Capabilities">
+  <Container>
+    <SectionHeader
+      badge="Operational Excellence"
+      title="End-to-End International Trade Capabilities"
+      subtitle="From origin inspection at the farmgate to ocean freight clearance at major Indian ports, we maintain total control of the supply chain."
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {capabilities.map((cap) => (
+        <div class="p-7 rounded-2xl bg-[#F8F7F3] border border-[#E8E5DC] hover:border-[#B69A63] hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl font-black text-[#B69A63] font-mono group-hover:scale-110 transition-transform">
+                {cap.step}
+              </span>
+              <div class="w-8 h-8 rounded-lg bg-white border border-[#E8E5DC] flex items-center justify-center text-[#102C50] group-hover:bg-[#102C50] group-hover:text-white transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-[#102C50] group-hover:text-[#B69A63] transition-colors leading-snug">
+              {cap.title}
+            </h3>
+
+            <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {cap.desc}
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-2 text-[11px] font-semibold text-slate-500">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Verified Operational Standard
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

@@ -11,24 +11,24 @@ const { product, class: className = '' } = Astro.props;
 const { data } = product;
 const categoryInfo = getCategoryDetails(data.category);
 
-const tradeTypeLabel = {
-  export: 'Global Export',
-  import: 'Direct Import',
-  both: 'Import & Export',
-}[data.tradeType];
+const tradeTypeLabels: Record<string, string> = {
+  'export': 'Global Export',
+  'import': 'Direct Import',
+  'both': 'Import & Export',
+};
 
-const tradeTypeBadgeClass = {
-  export: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-  import: 'bg-blue-50 text-blue-800 border-blue-200',
-  both: 'bg-indigo-50 text-indigo-800 border-indigo-200',
-}[data.tradeType];
+const tradeTypeBadgeClasses: Record<string, string> = {
+  'export': 'bg-emerald-50 text-emerald-800 border-emerald-200',
+  'import': 'bg-blue-50 text-blue-800 border-blue-200',
+  'both': 'bg-indigo-50 text-indigo-800 border-indigo-200',
+};
+
+const tradeTypeLabel = tradeTypeLabels[data.tradeType] || 'Export';
+const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald-50 text-emerald-800 border-emerald-200';
 ---
 
 <article
-  class:list={[
-    'group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative',
-    className
-  ]}
+  class={`group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative ${className}`}
   data-category={data.category}
   data-trade-type={data.tradeType}
 >
@@ -50,7 +50,7 @@ const tradeTypeBadgeClass = {
       <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-[#102C50]/90 text-white backdrop-blur-sm shadow-sm uppercase tracking-wider">
         {categoryInfo?.name || data.category}
       </span>
-      <span class:list={['inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold border backdrop-blur-sm shadow-sm', tradeTypeBadgeClass]}>
+      <span class={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold border backdrop-blur-sm shadow-sm ${tradeTypeBadgeClass}`}>
         {tradeTypeLabel}
       </span>
     </div>

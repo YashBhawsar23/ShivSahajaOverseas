@@ -1,0 +1,79 @@
+---
+import Container from '../common/Container.astro';
+import Button from '../common/Button.astro';
+---
+
+<section class="relative bg-[#102C50] text-white overflow-hidden min-h-[85vh] flex items-center">
+  <!-- Background Image with Gradient Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=2000&q=80"
+      alt="Global maritime container port and cargo ship"
+      class="w-full h-full object-cover object-center opacity-25 filter brightness-75 contrast-125"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-[#102C50] via-[#102C50]/90 to-[#183B63]/80"></div>
+    <!-- Subtle Grid Overlay -->
+    <div class="absolute inset-0 bg-[radial-gradient(#B69A63_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+  </div>
+
+  <Container class="relative z-10 py-20 lg:py-28">
+    <div class="max-w-3xl">
+      <!-- Tagline Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#183B63]/80 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold tracking-wider uppercase mb-6 backdrop-blur-md shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-[#B69A63] animate-pulse"></span>
+        Global Trade &bull; Trusted Partner &bull; Borderless Growth
+      </div>
+
+      <!-- Main Headline (Exact Match to Prompt) -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] text-white">
+        Connecting Global Markets Through <span class="text-[#B69A63] inline-block">Trusted Trade</span>
+      </h1>
+
+      <!-- Supporting Text (Exact Match to Prompt) -->
+      <p class="mt-6 text-lg sm:text-xl text-slate-200 leading-relaxed max-w-2xl font-light">
+        Your trusted partner for sourcing and supplying quality agricultural commodities and products across international markets.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <Button href="/products" variant="gold" size="lg" class="shadow-xl">
+          Explore Product Catalogue
+        </Button>
+        <Button href="/contact" variant="outline" size="lg" class="border-slate-300 text-white hover:bg-white hover:text-[#102C50] backdrop-blur-sm">
+          Request Commercial Quote
+        </Button>
+        <a href="/about" class="text-sm font-semibold text-[#CBB482] hover:text-white transition-colors inline-flex items-center gap-1.5 ml-2">
+          Discover Our Heritage &rarr;
+        </a>
+      </div>
+
+      <!-- Trust Metrics Strip -->
+      <div class="mt-14 pt-8 border-t border-slate-700/60 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white">6</div>
+          <div class="text-xs text-[#CBB482] font-semibold mt-0.5">Commodity Sectors</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">Cotton, Spices, Grains, Fruits & More</div>
+        </div>
+
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white">100%</div>
+          <div class="text-xs text-[#CBB482] font-semibold mt-0.5">Inspection Passed</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">SGS &amp; Intertek Quality Protocols</div>
+        </div>
+
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white">Incoterms</div>
+          <div class="text-xs text-[#CBB482] font-semibold mt-0.5">FOB &bull; CIF &bull; CFR</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">Direct Sea &amp; Air Logistics</div>
+        </div>
+
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white">Certified</div>
+          <div class="text-xs text-[#CBB482] font-semibold mt-0.5">Export Compliant</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">APEDA, FSSAI &amp; DGFT Standards</div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

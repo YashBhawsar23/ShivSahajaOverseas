@@ -1,0 +1,74 @@
+---
+import Container from '../common/Container.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+import { categories, getAllProducts } from '../../utils/products';
+
+const allProducts = await getAllProducts();
+
+const categoryImages: Record<string, string> = {
+  cotton: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
+  spices: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
+  'grains-flour': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80',
+  'seeds-pulses': 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=80',
+  vegetables: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80',
+  fruits: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=80',
+};
+
+const enrichedCategories = categories.map((cat) => ({
+  ...cat,
+  count: allProducts.filter((p) => p.data.category === cat.id).length,
+  image: categoryImages[cat.id] || 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+}));
+---
+
+<section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Product Categories">
+  <Container>
+    <SectionHeader
+      badge="Commodity Portfolio"
+      title="Sourced from Prime Agricultural Belts"
+      subtitle="From premium raw cotton to nutrient-rich food grains and aromatic spices, our commodities comply with international phytosanitary and export benchmarks."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {enrichedCategories.map((cat) => (
+        <a
+          href={`/products/category/${cat.id}`}
+          class="group relative h-80 rounded-2xl overflow-hidden border border-[#E8E5DC] shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6"
+        >
+          <!-- Background Image with Zoom -->
+          <img
+            src={cat.image}
+            alt={cat.name}
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+          />
+
+          <!-- Gradient Darkness -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#102C50] via-[#102C50]/60 to-transparent group-hover:from-[#0A1C33] group-hover:via-[#102C50]/80 transition-colors"></div>
+
+          <!-- Content overlay -->
+          <div class="relative z-10 text-white space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-[#CBB482] uppercase tracking-wider bg-[#102C50]/80 px-2.5 py-1 rounded backdrop-blur-sm border border-[#B69A63]/30">
+                {cat.count} Varieties
+              </span>
+              <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#B69A63] group-hover:text-[#102C50] transition-colors">
+                <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold tracking-tight text-white group-hover:text-[#CBB482] transition-colors">
+              {cat.name}
+            </h3>
+
+            <p class="text-xs text-slate-200 line-clamp-2 leading-relaxed opacity-90">
+              {cat.description}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </Container>
+</section>

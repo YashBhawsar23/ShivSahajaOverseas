@@ -1,0 +1,72 @@
+---
+import Container from '../common/Container.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+
+const faqs = [
+  {
+    q: 'What international Incoterms and payment terms does Shivsahaja Overseas support?',
+    a: 'We routinely execute contracts under Incoterms 2020: FOB (Free On Board Indian ports), CIF (Cost, Insurance & Freight), and CFR (Cost & Freight). Our standard international payment terms include Irrevocable Letter of Credit (L/C at sight from prime international banks) and Wire Transfer (T/T with a standard advance deposit and remaining against scanned Bill of Lading & shipping documents).',
+  },
+  {
+    q: 'Which loading ports in India are used for your commodity shipments?',
+    a: 'We primarily ship containerized break-bulk and FCL cargoes through India’s most technologically advanced western deepwater ports: JNPT (Nhava Sheva, Mumbai), Mundra Port (Gujarat), and Hazira Port (Surat). For specific south Indian agricultural varieties and spices, we also utilize Chennai and Cochin ports.',
+  },
+  {
+    q: 'How does Shivsahaja Overseas ensure product specifications and purity?',
+    a: 'Quality control begins at the farmgate and processing plant. Before container sealing, every export consignment can be surveyed and certified by internationally accredited third-party inspection agencies such as SGS, Intertek, or Geo-Chem. We supply a formal Certificate of Analysis (COA) confirming physical parameters, moisture limits, and chemical purity.',
+  },
+  {
+    q: 'Do you provide buyer-customized packaging and private labeling?',
+    a: 'Yes. We cater to institutional importers, retail repackers, and industrial processors. Packaging options include 500g to 5kg retail nitrogen-flushed pouches, 25kg / 50kg food-grade PP bags with buyer brand stenciling, 1-ton jumbo bulk totes, and 165-170kg hydraulically compressed cotton bales.',
+  },
+  {
+    q: 'Can overseas buyers request commodity samples prior to final contracting?',
+    a: 'Certainly. We routinely dispatch representative commodity samples via international express couriers (DHL, FedEx) along with preliminary laboratory test sheets to allow buyers to verify color, mesh size, brix, or micronaire before final purchase order confirmation.',
+  },
+  {
+    q: 'What is the standard order lead time from contract confirmation to vessel departure?',
+    a: 'Standard containerized shipments typically dispatch within 7 to 14 business days from financial instrument establishment. For fresh perishable commodities (bananas, pomegranates, chillies), shipments are scheduled within 48 to 72 hours of harvest via cold-chain reefer routing.',
+  },
+];
+---
+
+<section class="py-20 bg-white border-b border-[#E8E5DC]" aria-label="Frequently Asked Questions">
+  <Container size="lg">
+    <SectionHeader
+      badge="Trade Clarifications"
+      title="Frequently Asked Trade Questions"
+      subtitle="Clear answers on payment terms, port logistics, third-party inspection, and packaging protocols for international buyers."
+    />
+
+    <div class="space-y-4 max-w-4xl mx-auto">
+      {faqs.map((faq, idx) => (
+        <details class="group bg-[#F8F7F3] rounded-2xl border border-[#E8E5DC] transition-all duration-200 overflow-hidden open:bg-white open:border-[#B69A63]/50 open:shadow-md">
+          <summary class="p-5 sm:p-6 cursor-pointer list-none flex items-center justify-between text-left font-bold text-base sm:text-lg text-[#102C50] group-hover:text-[#B69A63] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] select-none">
+            <span class="flex items-center gap-3 pr-4">
+              <span class="w-6 h-6 rounded-full bg-[#102C50]/10 text-[#102C50] text-xs font-mono font-bold flex items-center justify-center flex-shrink-0 group-open:bg-[#102C50] group-open:text-[#B69A63] transition-colors">
+                {idx + 1}
+              </span>
+              <span>{faq.q}</span>
+            </span>
+            <span class="w-7 h-7 rounded-full bg-white border border-[#E8E5DC] flex items-center justify-center text-slate-500 group-open:rotate-180 group-open:bg-[#102C50] group-open:text-white transition-all flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6 pt-2 text-sm text-slate-600 leading-relaxed border-t border-slate-100/80">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Quick Help Notice -->
+    <div class="mt-12 text-center text-xs text-slate-500">
+      Have a specific technical or Incoterm requirement? Contact our trade desk directly at{' '}
+      <a href="/contact" class="text-[#102C50] font-bold underline hover:text-[#B69A63]">
+        enquiry@shivsahajaoverseas.com
+      </a>
+    </div>
+  </Container>
+</section>

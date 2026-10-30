@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+
+const galleryItems = [
+  {
+    title: 'Raw Cotton Ginning & Baling',
+    category: 'cotton',
+    categoryName: 'Cotton & Fibers',
+    image: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Hydraulically pressed Shankar-6 cotton bales prepared for container stuffing at our contracted ginning partner facility in Gujarat.',
+  },
+  {
+    title: 'Sortex Cleaning & Purity Grader',
+    category: 'processing',
+    categoryName: 'Spices & Processing',
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=80',
+    caption: 'High-speed optical color sorters separating discolored pods and seeds from premium Guntur red chilli and turmeric batches.',
+  },
+  {
+    title: 'Deepwater Container Terminal Drayage',
+    category: 'logistics',
+    categoryName: 'Port Logistics',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Containerized vessel loading operations at JNPT (Nhava Sheva Port), executing weekly scheduled departures to the Middle East and Europe.',
+  },
+  {
+    title: 'Milling Wheat & Grain Warehousing',
+    category: 'grains',
+    categoryName: 'Grains & Pulses',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Moisture-controlled grain silo storage and aspirator pre-cleaning for hard amber milling wheat.',
+  },
+  {
+    title: 'Bhagwa Pomegranate Orchard Packhouse',
+    category: 'perishables',
+    categoryName: 'Fresh Fruits',
+    image: 'https://images.unsplash.com/photo-1541344999736-83eca872f242?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Individual sorting and foam cushioning of fresh Bhagwa pomegranates under APEDA HortiNet export protocol.',
+  },
+  {
+    title: 'Grand Nain Cavendish Banana Reefer Stuffing',
+    category: 'perishables',
+    categoryName: 'Fresh Fruits',
+    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Vacuum-sealed cartons of G9 Cavendish bananas loaded into 40ft Controlled Atmosphere (CA) reefer containers at +13.5°C.',
+  },
+  {
+    title: 'Nashik Red Onion Sorting & Leno Bag Packing',
+    category: 'perishables',
+    categoryName: 'Vegetables',
+    image: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Cured and stem-cut Nashik red onions graded into 45mm+ and 55mm+ sizes in ventilated mesh leno bags.',
+  },
+  {
+    title: 'Kabuli Chana Color Sorting & Bagging',
+    category: 'grains',
+    categoryName: 'Grains & Pulses',
+    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Export bagging of jumbo count Kabuli Chana into 25kg PP bags with custom buyer markings.',
+  },
+  {
+    title: 'Spice Cryogenic Pin-Milling',
+    category: 'processing',
+    categoryName: 'Spices & Processing',
+    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Low-temperature cryogenic milling of Salem turmeric fingers preserving volatile oils and natural curcuminoids.',
+  },
+];
+---
+
+<BaseLayout
+  title="Infrastructure & Commodity Gallery"
+  description="Explore the operational facilities, commodity inspections, port logistics, and processing technology behind Shivsahaja Overseas trade operations."
+>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white relative">
+    <Container>
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold uppercase tracking-wider mb-4">
+          Field &amp; Port Operations
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Operational Facilities &amp; <span class="text-[#B69A63]">Trade Gallery</span>
+        </h1>
+        <p class="mt-5 text-base sm:text-lg text-slate-200 leading-relaxed font-light">
+          A visual overview of our commodity sourcing clusters, mechanical Sortex cleaning plants, temperature-controlled packhouses, and maritime port logistics.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Filter Buttons & Grid -->
+  <section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+    <Container>
+      <!-- Filter Tabs -->
+      <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-12" id="gallery-filters">
+        <button
+          type="button"
+          data-filter="all"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#102C50] text-white shadow-sm transition-colors cursor-pointer"
+        >
+          All Operations
+        </button>
+        <button
+          type="button"
+          data-filter="cotton"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
+        >
+          Cotton &amp; Fibers
+        </button>
+        <button
+          type="button"
+          data-filter="processing"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
+        >
+          Spices &amp; Processing
+        </button>
+        <button
+          type="button"
+          data-filter="grains"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
+        >
+          Grains &amp; Pulses
+        </button>
+        <button
+          type="button"
+          data-filter="perishables"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
+        >
+          Fruits &amp; Vegetables
+        </button>
+        <button
+          type="button"
+          data-filter="logistics"
+          class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
+        >
+          Port Logistics
+        </button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="gallery-grid">
+        {galleryItems.map((item) => (
+          <div
+            class="gallery-card group bg-white rounded-2xl overflow-hidden border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+            data-category={item.category}
+          >
+            <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-[#102C50]/90 text-[#CBB482] uppercase tracking-wider backdrop-blur-sm">
+                  {item.categoryName}
+                </span>
+              </div>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-[#102C50] group-hover:text-[#B69A63] transition-colors">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+                  {item.caption}
+                </p>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <span class="inline-flex items-center gap-1 font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Active Operation
+                </span>
+                <span class="font-mono text-slate-400">Shivsahaja Overseas</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupGalleryFilters() {
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.gallery-card');
+
+    if (!filterBtns.length || !cards.length) return;
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = (btn as HTMLElement).dataset.filter || 'all';
+
+        filterBtns.forEach((b) => {
+          b.classList.remove('bg-[#102C50]', 'text-white');
+          b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+        });
+
+        btn.classList.add('bg-[#102C50]', 'text-white');
+        btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+
+        cards.forEach((card) => {
+          const cat = card.dataset.category;
+          if (filter === 'all' || cat === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  setupGalleryFilters();
+  document.addEventListener('astro:page-load', setupGalleryFilters);
+</script>
