@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/common/Container.astro';
+import ProductGallery from '../../components/products/ProductGallery.astro';
+import ProductDetails from '../../components/products/ProductDetails.astro';
+import ProductEnquiryCTA from '../../components/products/ProductEnquiryCTA.astro';
+import RelatedProducts from '../../components/products/RelatedProducts.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { getAllProducts, getCategoryDetails } from '../../utils/products';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const products = await getAllProducts();
+  return products.map((product) => ({
+    params: { slug: product.data.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { data } = product;
+const { Content } = await render(product);
+const categoryInfo = getCategoryDetails(data.category);
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: data.name,
+  description: data.shortDescription,
+  image: data.image,
+  category: categoryInfo?.name || data.category,
+  brand: {
+    '@type': 'Brand',
+    name: 'Shivsahaja Overseas',
+  },
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    itemCondition: 'https://schema.org/NewCondition',
+    price: '0.00',
+    description: 'B2B commercial wholesale quotation available upon inquiry based on Incoterms (FOB/CIF/CFR).',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://shivsahajaoverseas.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Products',
+      item: 'https://shivsahajaoverseas.com/products',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: categoryInfo?.name || data.category,
+      item: `https://shivsahajaoverseas.com/products/category/${data.category}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: data.name,
+      item: `https://shivsahajaoverseas.com/products/${data.slug}`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={data.seo.title || `${data.name} Exporter India`}
+  description={data.seo.description || data.shortDescription}
+  image={data.image}
+  type="product"
+>
+  <JsonLd slot="head" schema={productSchema} />
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <!-- Breadcrumbs & Header Strip -->
+  <div class="bg-white border-b border-[#E8E5DC] py-4">
+    <Container>
+      <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+        <a href="/" class="hover:text-[#102C50] transition-colors">Home</a>
+        <span>&rsaquo;</span>
+        <a href="/products" class="hover:text-[#102C50] transition-colors">Products</a>
+        <span>&rsaquo;</span>
+        <a href={`/products/category/${data.category}`} class="hover:text-[#102C50] transition-colors">
+          {categoryInfo?.name || data.category}
+        </a>
+        <span>&rsaquo;</span>
+        <span class="text-[#102C50] font-semibold truncate max-w-xs">{data.name}</span>
+      </nav>
+    </Container>
+  </div>
+
+  <!-- Product Detail Core -->
+  <section class="py-12 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <!-- Left: Image Gallery & Pre-filled Quotation CTA -->
+        <div class="lg:col-span-5 space-y-8 sticky top-28">
+          <ProductGallery
+            mainImage={data.image}
+            gallery={data.gallery}
+            productName={data.name}
+          />
+
+          <ProductEnquiryCTA
+            productName={data.name}
+            moq={data.moq}
+          />
+        </div>
+
+        <!-- Right: Technical Details & Specifications Table -->
+        <div class="lg:col-span-7 space-y-8">
+          <ProductDetails product={product} />
+
+          <!-- Rendered Markdown Body (Processing & Agronomy) -->
+          <div class="bg-white p-7 rounded-2xl border border-[#E8E5DC] shadow-sm prose prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#102C50] prose-a:text-[#102C50] prose-a:underline hover:prose-a:text-[#B69A63]">
+            <Content />
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Products in Same Category -->
+      <RelatedProducts
+        currentSlug={data.slug}
+        category={data.category}
+      />
+    </Container>
+  </section>
+</BaseLayout>

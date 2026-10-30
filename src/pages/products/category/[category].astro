@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Container from '../../../components/common/Container.astro';
+import ProductCategoryNavigation from '../../../components/products/ProductCategoryNavigation.astro';
+import ProductGrid from '../../../components/products/ProductGrid.astro';
+import JsonLd from '../../../components/seo/JsonLd.astro';
+import { categories, getProductsByCategory } from '../../../utils/products';
+
+export async function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { category: cat.id },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const products = await getProductsByCategory(category.id);
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://shivsahajaoverseas.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Products',
+      item: 'https://shivsahajaoverseas.com/products',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: category.name,
+      item: `https://shivsahajaoverseas.com/products/category/${category.id}`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${category.name} Exporter & Supplier India`}
+  description={`Export quality Indian ${category.name.toLowerCase()}. Verified specifications, sortex cleaned, and containerized logistics by Shivsahaja Overseas.`}
+>
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <!-- Category Hero Header -->
+  <section class="py-16 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white">
+    <Container>
+      <div class="max-w-3xl">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs text-slate-300 mb-4">
+          <a href="/" class="hover:text-white transition-colors">Home</a>
+          <span>&rsaquo;</span>
+          <a href="/products" class="hover:text-white transition-colors">Products</a>
+          <span>&rsaquo;</span>
+          <span class="text-[#CBB482] font-semibold">{category.name}</span>
+        </nav>
+
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold uppercase tracking-wider mb-4">
+          Commodity Category Showcase
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Indian <span class="text-[#B69A63]">{category.name}</span> Export
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed font-light">
+          {category.description}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Category Products Section -->
+  <section class="py-14 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+    <Container>
+      <!-- Category Navigation -->
+      <div class="mb-10">
+        <ProductCategoryNavigation activeCategory={category.id} />
+      </div>
+
+      <!-- Category Products Grid -->
+      <ProductGrid products={products} />
+
+      <!-- Category Quick Contact Banner -->
+      <div class="mt-16 p-8 rounded-2xl bg-white border border-[#E8E5DC] shadow-sm max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-bold text-[#102C50]">
+            Inquire About Bulk {category.name} Shipments
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            Request our latest seasonal market report, laboratory specifications, and FOB/CIF price quotation.
+          </p>
+        </div>
+        <a
+          href={`/contact?commodity=${encodeURIComponent(category.name)}`}
+          class="inline-flex items-center px-6 py-3 rounded-lg bg-[#102C50] text-white hover:bg-[#183B63] font-semibold text-sm transition-all shadow hover:shadow-md whitespace-nowrap"
+        >
+          Request Category Quote &rarr;
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
