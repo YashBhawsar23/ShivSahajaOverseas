@@ -1,0 +1,81 @@
+---
+import Button from '../common/Button.astro';
+
+interface Props {
+  productName: string;
+  moq?: string;
+  class?: string;
+}
+
+const { productName, moq, class: className = '' } = Astro.props;
+---
+
+<div class:list={['bg-white rounded-2xl border-2 border-[#B69A63]/30 p-6 sm:p-7 shadow-lg relative overflow-hidden', className]}>
+  <div class="absolute -right-12 -top-12 w-32 h-32 bg-[#B69A63]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+  <div class="relative z-10 space-y-4">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#102C50] text-[#CBB482] uppercase tracking-wider">
+      <span>Official Trade Inquiry</span>
+    </div>
+
+    <h3 class="text-xl font-bold text-[#102C50] leading-snug">
+      Request Price Quotation for {productName}
+    </h3>
+
+    <p class="text-xs text-slate-600 leading-relaxed">
+      Submit your target delivery port, volume requirements, and packaging specifications to receive a formal Proforma Invoice and CIF/FOB quote.
+    </p>
+
+    {moq && (
+      <div class="text-xs text-slate-700 bg-[#F8F7F3] p-2.5 rounded-lg border border-[#E8E5DC]">
+        <span class="font-bold text-[#102C50]">Standard Minimum Order:</span> {moq}
+      </div>
+    )}
+
+    <div class="pt-2 space-y-2.5">
+      <Button
+        href={`/contact?commodity=${encodeURIComponent(productName)}`}
+        variant="gold"
+        size="md"
+        class="w-full text-center shadow-md justify-center"
+      >
+        Request Formal Quotation
+      </Button>
+
+      <a
+        href="mailto:enquiry@shivsahajaoverseas.com?subject=Inquiry for " + encodeURIComponent(productName)
+        class="block text-center text-xs text-slate-500 hover:text-[#102C50] transition-colors py-1"
+      >
+        Direct Email: <span class="font-semibold text-slate-700">enquiry@shivsahajaoverseas.com</span>
+      </a>
+    </div>
+
+    <!-- Assurance Points -->
+    <div class="pt-4 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px] text-slate-500">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Response &le; 24 Hours</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Pre-shipment Inspection</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Global Port Logistics</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>FSSAI / APEDA Certified</span>
+      </div>
+    </div>
+  </div>
+</div>

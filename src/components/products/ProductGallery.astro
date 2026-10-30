@@ -1,0 +1,88 @@
+---
+interface Props {
+  mainImage: string;
+  gallery?: string[];
+  productName: string;
+  class?: string;
+}
+
+const { mainImage, gallery = [], productName, class: className = '' } = Astro.props;
+const allImages = [mainImage, ...gallery.filter((img) => img !== mainImage)];
+---
+
+<div class:list={['space-y-4', className]} id="product-gallery">
+  <!-- Primary Large Image -->
+  <div class="relative aspect-4/3 rounded-2xl overflow-hidden bg-slate-100 border border-[#E8E5DC] shadow-md group">
+    <img
+      id="gallery-main-image"
+      src={allImages[0]}
+      alt={`${productName} primary display`}
+      class="w-full h-full object-cover object-center transition-all duration-300"
+      loading="eager"
+    />
+    <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-md text-[11px] text-white font-medium flex items-center gap-1.5 pointer-events-none">
+      <svg class="w-3.5 h-3.5 text-[#B69A63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      Verified Commodity Inspection
+    </div>
+  </div>
+
+  <!-- Thumbnails Row (if multiple images) -->
+  {allImages.length > 1 && (
+    <div class="flex items-center gap-3 overflow-x-auto pb-2" role="tablist" aria-label="Product Image Thumbnails">
+      {allImages.map((img, idx) => (
+        <button
+          type="button"
+          class:list={[
+            'gallery-thumb relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63]',
+            idx === 0 ? 'border-[#102C50] ring-2 ring-[#B69A63]/50 scale-102' : 'border-slate-200 hover:border-slate-400 opacity-80 hover:opacity-100'
+          ]}
+          data-image-src={img}
+          aria-label={`View image ${idx + 1} of ${productName}`}
+        >
+          <img
+            src={img}
+            alt={`${productName} thumbnail ${idx + 1}`}
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  function setupGallery() {
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    const mainImg = document.getElementById('gallery-main-image') as HTMLImageElement | null;
+
+    if (!mainImg || !thumbs.length) return;
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const newSrc = (thumb as HTMLElement).dataset.imageSrc;
+        if (!newSrc) return;
+
+        mainImg.style.opacity = '0.4';
+        setTimeout(() => {
+          mainImg.src = newSrc;
+          mainImg.style.opacity = '1';
+        }, 150);
+
+        thumbs.forEach((t) => {
+          t.classList.remove('border-[#102C50]', 'ring-2', 'ring-[#B69A63]/50', 'scale-102');
+          t.classList.add('border-slate-200', 'opacity-80');
+        });
+
+        thumb.classList.add('border-[#102C50]', 'ring-2', 'ring-[#B69A63]/50', 'scale-102');
+        thumb.classList.remove('border-slate-200', 'opacity-80');
+      });
+    });
+  }
+
+  setupGallery();
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

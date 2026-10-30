@@ -1,0 +1,52 @@
+---
+import type { ProductEntry } from '../../utils/products';
+import ProductCard from './ProductCard.astro';
+
+interface Props {
+  products: ProductEntry[];
+  class?: string;
+  emptyMessage?: string;
+}
+
+const {
+  products,
+  class: className = '',
+  emptyMessage = 'No commodities match your selection. Please contact our trade desk for custom sourcing requests.',
+} = Astro.props;
+---
+
+{
+  products.length > 0 ? (
+    <div
+      class:list={[
+        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8',
+        className
+      ]}
+      id="product-grid"
+    >
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+  ) : (
+    <div class="text-center py-16 px-4 bg-white rounded-2xl border border-[#E8E5DC] shadow-sm max-w-xl mx-auto">
+      <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-[#B69A63]/10 flex items-center justify-center text-[#91753C]">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-[#102C50]">Commodity Not Listed</h3>
+      <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+        {emptyMessage}
+      </p>
+      <div class="mt-6">
+        <a
+          href="/contact"
+          class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg bg-[#102C50] text-white hover:bg-[#183B63] transition-colors"
+        >
+          Submit Custom Sourcing Request &rarr;
+        </a>
+      </div>
+    </div>
+  )
+}

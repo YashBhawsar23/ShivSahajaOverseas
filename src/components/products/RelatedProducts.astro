@@ -1,0 +1,44 @@
+---
+import type { ProductEntry } from '../../utils/products';
+import { getRelatedProducts, getCategoryDetails } from '../../utils/products';
+import ProductCard from './ProductCard.astro';
+
+interface Props {
+  currentSlug: string;
+  category: ProductEntry['data']['category'];
+  class?: string;
+}
+
+const { currentSlug, category, class: className = '' } = Astro.props;
+const related = await getRelatedProducts(currentSlug, category, 3);
+const categoryInfo = getCategoryDetails(category);
+---
+
+{
+  related.length > 0 && (
+    <section class:list={['mt-16 pt-12 border-t border-[#E8E5DC]', className]} aria-label="Related Commodities">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold text-[#B69A63] uppercase tracking-wider block mb-1">
+            Category Showcase
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#102C50]">
+            More in {categoryInfo?.name || category}
+          </h2>
+        </div>
+        <a
+          href={`/products/category/${category}`}
+          class="text-xs sm:text-sm font-bold text-[#102C50] hover:text-[#B69A63] transition-colors inline-flex items-center gap-1"
+        >
+          View all {categoryInfo?.name} commodities &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {related.map((prod) => (
+          <ProductCard product={prod} />
+        ))}
+      </div>
+    </section>
+  )
+}

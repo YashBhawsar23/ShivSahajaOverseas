@@ -1,0 +1,63 @@
+---
+import { categories, getAllProducts } from '../../utils/products';
+
+interface Props {
+  activeCategory?: string;
+  class?: string;
+}
+
+const { activeCategory = 'all', class: className = '' } = Astro.props;
+const allProducts = await getAllProducts();
+
+const categoryCounts = categories.map((cat) => ({
+  ...cat,
+  count: allProducts.filter((p) => p.data.category === cat.id).length,
+}));
+
+const totalCount = allProducts.length;
+---
+
+<nav aria-label="Commodity Categories" class:list={['w-full overflow-x-auto pb-2 scrollbar-none', className]}>
+  <div class="flex items-center gap-2 sm:gap-3 min-w-max">
+    <a
+      href="/products"
+      class:list={[
+        'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border flex items-center gap-2',
+        activeCategory === 'all'
+          ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
+          : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
+      ]}
+    >
+      <span>All Commodities</span>
+      <span class:list={[
+        'px-2 py-0.5 rounded-full text-[10px] font-bold',
+        activeCategory === 'all' ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
+      ]}>
+        {totalCount}
+      </span>
+    </a>
+
+    {categoryCounts.map((cat) => {
+      const isActive = activeCategory === cat.id;
+      return (
+        <a
+          href={`/products/category/${cat.id}`}
+          class:list={[
+            'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border flex items-center gap-2',
+            isActive
+              ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
+              : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
+          ]}
+        >
+          <span>{cat.name}</span>
+          <span class:list={[
+            'px-2 py-0.5 rounded-full text-[10px] font-bold',
+            isActive ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
+          ]}>
+            {cat.count}
+          </span>
+        </a>
+      );
+    })}
+  </div>
+</nav>

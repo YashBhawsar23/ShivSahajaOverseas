@@ -1,0 +1,119 @@
+---
+import type { ProductEntry } from '../../utils/products';
+import { getCategoryDetails } from '../../utils/products';
+
+interface Props {
+  product: ProductEntry;
+  class?: string;
+}
+
+const { product, class: className = '' } = Astro.props;
+const { data } = product;
+const categoryInfo = getCategoryDetails(data.category);
+
+const tradeTypeLabel = {
+  export: 'Global Export',
+  import: 'Direct Import',
+  both: 'Import & Export',
+}[data.tradeType];
+
+const tradeTypeBadgeClass = {
+  export: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+  import: 'bg-blue-50 text-blue-800 border-blue-200',
+  both: 'bg-indigo-50 text-indigo-800 border-indigo-200',
+}[data.tradeType];
+---
+
+<article
+  class:list={[
+    'group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative',
+    className
+  ]}
+  data-category={data.category}
+  data-trade-type={data.tradeType}
+>
+  <!-- Card Header & Image -->
+  <div class="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
+    <img
+      src={data.image}
+      alt={data.name}
+      loading="lazy"
+      decoding="async"
+      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+    />
+
+    <!-- Gradient overlay for badge readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none"></div>
+
+    <!-- Category & Trade Badges -->
+    <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-[#102C50]/90 text-white backdrop-blur-sm shadow-sm uppercase tracking-wider">
+        {categoryInfo?.name || data.category}
+      </span>
+      <span class:list={['inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold border backdrop-blur-sm shadow-sm', tradeTypeBadgeClass]}>
+        {tradeTypeLabel}
+      </span>
+    </div>
+
+    {data.featured && (
+      <div class="absolute bottom-3 left-3">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#B69A63] text-[#102C50] text-[10px] font-bold uppercase tracking-wider shadow">
+          ★ Featured Commodity
+        </span>
+      </div>
+    )}
+  </div>
+
+  <!-- Card Body -->
+  <div class="p-5 flex-1 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2">
+        <span class="inline-flex items-center gap-1 font-medium text-slate-600">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B69A63]"></span>
+          {data.origin}
+        </span>
+        {data.hsCode && (
+          <span class="text-[11px] bg-slate-100 px-2 py-0.5 rounded text-slate-600 font-mono" title="HS Code Reference">
+            HS: {data.hsCode}
+          </span>
+        )}
+      </div>
+
+      <h3 class="text-lg font-bold text-[#102C50] group-hover:text-[#B69A63] transition-colors line-clamp-1">
+        <a href={`/products/${data.slug}`} class="focus:outline-none">
+          {data.name}
+        </a>
+      </h3>
+
+      <p class="mt-2 text-xs text-slate-600 leading-relaxed line-clamp-2">
+        {data.shortDescription}
+      </p>
+
+      {data.grade && (
+        <div class="mt-3 text-[11px] text-slate-500 bg-[#F8F7F3] p-2 rounded border border-[#E8E5DC]">
+          <span class="font-semibold text-slate-700">Grade:</span> {data.grade}
+        </div>
+      )}
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+      <a
+        href={`/products/${data.slug}`}
+        class="inline-flex items-center text-xs font-bold text-[#102C50] hover:text-[#B69A63] transition-colors group/link"
+      >
+        <span>Specifications</span>
+        <svg class="w-3.5 h-3.5 ml-1 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+
+      <a
+        href={`/contact?commodity=${encodeURIComponent(data.name)}`}
+        class="inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-md bg-[#183B63] hover:bg-[#102C50] text-white shadow-sm transition-colors"
+      >
+        Inquire Now
+      </a>
+    </div>
+  </div>
+</article>
