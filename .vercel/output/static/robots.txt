@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://shivsahajaoverseas.com/sitemap-index.xml
