@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { getAllProducts } from '../utils/products';
+
+const allProducts = await getAllProducts();
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://shivsahajaoverseas.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Contact Trade Desk',
+      item: 'https://shivsahajaoverseas.com/contact',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Contact Trade Desk & Request Quotation"
+  description="Connect with Shivsahaja Overseas trade desk. Request formal B2B price quotations, CIF/FOB ocean freight rates, and product specifications for Indian agro commodities."
+>
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <!-- Hero Header -->
+  <section class="py-16 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white">
+    <Container>
+      <div class="max-w-3xl">
+        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs text-slate-300 mb-4">
+          <a href="/" class="hover:text-white transition-colors">Home</a>
+          <span>&rsaquo;</span>
+          <span class="text-[#CBB482] font-semibold">Contact Trade Desk</span>
+        </nav>
+
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482] text-xs font-bold uppercase tracking-wider mb-4">
+          Commercial Sourcing &bull; International Enquiries
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Request a Commercial <span class="text-[#B69A63]">Price Quotation</span>
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed font-light">
+          Submit your commodity requirements, desired Incoterms, and target destination discharge port. Our export desk will respond with an official Proforma Invoice within 24 business hours.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Contact Form & Coordinates Section -->
+  <section class="py-16 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <!-- Left: Official Trade Coordinates -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-white p-7 rounded-2xl border border-[#E8E5DC] shadow-sm space-y-6">
+            <h2 class="text-xl font-bold text-[#102C50] border-b border-slate-100 pb-3">
+              Corporate Headquarters &amp; Operations
+            </h2>
+
+            <div class="space-y-4 text-xs sm:text-sm text-slate-600">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[#102C50]/10 text-[#102C50] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="block font-bold text-[#102C50]">Company Name:</span>
+                  <p class="font-medium">Shivsahaja Overseas</p>
+                  <p class="text-xs text-slate-400 mt-0.5">[Official Corporate Office - Maharashtra / Gujarat, India]</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[#102C50]/10 text-[#102C50] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="block font-bold text-[#102C50]">Corporate Trade Email:</span>
+                  <a href="mailto:enquiry@shivsahajaoverseas.com" class="text-[#B69A63] hover:underline font-semibold break-all">
+                    enquiry@shivsahajaoverseas.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[#102C50]/10 text-[#102C50] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="block font-bold text-[#102C50]">Primary Maritime Loading Ports:</span>
+                  <p class="text-xs">JNPT (Nhava Sheva, Mumbai) &bull; Mundra Port (Gujarat) &bull; Hazira Port (Surat)</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[#102C50]/10 text-[#102C50] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="block font-bold text-[#102C50]">Statutory Trade Registrations:</span>
+                  <p class="text-xs text-slate-600">DGFT IEC Authorized &bull; APEDA &bull; FSSAI &bull; Spices Board</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trade Assurance Card -->
+          <div class="p-6 rounded-2xl bg-[#102C50] text-white shadow-lg space-y-3">
+            <h3 class="text-base font-bold text-[#CBB482]">Buyer Protection &amp; Standards</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Every contract is executed with complete transparency. We provide verified Certificate of Analysis (COA), packing lists, phytosanitary clearance, and container stuffing inspection photos with every shipment.
+            </p>
+            <div class="pt-2 flex items-center gap-2 text-xs font-semibold text-emerald-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Average response time: &le; 24 hours
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Inquiry Submission Form -->
+        <div class="lg:col-span-7 bg-white p-7 sm:p-9 rounded-2xl border border-[#E8E5DC] shadow-sm">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-[#102C50]">Commercial Inquiry Form</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              Please provide complete specifications to enable our trade desk to calculate precise FOB or CIF rate estimates.
+            </p>
+          </div>
+
+          <!-- Alert Notices -->
+          <div id="form-alert-success" class="hidden mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <strong class="font-bold block">Inquiry Submitted Successfully!</strong>
+                <span id="form-success-text">Our trade desk has received your request and will contact you within 24 business hours.</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="form-alert-error" class="hidden mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <strong class="font-bold block">Submission Error</strong>
+                <span id="form-error-text">Please verify all required fields and try again.</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="trade-enquiry-form" class="space-y-5" novalidate>
+            <!-- Honeypot anti-spam field -->
+            <input type="text" name="website_honeypot" id="website_honeypot" class="hidden" tabindex="-1" autocomplete="off" />
+
+            <!-- Row 1: Name & Company -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Contact Person <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  required
+                  placeholder="e.g. John Doe"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label for="companyName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Company / Enterprise <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="companyName"
+                  id="companyName"
+                  required
+                  placeholder="e.g. Global Foods Trading LLC"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+            </div>
+
+            <!-- Row 2: Country & Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="country" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Country &amp; City <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="country"
+                  id="country"
+                  required
+                  placeholder="e.g. United Arab Emirates, Dubai"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Corporate Email <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="e.g. purchasing@company.com"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+            </div>
+
+            <!-- Row 3: Phone & Commodity -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="phone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Phone / WhatsApp (with Country Code)
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  placeholder="e.g. +971 50 123 4567"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label for="commodity" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Target Commodity <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="commodity"
+                  id="commodity"
+                  required
+                  list="commodity-datalist"
+                  placeholder="Select or type commodity..."
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+                <datalist id="commodity-datalist">
+                  {allProducts.map((p) => (
+                    <option value={p.data.name} />
+                  ))}
+                </datalist>
+              </div>
+            </div>
+
+            <!-- Row 4: Volume & Incoterm -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label for="volume" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Required Volume
+                </label>
+                <input
+                  type="text"
+                  name="volume"
+                  id="volume"
+                  placeholder="e.g. 2 x 20ft FCL / 50 MT"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label for="incoterm" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Preferred Incoterm
+                </label>
+                <select
+                  name="incoterm"
+                  id="incoterm"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                >
+                  <option value="FOB">FOB (Free On Board Indian Port)</option>
+                  <option value="CIF">CIF (Cost, Insurance &amp; Freight)</option>
+                  <option value="CFR">CFR (Cost &amp; Freight)</option>
+                  <option value="OTHER">Other / Sourcing Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="dischargePort" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Discharge Port
+                </label>
+                <input
+                  type="text"
+                  name="dischargePort"
+                  id="dischargePort"
+                  placeholder="e.g. Jebel Ali / Rotterdam"
+                  class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+                />
+              </div>
+            </div>
+
+            <!-- Message / Specifications -->
+            <div>
+              <label for="message" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                Detailed Specifications &amp; Inquiries <span class="text-rose-600">*</span>
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                rows="4"
+                required
+                placeholder="Mention required grade, moisture thresholds, packaging type (e.g. 25kg PP bags), target delivery timeline, or questions for our trade desk..."
+                class="w-full px-3.5 py-2.5 bg-[#F8F7F3] border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#B69A63] focus:border-transparent transition"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button with Spinner -->
+            <div>
+              <button
+                type="submit"
+                id="submit-enquiry-btn"
+                class="w-full sm:w-auto px-8 py-3.5 bg-[#102C50] hover:bg-[#183B63] text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] cursor-pointer flex items-center justify-center gap-2"
+              >
+                <span id="submit-btn-spinner" class="hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                <span id="submit-btn-text">Submit Formal Trade Inquiry &rarr;</span>
+              </button>
+              <p class="text-[11px] text-slate-400 mt-2">
+                &bull; Confidentiality Assured &bull; Direct Manufacturer / Exporter Sourcing &bull; Verified Documentation
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupContactForm() {
+    const form = document.getElementById('trade-enquiry-form') as HTMLFormElement | null;
+    const commodityInput = document.getElementById('commodity') as HTMLInputElement | null;
+    const alertSuccess = document.getElementById('form-alert-success');
+    const alertError = document.getElementById('form-alert-error');
+    const successText = document.getElementById('form-success-text');
+    const errorText = document.getElementById('form-error-text');
+    const submitBtn = document.getElementById('submit-enquiry-btn') as HTMLButtonElement | null;
+    const spinner = document.getElementById('submit-btn-spinner');
+    const btnText = document.getElementById('submit-btn-text');
+
+    if (!form) return;
+
+    // Prefill commodity from URL query param if present
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramCommodity = urlParams.get('commodity');
+    if (paramCommodity && commodityInput && !commodityInput.value) {
+      commodityInput.value = paramCommodity;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      alertSuccess?.classList.add('hidden');
+      alertError?.classList.add('hidden');
+
+      // Basic client validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+      spinner?.classList.remove('hidden');
+      if (btnText) btnText.textContent = 'Transmitting to Trade Desk...';
+
+      const formData = new FormData(form);
+      const data: Record<string, string> = {};
+      formData.forEach((value, key) => {
+        data[key] = String(value);
+      });
+
+      try {
+        const response = await fetch('/api/enquiry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          if (successText && result.message) {
+            successText.textContent = result.message;
+          }
+          alertSuccess?.classList.remove('hidden');
+          form.reset();
+          alertSuccess?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          if (errorText) {
+            errorText.textContent = result.error || 'Failed to process inquiry. Please email us directly.';
+          }
+          alertError?.classList.remove('hidden');
+          alertError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } catch (err: any) {
+        if (errorText) {
+          errorText.textContent = 'Network or connection error. Please email enquiry@shivsahajaoverseas.com directly.';
+        }
+        alertError?.classList.remove('hidden');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        spinner?.classList.add('hidden');
+        if (btnText) btnText.textContent = 'Submit Formal Trade Inquiry →';
+      }
+    });
+  }
+
+  setupContactForm();
+  document.addEventListener('astro:page-load', setupContactForm);
+</script>
