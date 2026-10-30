@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1C33"/>
+      <stop offset="50%" stop-color="#102C50"/>
+      <stop offset="100%" stop-color="#183B63"/>
+    </linearGradient>
+    <linearGradient id="brandGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8DCBF"/>
+      <stop offset="50%" stop-color="#B69A63"/>
+      <stop offset="100%" stop-color="#91753C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgNavy)"/>
+
+  <!-- Subtle grid lines -->
+  <circle cx="950" cy="315" r="300" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.15" fill="none"/>
+  <circle cx="950" cy="315" r="200" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.15" fill="none"/>
+  <ellipse cx="950" cy="315" rx="100" ry="300" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.15" fill="none"/>
+  <line x1="650" y1="315" x2="1250" y2="315" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.15"/>
+
+  <!-- Brand Emblem Box -->
+  <g transform="translate(100, 120)">
+    <rect width="72" height="72" rx="18" fill="#183B63" stroke="url(#brandGold)" stroke-width="3"/>
+    <circle cx="36" cy="36" r="24" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.4" fill="none"/>
+    <ellipse cx="36" cy="36" rx="12" ry="24" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.4" fill="none"/>
+    <path d="M47 25 C47 19 42 17 36 17 C28 17 24 21 24 27 C24 35 48 33 48 44 C48 52 41 57 35 57 C27 57 23 52 22 46" 
+          stroke="url(#brandGold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Title Text -->
+  <text x="195" y="155" font-family="'Manrope', -apple-system, sans-serif" font-weight="800" font-size="34" fill="#FFFFFF" letter-spacing="-0.5">
+    SHIVSAHAJA <tspan fill="#B69A63" font-weight="300">OVERSEAS</tspan>
+  </text>
+  <text x="195" y="180" font-family="'Inter', -apple-system, sans-serif" font-weight="600" font-size="14" fill="#CBB482" letter-spacing="2">
+    GLOBAL TRADE &bull; TRUSTED PARTNER &bull; BORDERLESS GROWTH
+  </text>
+
+  <!-- Main Headline -->
+  <text x="100" y="290" font-family="'Manrope', -apple-system, sans-serif" font-weight="800" font-size="52" fill="#FFFFFF" letter-spacing="-1">
+    Connecting Global Markets
+  </text>
+  <text x="100" y="355" font-family="'Manrope', -apple-system, sans-serif" font-weight="800" font-size="52" fill="#B69A63" letter-spacing="-1">
+    Through Trusted Trade
+  </text>
+
+  <!-- Value Prop Subtitle -->
+  <text x="100" y="420" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="20" fill="#CBD5E1">
+    Premier Indian Export House for Raw Cotton, Spices, Food Grains, Non-GMO Pulses &amp; Fresh Produce
+  </text>
+
+  <!-- Credentials Pill Bar -->
+  <g transform="translate(100, 480)">
+    <rect width="680" height="50" rx="10" fill="#183B63" stroke="#B69A63" stroke-width="1.5" stroke-opacity="0.4"/>
+    <text x="30" y="32" font-family="'Inter', -apple-system, sans-serif" font-weight="600" font-size="14" fill="#FFFFFF">
+      DGFT Registered &bull; APEDA Certified &bull; FSSAI Compliant &bull; JNPT &amp; Mundra Logistics
+    </text>
+  </g>
+</svg>
