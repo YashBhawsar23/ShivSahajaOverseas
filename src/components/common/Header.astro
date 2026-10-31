@@ -2,6 +2,7 @@
 import BrandLogo from './BrandLogo.astro';
 import Button from './Button.astro';
 import Container from './Container.astro';
+import { SITE_CONFIG } from '../../config/site';
 
 interface Props {
   currentPath?: string;
@@ -9,16 +10,18 @@ interface Props {
 
 const { currentPath = Astro.url.pathname } = Astro.props;
 
-const navItems = [
+const allNavItems = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Products', href: '/products' },
-  { label: 'Import', href: '/import' },
   { label: 'Export', href: '/export' },
+  { label: 'Import', href: '/import', hidden: !SITE_CONFIG.features.enableImport },
   { label: 'Certifications', href: '/certifications' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ];
+
+const navItems = allNavItems.filter((item) => !item.hidden);
 
 const isActive = (href: string) => {
   if (href === '/') return currentPath === '/';

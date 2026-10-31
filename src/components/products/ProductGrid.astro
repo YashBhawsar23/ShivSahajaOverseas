@@ -6,12 +6,14 @@ interface Props {
   products: ProductEntry[];
   class?: string;
   emptyMessage?: string;
+  variant?: 'full' | 'minimal';
 }
 
 const {
   products,
   class: className = '',
   emptyMessage = 'No commodities match your selection. Please contact our trade desk for custom sourcing requests.',
+  variant = 'full',
 } = Astro.props;
 ---
 
@@ -25,7 +27,7 @@ const {
       id="product-grid"
     >
       {products.map((product) => (
-        <ProductCard product={product} />
+        <ProductCard product={product} variant={variant} />
       ))}
     </div>
   ) : (

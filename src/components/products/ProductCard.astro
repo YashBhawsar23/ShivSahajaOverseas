@@ -1,38 +1,69 @@
 ---
 import type { ProductEntry } from '../../utils/products';
 import { getCategoryDetails } from '../../utils/products';
+import { SITE_CONFIG } from '../../config/site';
 
 interface Props {
   product: ProductEntry;
   class?: string;
+  variant?: 'full' | 'minimal';
 }
 
-const { product, class: className = '' } = Astro.props;
+const { product, class: className = '', variant = 'full' } = Astro.props;
 const { data } = product;
 const categoryInfo = getCategoryDetails(data.category);
+const isMinimal = variant === 'minimal';
+const { enableImport } = SITE_CONFIG.features;
 
 const tradeTypeLabels: Record<string, string> = {
   'export': 'Global Export',
-  'import': 'Direct Import',
-  'both': 'Import & Export',
+  'import': enableImport ? 'Direct Import' : 'Global Export',
+  'both': enableImport ? 'Import & Export' : 'Global Export',
 };
 
 const tradeTypeBadgeClasses: Record<string, string> = {
   'export': 'bg-emerald-50 text-emerald-800 border-emerald-200',
-  'import': 'bg-blue-50 text-blue-800 border-blue-200',
-  'both': 'bg-indigo-50 text-indigo-800 border-indigo-200',
+  'import': enableImport ? 'bg-blue-50 text-blue-800 border-blue-200' : 'bg-emerald-50 text-emerald-800 border-emerald-200',
+  'both': enableImport ? 'bg-indigo-50 text-indigo-800 border-indigo-200' : 'bg-emerald-50 text-emerald-800 border-emerald-200',
 };
 
-const tradeTypeLabel = tradeTypeLabels[data.tradeType] || 'Export';
+const tradeTypeLabel = tradeTypeLabels[data.tradeType] || 'Global Export';
 const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald-50 text-emerald-800 border-emerald-200';
 ---
 
-<article
-  class={`group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative ${className}`}
-  data-category={data.category}
-  data-trade-type={data.tradeType}
->
-  <!-- Card Header & Image -->
+{isMinimal ? (
+  <article
+    class={`group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative hover:-translate-y-1 ${className}`}
+    data-category={data.category}
+    data-trade-type={data.tradeType}
+  >
+    <a href={`/products/${data.slug}`} class="block flex-1 flex flex-col">
+      <!-- Card Image -->
+      <div class="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
+        <img
+          src={data.image}
+          alt={data.name}
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
+      </div>
+
+      <!-- Card Name -->
+      <div class="p-5 text-center flex-1 flex items-center justify-center bg-white">
+        <h3 class="text-lg font-bold text-[#102C50] group-hover:text-[#B69A63] transition-colors">
+          {data.name}
+        </h3>
+      </div>
+    </a>
+  </article>
+) : (
+  <article
+    class={`group bg-white rounded-xl border border-[#E8E5DC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative ${className}`}
+    data-category={data.category}
+    data-trade-type={data.tradeType}
+  >
+    <!-- Card Header & Image -->
   <div class="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
     <img
       src={data.image}
@@ -117,3 +148,4 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
     </div>
   </div>
 </article>
+)}

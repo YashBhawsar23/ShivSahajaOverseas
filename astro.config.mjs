@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
+import { SITE_CONFIG } from './src/config/site';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,6 +14,12 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      filter: (page) => {
+        if (!SITE_CONFIG.features.enableImport && page.includes('/import')) {
+          return false;
+        }
+        return true;
+      },
     }),
   ],
   vite: {

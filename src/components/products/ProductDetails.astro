@@ -1,6 +1,7 @@
 ---
 import type { ProductEntry } from '../../utils/products';
 import { getCategoryDetails } from '../../utils/products';
+import { SITE_CONFIG } from '../../config/site';
 
 interface Props {
   product: ProductEntry;
@@ -10,6 +11,7 @@ interface Props {
 const { product, class: className = '' } = Astro.props;
 const { data } = product;
 const categoryInfo = getCategoryDetails(data.category);
+const { enableImport } = SITE_CONFIG.features;
 
 const specEntries = Object.entries(data.specifications || {});
 ---
@@ -26,7 +28,7 @@ const specEntries = Object.entries(data.specifications || {});
       </a>
       
       <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 uppercase tracking-wide">
-        Trade Type: {data.tradeType.toUpperCase()}
+        Trade Type: {enableImport ? data.tradeType.toUpperCase() : 'EXPORT READY'}
       </span>
 
       {data.hsCode && (

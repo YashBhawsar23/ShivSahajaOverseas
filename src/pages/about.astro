@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
 import Button from '../components/common/Button.astro';
+import { SITE_CONFIG } from '../config/site';
+
+const { enableImport } = SITE_CONFIG.features;
 
 const values = [
   {
@@ -62,7 +65,7 @@ const milestones = [
           Pioneering Trust in International <span class="text-[#B69A63]">Agro Trade</span>
         </h1>
         <p class="mt-5 text-base sm:text-lg text-slate-200 leading-relaxed font-light">
-          Shivsahaja Overseas is a dedicated Indian import-export enterprise committed to sourcing and exporting top-tier agricultural commodities, raw cotton, spices, grains, and farm produce to buyers worldwide.
+          Shivsahaja Overseas is a dedicated Indian {enableImport ? 'import-export' : 'agricultural export'} enterprise committed to sourcing and exporting top-tier agricultural commodities, raw cotton, spices, grains, and farm produce to buyers worldwide.
         </p>
       </div>
     </Container>

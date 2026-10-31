@@ -1,6 +1,7 @@
 ---
 import BrandLogo from './BrandLogo.astro';
 import Container from './Container.astro';
+import { SITE_CONFIG } from '../../config/site';
 
 const currentYear = new Date().getFullYear();
 
@@ -16,7 +17,7 @@ const productCategories = [
 const companyLinks = [
   { name: 'About Shivsahaja', href: '/about' },
   { name: 'Export Solutions', href: '/export' },
-  { name: 'Import Capabilities', href: '/import' },
+  ...(SITE_CONFIG.features.enableImport ? [{ name: 'Import Capabilities', href: '/import' }] : []),
   { name: 'Quality Certifications', href: '/certifications' },
   { name: 'Facility & Trade Gallery', href: '/gallery' },
   { name: 'Trade Inquiries', href: '/contact' },
