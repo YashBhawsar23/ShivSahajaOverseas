@@ -180,36 +180,29 @@ const isActive = (href: string) => {
         if (item.children) {
           return (
             <div class="space-y-1">
-              <div class="flex items-center justify-between">
-                <a
-                  href={item.href}
-                  class:list={[
-                    'flex-1 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                    active
-                      ? 'bg-[#183B63] text-white font-semibold border-l-4 border-[#B69A63]'
-                      : 'text-slate-200 hover:bg-[#183B63]/60 hover:text-white'
-                  ]}
-                  aria-current={active ? 'page' : undefined}
+              <button
+                type="button"
+                id="mobile-products-toggle"
+                aria-expanded="false"
+                aria-label="Toggle products categories"
+                class:list={[
+                  'w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer select-none',
+                  active
+                    ? 'bg-[#183B63] text-white font-semibold border-l-4 border-[#B69A63]'
+                    : 'text-slate-200 hover:bg-[#183B63]/60 hover:text-white'
+                ]}
+              >
+                <span>{item.label}</span>
+                <svg
+                  class="w-4 h-4 transition-transform duration-200 mobile-chevron text-[#CBB482]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {item.label}
-                </a>
-                <button
-                  type="button"
-                  id="mobile-products-toggle"
-                  aria-expanded="false"
-                  aria-label="Toggle products categories"
-                  class="p-2.5 text-slate-300 hover:text-white hover:bg-[#183B63] rounded-lg transition-colors cursor-pointer"
-                >
-                  <svg
-                    class="w-4 h-4 transition-transform duration-200 mobile-chevron text-[#CBB482]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </div>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
               <div id="mobile-products-menu" class="hidden pl-4 pr-1 py-1 space-y-1 border-l-2 border-[#B69A63]/30 ml-4">
                 {item.children.map((child) => (
                   <a
