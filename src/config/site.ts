@@ -35,6 +35,21 @@ export const SITE_CONFIG = {
     enableImport: false,
 
     /**
+     * Product Live Search Bar Feature Flag:
+     * -------------------------------------------------------------
+     * Set to `false` when the client wants to temporarily disable/hide
+     * the search input box on the products catalogue page.
+     * 
+     * When `false`:
+     *  - The search input and counter card on /products are hidden.
+     *  - Category navigation pills continue to function seamlessly.
+     * 
+     * To RE-ENABLE in the future:
+     *  Simply set `enableProductSearch: true`.
+     */
+    enableProductSearch: false,
+
+    /**
      * Product Category Navigation UI Options:
      * -------------------------------------------------------------
      * Toggle the category navigation elements on the Product Catalogue:
