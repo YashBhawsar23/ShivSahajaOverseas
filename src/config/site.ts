@@ -33,6 +33,24 @@ export const SITE_CONFIG = {
      *  automatically restore across all menus, pages, and filters!
      */
     enableImport: false,
+
+    /**
+     * Product Category Navigation UI Options:
+     * -------------------------------------------------------------
+     * Toggle the category navigation elements on the Product Catalogue:
+     * 
+     * - showMobileDropdown:
+     *   Enables the native select dropdown on mobile phones (< 640px).
+     *   Set to `false` to disable the mobile dropdown.
+     * 
+     * - showPillStrip:
+     *   Enables the horizontal pill buttons with touch scrolling.
+     *   Set to `false` to disable the horizontal pill strip.
+     */
+    categoryNavigation: {
+      showMobileDropdown: true,
+      showPillStrip: true,
+    },
   },
 } as const;
 

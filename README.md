@@ -188,6 +188,20 @@ Detailed notes rendered on the product detail page.
 
 ---
 
+## 7. Configuration & Feature Flags
+
+Centralized business operations and UI display toggles are managed in [`src/config/site.ts`](./src/config/site.ts):
+
+- **Import Operations (`enableImport`):**
+  - Set to `false` when the business is strictly focused on exports. Hides all navigation links, trade filters, and redirects `/import` to `/export`.
+  - Set to `true` to immediately restore full import capabilities across all pages.
+- **Product Category Navigation (`categoryNavigation`):**
+  - `showMobileDropdown`: Set to `false` to disable the native mobile select dropdown on small displays (< 640px).
+  - `showPillStrip`: Set to `false` to disable the horizontal touch pill strip.
+  - Full instructions guide: [`docs/CATEGORY_NAVIGATION_GUIDE.md`](./docs/CATEGORY_NAVIGATION_GUIDE.md).
+
+---
+
 ## 8. Deployment to Vercel
 
 The project is pre-configured with the official `@astrojs/vercel` adapter.
