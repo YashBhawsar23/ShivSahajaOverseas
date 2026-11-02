@@ -47,6 +47,13 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
           decoding="async"
           class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
+
+        <!-- Category Badge (Top Right Corner) -->
+        <div class="absolute top-3 right-3 pointer-events-none z-10">
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-[#102C50]/90 text-white backdrop-blur-sm shadow-md uppercase tracking-wider border border-white/10">
+            {categoryInfo?.name || data.category}
+          </span>
+        </div>
       </div>
 
       <!-- Card Name -->
