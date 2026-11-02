@@ -47,5 +47,45 @@ const { title, description, image, type = 'website', hasBottomBar = false } = As
 
     <!-- Universal Sticky WhatsApp Inquiry Widget -->
     <WhatsAppButton />
+
+    <!-- Lenis Smooth Momentum Scrolling -->
+    <script>
+      import Lenis from 'lenis';
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          touchMultiplier: 1.5,
+        });
+
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Smooth scroll for internal hash anchors
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', (e) => {
+            const href = anchor.getAttribute('href');
+            if (href && href !== '#' && document.querySelector(href)) {
+              e.preventDefault();
+              lenis.scrollTo(href, { offset: -70 });
+            }
+          });
+        });
+
+        document.addEventListener('astro:page-load', () => {
+          lenis.resize();
+        });
+      }
+    </script>
   </body>
 </html>
