@@ -4,15 +4,16 @@ import Button from '../common/Button.astro';
 ---
 
 <section class="relative bg-[#102C50] text-white overflow-hidden min-h-[85vh] flex items-center">
-  <!-- Background Image with Gradient Overlay -->
+  <!-- Background Image with Directional Gradient Overlay -->
   <div class="absolute inset-0 z-0">
     <img
       src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=2000&q=80"
       alt="Global maritime container port and cargo ship"
-      class="w-full h-full object-cover object-center opacity-25 filter brightness-75 contrast-125"
+      class="w-full h-full object-cover object-center opacity-55 filter brightness-95 contrast-115"
       loading="eager"
     />
-    <div class="absolute inset-0 bg-gradient-to-r from-[#102C50] via-[#102C50]/90 to-[#183B63]/80"></div>
+    <!-- Directional Asymmetric Gradient: Solid Navy on Left for text readability, Translucent on Right for maritime visibility -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#102C50] via-[#102C50]/85 to-[#102C50]/35 lg:via-[#102C50]/75 lg:to-transparent"></div>
     <!-- Subtle Grid Overlay -->
     <div class="absolute inset-0 bg-[radial-gradient(#B69A63_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
   </div>
