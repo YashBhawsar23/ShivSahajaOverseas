@@ -84,29 +84,29 @@ const breadcrumbSchema = {
   <JsonLd slot="head" schema={productSchema} />
   <JsonLd slot="head" schema={breadcrumbSchema} />
 
-  <!-- Breadcrumbs & Header Strip -->
-  <div class="bg-white border-b border-[#E8E5DC] py-4">
+  <!-- Breadcrumbs Strip -->
+  <div class="bg-white border-b border-[#E8E5DC] py-2.5 sm:py-3.5">
     <Container>
-      <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-slate-500">
         <a href="/" class="hover:text-[#102C50] transition-colors">Home</a>
-        <span>&rsaquo;</span>
+        <span class="text-slate-300">&rsaquo;</span>
         <a href="/products" class="hover:text-[#102C50] transition-colors">Products</a>
-        <span>&rsaquo;</span>
+        <span class="text-slate-300">&rsaquo;</span>
         <a href={`/products/category/${data.category}`} class="hover:text-[#102C50] transition-colors">
           {categoryInfo?.name || data.category}
         </a>
-        <span>&rsaquo;</span>
-        <span class="text-[#102C50] font-semibold truncate max-w-xs">{data.name}</span>
+        <span class="text-slate-300">&rsaquo;</span>
+        <span class="text-[#102C50] font-semibold truncate max-w-[200px] sm:max-w-xs">{data.name}</span>
       </nav>
     </Container>
   </div>
 
   <!-- Product Detail Core -->
-  <section class="py-8 sm:py-12 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+  <section class="py-6 sm:py-12 pb-24 lg:pb-12 bg-[#F8F7F3] border-b border-[#E8E5DC]">
     <Container>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start">
         <!-- Left: Image Gallery & (Desktop-only) Sticky Quotation CTA -->
-        <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+        <div class="lg:col-span-5 space-y-6 sm:space-y-8 lg:sticky lg:top-28">
           <ProductGallery
             mainImage={data.image}
             gallery={data.gallery}
@@ -122,21 +122,24 @@ const breadcrumbSchema = {
           </div>
         </div>
 
-        <!-- Right: Technical Details, Mobile Quotation CTA, & Specifications Table -->
-        <div class="lg:col-span-7 space-y-8">
+        <!-- Right: Technical Details, Agronomy/Logistics, & Mobile Quotation CTA -->
+        <div class="lg:col-span-7 space-y-6 sm:space-y-8">
           <ProductDetails product={product} />
 
-          <!-- Mobile-only Quotation CTA (placed naturally after product specifications) -->
+          <!-- Rendered Markdown Body (Processing, Harvest & Agronomy Logistics) -->
+          <div class="bg-white p-5 sm:p-7 rounded-2xl border border-[#E8E5DC] shadow-sm prose prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#102C50] prose-a:text-[#102C50] prose-a:underline hover:prose-a:text-[#B69A63]">
+            <div class="not-prose inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold bg-[#B69A63]/15 text-[#91753C] uppercase tracking-wider mb-2">
+              Commodity Insights & Logistics
+            </div>
+            <Content />
+          </div>
+
+          <!-- Mobile-only Quotation CTA (placed as primary conversion point after all details) -->
           <div class="lg:hidden scroll-mt-24" id="product-inquiry">
             <ProductEnquiryCTA
               productName={data.name}
               moq={data.moq}
             />
-          </div>
-
-          <!-- Rendered Markdown Body (Processing & Agronomy) -->
-          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-[#E8E5DC] shadow-sm prose prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#102C50] prose-a:text-[#102C50] prose-a:underline hover:prose-a:text-[#B69A63]">
-            <Content />
           </div>
         </div>
       </div>
@@ -148,4 +151,42 @@ const breadcrumbSchema = {
       />
     </Container>
   </section>
+
+  <!-- Sticky Mobile Action Bottom Bar -->
+  <aside
+    class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8E5DC] px-4 py-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300"
+    aria-label="Quick Commodity Inquiry Bar"
+  >
+    <div class="flex items-center justify-between gap-3 max-w-lg mx-auto">
+      <div class="min-w-0 flex-1">
+        <span class="block text-xs font-bold text-[#102C50] truncate">{data.name}</span>
+        <span class="block text-[11px] text-slate-500 font-medium truncate">
+          {data.moq ? `MOQ: ${data.moq}` : 'Export Standard Quality'}
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <a
+          href={`/contact?commodity=${encodeURIComponent(data.name)}`}
+          class="inline-flex items-center justify-center p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#102C50] transition-colors"
+          aria-label="Direct Contact Form"
+          title="Direct Contact"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </a>
+
+        <a
+          href="#product-inquiry"
+          class="inline-flex items-center justify-center gap-1 px-4 py-2 rounded-lg bg-[#B69A63] hover:bg-[#A38752] text-[#102C50] text-xs font-extrabold shadow-sm uppercase tracking-wider transition-colors"
+        >
+          <span>Inquire Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
 </BaseLayout>

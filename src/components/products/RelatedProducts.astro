@@ -16,8 +16,8 @@ const categoryInfo = getCategoryDetails(category);
 
 {
   related.length > 0 && (
-    <section class:list={['mt-16 pt-12 border-t border-[#E8E5DC]', className]} aria-label="Related Commodities">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+    <section class:list={['mt-10 sm:mt-16 pt-8 sm:pt-12 border-t border-[#E8E5DC]', className]} aria-label="Related Commodities">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
         <div>
           <span class="text-xs font-bold text-[#B69A63] uppercase tracking-wider block mb-1">
             Category Showcase
@@ -28,15 +28,15 @@ const categoryInfo = getCategoryDetails(category);
         </div>
         <a
           href={`/products/category/${category}`}
-          class="text-xs sm:text-sm font-bold text-[#102C50] hover:text-[#B69A63] transition-colors inline-flex items-center gap-1"
+          class="text-xs sm:text-sm font-bold text-[#102C50] hover:text-[#B69A63] transition-colors inline-flex items-center gap-1 self-start sm:self-auto"
         >
-          View all {categoryInfo?.name} commodities &rarr;
+          View all {categoryInfo?.name || category} commodities &rarr;
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
         {related.map((prod) => (
-          <ProductCard product={prod} />
+          <ProductCard product={prod} variant="minimal" />
         ))}
       </div>
     </section>

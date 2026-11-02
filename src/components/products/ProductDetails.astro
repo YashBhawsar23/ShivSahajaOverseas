@@ -16,7 +16,7 @@ const { enableImport } = SITE_CONFIG.features;
 const specEntries = Object.entries(data.specifications || {});
 ---
 
-<div class:list={['space-y-8', className]}>
+<div class:list={['space-y-6 sm:space-y-8', className]}>
   <!-- Header info -->
   <div>
     <div class="flex flex-wrap items-center gap-2 mb-3">
@@ -38,28 +38,28 @@ const specEntries = Object.entries(data.specifications || {});
       )}
     </div>
 
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#102C50] tracking-tight leading-tight">
+    <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#102C50] tracking-tight leading-tight">
       {data.name}
     </h1>
 
-    <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+    <p class="mt-3 sm:mt-4 text-sm sm:text-lg text-slate-600 leading-relaxed">
       {data.description}
     </p>
 
     <!-- Mobile Quick Quotation Jump -->
-    <div class="mt-5 flex items-center gap-3 lg:hidden">
+    <div class="mt-4 flex items-center gap-2.5 lg:hidden">
       <a
         href="#product-inquiry"
-        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#B69A63] hover:bg-[#A38752] text-[#102C50] text-sm font-bold shadow-sm transition-colors flex-1"
+        class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#B69A63] hover:bg-[#A38752] text-[#102C50] text-xs font-bold shadow-sm transition-colors flex-1 uppercase tracking-wider"
       >
-        <span>Request Price Quotation</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span>Request Quotation</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
         </svg>
       </a>
       <a
         href={`/contact?commodity=${encodeURIComponent(data.name)}`}
-        class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#102C50] hover:bg-[#183B63] text-white text-sm font-semibold transition-colors"
+        class="inline-flex items-center justify-center px-3.5 py-2.5 rounded-xl bg-[#102C50] hover:bg-[#183B63] text-white text-xs font-semibold transition-colors"
       >
         Direct Contact
       </a>
@@ -67,22 +67,22 @@ const specEntries = Object.entries(data.specifications || {});
   </div>
 
   <!-- Key Trade Metrics Cards -->
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-4">
-    <div class="bg-white p-4 rounded-xl border border-[#E8E5DC] shadow-sm">
-      <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Country of Origin</span>
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+    <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E5DC] shadow-sm">
+      <span class="block text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider">Country of Origin</span>
       <span class="mt-1 block text-sm sm:text-base font-bold text-[#102C50]">{data.origin}</span>
     </div>
 
     {data.grade && (
-      <div class="bg-white p-4 rounded-xl border border-[#E8E5DC] shadow-sm">
-        <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Grading Standard</span>
+      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E5DC] shadow-sm">
+        <span class="block text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider">Grading Standard</span>
         <span class="mt-1 block text-sm sm:text-base font-bold text-[#102C50]">{data.grade}</span>
       </div>
     )}
 
     {data.moq && (
-      <div class="bg-white p-4 rounded-xl border border-[#E8E5DC] shadow-sm">
-        <span class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Min. Order Qty (MOQ)</span>
+      <div class="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8E5DC] shadow-sm col-span-2 sm:col-span-1 border-l-4 border-l-[#B69A63]">
+        <span class="block text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider">Min. Order Qty (MOQ)</span>
         <span class="mt-1 block text-sm sm:text-base font-bold text-[#102C50]">{data.moq}</span>
       </div>
     )}
@@ -91,17 +91,17 @@ const specEntries = Object.entries(data.specifications || {});
   <!-- Technical Specifications Table -->
   {specEntries.length > 0 && (
     <div class="bg-white rounded-2xl border border-[#E8E5DC] shadow-sm overflow-hidden">
-      <div class="px-6 py-4 bg-[#102C50] text-white flex items-center justify-between">
-        <h2 class="text-sm sm:text-base font-bold tracking-wide uppercase">
+      <div class="px-4 sm:px-6 py-3.5 bg-[#102C50] text-white flex items-center justify-between">
+        <h2 class="text-xs sm:text-sm md:text-base font-bold tracking-wide uppercase">
           Technical Parameters & Analysis
         </h2>
-        <span class="text-xs text-[#CBB482] font-semibold">Laboratory Tested</span>
+        <span class="text-[11px] sm:text-xs text-[#CBB482] font-semibold flex-shrink-0">Laboratory Tested</span>
       </div>
 
       <div class="divide-y divide-slate-100">
         {specEntries.map(([key, value], idx) => (
-          <div class:list={['px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between text-sm gap-1', idx % 2 === 0 ? 'bg-[#F8F7F3]/40' : 'bg-white']}>
-            <span class="font-semibold text-slate-700">{key}</span>
+          <div class:list={['px-4 sm:px-6 py-3 flex items-center justify-between text-xs sm:text-sm gap-3', idx % 2 === 0 ? 'bg-[#F8F7F3]/50' : 'bg-white']}>
+            <span class="font-semibold text-slate-700 flex-shrink-0">{key}</span>
             <span class="font-medium text-[#102C50] text-right font-mono sm:font-sans">{value}</span>
           </div>
         ))}
@@ -111,14 +111,14 @@ const specEntries = Object.entries(data.specifications || {});
 
   <!-- Packaging & Shipping Details -->
   {data.packaging && (
-    <div class="bg-white p-6 rounded-2xl border border-[#E8E5DC] shadow-sm space-y-3">
-      <h3 class="text-base font-bold text-[#102C50] flex items-center gap-2">
-        <svg class="w-5 h-5 text-[#B69A63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl border border-[#E8E5DC] shadow-sm space-y-3">
+      <h3 class="text-sm sm:text-base font-bold text-[#102C50] flex items-center gap-2">
+        <svg class="w-5 h-5 text-[#B69A63] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
         </svg>
         Export Packaging & Container Logistics
       </h3>
-      <p class="text-sm text-slate-600 leading-relaxed">
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
         {data.packaging}
       </p>
       <div class="pt-2 text-xs text-slate-500 flex flex-wrap gap-x-4 gap-y-1">
@@ -130,13 +130,13 @@ const specEntries = Object.entries(data.specifications || {});
   )}
 
   <!-- Commercial Trade Terms & Assurance -->
-  <div class="bg-gradient-to-br from-[#102C50] to-[#183B63] text-white p-6 rounded-2xl shadow-md">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+  <div class="bg-gradient-to-br from-[#102C50] to-[#183B63] text-white p-4 sm:p-6 rounded-2xl shadow-md">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
       <div>
-        <h4 class="text-base font-bold text-[#CBB482]">Supported Incoterms 2020</h4>
+        <h4 class="text-sm sm:text-base font-bold text-[#CBB482]">Supported Incoterms 2020</h4>
         <p class="text-xs text-slate-200 mt-1">FOB (Nhava Sheva / Mundra / Chennai), CIF, CFR target destination port.</p>
       </div>
-      <div class="flex items-center gap-2 text-xs font-semibold">
+      <div class="flex items-center gap-2 text-xs font-semibold flex-shrink-0">
         <span class="px-2.5 py-1 rounded bg-[#B69A63]/20 border border-[#B69A63]/40 text-[#CBB482]">SGS / Intertek Inspection</span>
       </div>
     </div>
