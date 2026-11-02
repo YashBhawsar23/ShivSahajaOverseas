@@ -102,29 +102,40 @@ const breadcrumbSchema = {
   </div>
 
   <!-- Product Detail Core -->
-  <section class="py-12 bg-[#F8F7F3] border-b border-[#E8E5DC]">
+  <section class="py-8 sm:py-12 bg-[#F8F7F3] border-b border-[#E8E5DC]">
     <Container>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-        <!-- Left: Image Gallery & Pre-filled Quotation CTA -->
-        <div class="lg:col-span-5 space-y-8 sticky top-28">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+        <!-- Left: Image Gallery & (Desktop-only) Sticky Quotation CTA -->
+        <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
           <ProductGallery
             mainImage={data.image}
             gallery={data.gallery}
             productName={data.name}
           />
 
-          <ProductEnquiryCTA
-            productName={data.name}
-            moq={data.moq}
-          />
+          <!-- Desktop Sticky Quotation CTA -->
+          <div class="hidden lg:block">
+            <ProductEnquiryCTA
+              productName={data.name}
+              moq={data.moq}
+            />
+          </div>
         </div>
 
-        <!-- Right: Technical Details & Specifications Table -->
+        <!-- Right: Technical Details, Mobile Quotation CTA, & Specifications Table -->
         <div class="lg:col-span-7 space-y-8">
           <ProductDetails product={product} />
 
+          <!-- Mobile-only Quotation CTA (placed naturally after product specifications) -->
+          <div class="lg:hidden scroll-mt-24" id="product-inquiry">
+            <ProductEnquiryCTA
+              productName={data.name}
+              moq={data.moq}
+            />
+          </div>
+
           <!-- Rendered Markdown Body (Processing & Agronomy) -->
-          <div class="bg-white p-7 rounded-2xl border border-[#E8E5DC] shadow-sm prose prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#102C50] prose-a:text-[#102C50] prose-a:underline hover:prose-a:text-[#B69A63]">
+          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-[#E8E5DC] shadow-sm prose prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#102C50] prose-a:text-[#102C50] prose-a:underline hover:prose-a:text-[#B69A63]">
             <Content />
           </div>
         </div>

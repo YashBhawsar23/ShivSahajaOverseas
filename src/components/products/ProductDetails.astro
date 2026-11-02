@@ -45,6 +45,25 @@ const specEntries = Object.entries(data.specifications || {});
     <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
       {data.description}
     </p>
+
+    <!-- Mobile Quick Quotation Jump -->
+    <div class="mt-5 flex items-center gap-3 lg:hidden">
+      <a
+        href="#product-inquiry"
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#B69A63] hover:bg-[#A38752] text-[#102C50] text-sm font-bold shadow-sm transition-colors flex-1"
+      >
+        <span>Request Price Quotation</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+        </svg>
+      </a>
+      <a
+        href={`/contact?commodity=${encodeURIComponent(data.name)}`}
+        class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#102C50] hover:bg-[#183B63] text-white text-sm font-semibold transition-colors"
+      >
+        Direct Contact
+      </a>
+    </div>
   </div>
 
   <!-- Key Trade Metrics Cards -->
