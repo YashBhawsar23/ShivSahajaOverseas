@@ -82,20 +82,10 @@ const totalCount = allProducts.length;
             href="/products"
             data-category-pill="all"
             data-active={activeCategory === 'all' ? 'true' : 'false'}
-            class:list={[
-              'category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap',
-              activeCategory === 'all'
-                ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
-                : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
-            ]}
+            class="category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap cursor-pointer select-none"
           >
             <span class="whitespace-nowrap">All Commodities</span>
-            <span
-              class:list={[
-                'category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors',
-                activeCategory === 'all' ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
-              ]}
-            >
+            <span class="category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors">
               {totalCount}
             </span>
           </a>
@@ -107,20 +97,10 @@ const totalCount = allProducts.length;
                 href={`/products/category/${cat.id}`}
                 data-category-pill={cat.id}
                 data-active={isActive ? 'true' : 'false'}
-                class:list={[
-                  'category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap',
-                  isActive
-                    ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
-                ]}
+                class="category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap cursor-pointer select-none"
               >
                 <span class="whitespace-nowrap">{cat.name}</span>
-                <span
-                  class:list={[
-                    'category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors',
-                    isActive ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
-                  ]}
-                >
+                <span class="category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors">
                   {cat.count}
                 </span>
               </a>
@@ -131,6 +111,51 @@ const totalCount = allProducts.length;
     </div>
   )}
 </div>
+
+<style>
+  .category-pill {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Active State (Selected Category) */
+  .category-pill[data-active="true"] {
+    background-color: #102C50 !important;
+    color: #ffffff !important;
+    border-color: #102C50 !important;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  /* Active Hover State (Slightly lighter navy with luxury gold accent border, TEXT STAYS PURE WHITE) */
+  .category-pill[data-active="true"]:hover {
+    background-color: #183B63 !important;
+    border-color: #B69A63 !important;
+    color: #ffffff !important;
+  }
+
+  .category-pill[data-active="true"] .category-pill-count {
+    background-color: #183B63 !important;
+    color: #ffffff !important;
+  }
+
+  /* Inactive State */
+  .category-pill[data-active="false"] {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border-color: #e2e8f0 !important;
+  }
+
+  /* Inactive Hover State (Warm gold border with deep navy text on soft off-white) */
+  .category-pill[data-active="false"]:hover {
+    background-color: #FAF9F6 !important;
+    border-color: #B69A63 !important;
+    color: #102C50 !important;
+  }
+
+  .category-pill[data-active="false"] .category-pill-count {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+  }
+</style>
 
 <script>
   function setupCategoryNavigation() {
@@ -174,29 +199,12 @@ const totalCount = allProducts.length;
         mobileSelect.value = catId;
       }
 
-      // Update pill styles
+      // Update pill states (CSS handles the active & hover styles cleanly based on data-active)
       pills.forEach((p) => {
         const isMatch = p.dataset.categoryPill === catId;
         p.dataset.active = isMatch ? 'true' : 'false';
-        const countBadge = p.querySelector('.category-pill-count');
-
-        if (isMatch) {
-          p.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
-          p.classList.add('bg-[#102C50]', 'text-white', 'border-[#102C50]', 'shadow-sm');
-          if (countBadge) {
-            countBadge.classList.remove('bg-slate-100', 'text-slate-600');
-            countBadge.classList.add('bg-[#183B63]', 'text-white');
-          }
-          if (shouldScroll) {
-            p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-          }
-        } else {
-          p.classList.remove('bg-[#102C50]', 'text-white', 'border-[#102C50]', 'shadow-sm');
-          p.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
-          if (countBadge) {
-            countBadge.classList.remove('bg-[#183B63]', 'text-white');
-            countBadge.classList.add('bg-slate-100', 'text-slate-600');
-          }
+        if (isMatch && shouldScroll) {
+          p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
       });
 
