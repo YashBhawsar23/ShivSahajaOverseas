@@ -2,6 +2,7 @@
 import BaseHead from '../components/seo/BaseHead.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import WhatsAppButton from '../components/common/WhatsAppButton.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -9,9 +10,10 @@ interface Props {
   description?: string;
   image?: string;
   type?: 'website' | 'article' | 'product';
+  hasBottomBar?: boolean;
 }
 
-const { title, description, image, type = 'website' } = Astro.props;
+const { title, description, image, type = 'website', hasBottomBar = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +22,10 @@ const { title, description, image, type = 'website' } = Astro.props;
     <BaseHead title={title} description={description} image={image} type={type} />
     <slot name="head" />
   </head>
-  <body class="flex flex-col min-h-screen bg-[#F8F7F3] text-slate-800 antialiased selection:bg-[#102C50] selection:text-white">
+  <body class:list={[
+    'flex flex-col min-h-screen bg-[#F8F7F3] text-slate-800 antialiased selection:bg-[#102C50] selection:text-white',
+    { 'has-mobile-bottom-bar': hasBottomBar }
+  ]}>
     <!-- Accessible Skip Link -->
     <a
       href="#main-content"
@@ -39,5 +44,8 @@ const { title, description, image, type = 'website' } = Astro.props;
 
     <!-- Global Footer -->
     <Footer />
+
+    <!-- Universal Sticky WhatsApp Inquiry Widget -->
+    <WhatsAppButton />
   </body>
 </html>

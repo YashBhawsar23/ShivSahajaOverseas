@@ -80,6 +80,7 @@ const breadcrumbSchema = {
   description={data.seo.description || data.shortDescription}
   image={data.image}
   type="product"
+  hasBottomBar={true}
 >
   <JsonLd slot="head" schema={productSchema} />
   <JsonLd slot="head" schema={breadcrumbSchema} />
