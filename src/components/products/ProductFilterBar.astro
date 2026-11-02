@@ -91,6 +91,7 @@ const { enableImport } = SITE_CONFIG.features;
 
     let currentTrade = 'all';
     let searchQuery = '';
+    let currentCategory = 'all';
 
     function applyFilters() {
       let visibleCount = 0;
@@ -98,11 +99,13 @@ const { enableImport } = SITE_CONFIG.features;
       articles.forEach((card) => {
         const text = card.textContent?.toLowerCase() || '';
         const tradeType = card.dataset.tradeType || '';
+        const category = card.dataset.category || '';
 
         const matchesQuery = !searchQuery || text.includes(searchQuery);
         const matchesTrade = currentTrade === 'all' || tradeType === currentTrade || tradeType === 'both';
+        const matchesCategory = currentCategory === 'all' || category === currentCategory;
 
-        if (matchesQuery && matchesTrade) {
+        if (matchesQuery && matchesTrade && matchesCategory) {
           card.style.display = '';
           visibleCount++;
         } else {
@@ -115,7 +118,7 @@ const { enableImport } = SITE_CONFIG.features;
       }
 
       if (resetBtn) {
-        if (searchQuery || currentTrade !== 'all') {
+        if (searchQuery || currentTrade !== 'all' || currentCategory !== 'all') {
           resetBtn.classList.remove('hidden');
         } else {
           resetBtn.classList.add('hidden');
@@ -127,6 +130,20 @@ const { enableImport } = SITE_CONFIG.features;
       searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
       applyFilters();
     });
+
+    // Listen for category selection events from ProductCategoryNavigation
+    window.addEventListener('filter-category', ((e: CustomEvent) => {
+      currentCategory = e.detail?.category || 'all';
+      applyFilters();
+    }) as EventListener);
+
+    // Check for category in URL parameters on initial load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get('category');
+    if (initialCategory) {
+      currentCategory = initialCategory;
+      applyFilters();
+    }
 
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -146,6 +163,7 @@ const { enableImport } = SITE_CONFIG.features;
       if (searchInput) searchInput.value = '';
       searchQuery = '';
       currentTrade = 'all';
+      currentCategory = 'all';
       filterBtns.forEach((b, idx) => {
         if (idx === 0) {
           b.classList.add('bg-[#102C50]', 'text-white');
@@ -155,6 +173,8 @@ const { enableImport } = SITE_CONFIG.features;
           b.classList.add('bg-slate-100', 'text-slate-700');
         }
       });
+      // Notify navigation pills to reset to 'all'
+      window.dispatchEvent(new CustomEvent('filter-category', { detail: { category: 'all' } }));
       applyFilters();
     });
   }

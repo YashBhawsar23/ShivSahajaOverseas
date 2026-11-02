@@ -17,47 +17,220 @@ const categoryCounts = categories.map((cat) => ({
 const totalCount = allProducts.length;
 ---
 
-<nav aria-label="Commodity Categories" class:list={['w-full overflow-x-auto pb-2 scrollbar-none', className]}>
-  <div class="flex items-center gap-2 sm:gap-3 min-w-max">
-    <a
-      href="/products"
-      class:list={[
-        'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border flex items-center gap-2',
-        activeCategory === 'all'
-          ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
-          : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
-      ]}
-    >
-      <span>All Commodities</span>
-      <span class:list={[
-        'px-2 py-0.5 rounded-full text-[10px] font-bold',
-        activeCategory === 'all' ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
-      ]}>
-        {totalCount}
-      </span>
-    </a>
+<div class:list={['w-full', className]}>
+  <!-- Mobile Category Selector Dropdown (Optimized for Small Phone Displays) -->
+  <div class="sm:hidden mb-4">
+    <label for="mobile-category-select" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+      Filter by Category
+    </label>
+    <div class="relative">
+      <select
+        id="mobile-category-select"
+        class="w-full bg-white border border-[#E8E5DC] text-[#102C50] text-sm font-bold rounded-xl px-4 py-3 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B69A63] appearance-none cursor-pointer"
+        aria-label="Filter by Commodity Category"
+      >
+        <option value="all" data-href="/products" selected={activeCategory === 'all'}>
+          All Commodities ({totalCount})
+        </option>
+        {categoryCounts.map((cat) => (
+          <option
+            value={cat.id}
+            data-href={`/products/category/${cat.id}`}
+            selected={activeCategory === cat.id}
+          >
+            {cat.name} ({cat.count})
+          </option>
+        ))}
+      </select>
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-[#102C50]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+  </div>
 
-    {categoryCounts.map((cat) => {
-      const isActive = activeCategory === cat.id;
-      return (
+  <!-- Horizontal Category Pill Strip with Smooth Touch Scrolling & Fade Indicators -->
+  <div class="relative w-full">
+    <!-- Left fade gradient (shows when scrolled) -->
+    <div
+      id="category-nav-left-fade"
+      class="pointer-events-none absolute left-0 top-0 bottom-2 w-8 bg-gradient-to-r from-[#F8F7F3] to-transparent z-10 opacity-0 transition-opacity duration-200"
+    ></div>
+
+    <!-- Right fade gradient (indicates more content on right) -->
+    <div
+      id="category-nav-right-fade"
+      class="pointer-events-none absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-[#F8F7F3] to-transparent z-10 opacity-100 transition-opacity duration-200"
+    ></div>
+
+    <nav
+      id="category-pill-nav"
+      aria-label="Commodity Categories"
+      class="w-full overflow-x-auto pb-2 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+      style="-webkit-overflow-scrolling: touch;"
+    >
+      <div class="flex items-center gap-2 sm:gap-3 min-w-max px-0.5">
         <a
-          href={`/products/category/${cat.id}`}
+          href="/products"
+          data-category-pill="all"
+          data-active={activeCategory === 'all' ? 'true' : 'false'}
           class:list={[
-            'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border flex items-center gap-2',
-            isActive
+            'category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap',
+            activeCategory === 'all'
               ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
               : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
           ]}
         >
-          <span>{cat.name}</span>
-          <span class:list={[
-            'px-2 py-0.5 rounded-full text-[10px] font-bold',
-            isActive ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
-          ]}>
-            {cat.count}
+          <span class="whitespace-nowrap">All Commodities</span>
+          <span
+            class:list={[
+              'category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors',
+              activeCategory === 'all' ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
+            ]}
+          >
+            {totalCount}
           </span>
         </a>
-      );
-    })}
+
+        {categoryCounts.map((cat) => {
+          const isActive = activeCategory === cat.id;
+          return (
+            <a
+              href={`/products/category/${cat.id}`}
+              data-category-pill={cat.id}
+              data-active={isActive ? 'true' : 'false'}
+              class:list={[
+                'category-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border inline-flex items-center gap-2 flex-shrink-0 whitespace-nowrap',
+                isActive
+                  ? 'bg-[#102C50] text-white border-[#102C50] shadow-sm'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-[#B69A63] hover:text-[#102C50]'
+              ]}
+            >
+              <span class="whitespace-nowrap">{cat.name}</span>
+              <span
+                class:list={[
+                  'category-pill-count px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors',
+                  isActive ? 'bg-[#183B63] text-white' : 'bg-slate-100 text-slate-600'
+                ]}
+              >
+                {cat.count}
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </nav>
   </div>
-</nav>
+</div>
+
+<script>
+  function setupCategoryNavigation() {
+    const nav = document.getElementById('category-pill-nav');
+    const leftFade = document.getElementById('category-nav-left-fade');
+    const rightFade = document.getElementById('category-nav-right-fade');
+    const mobileSelect = document.getElementById('mobile-category-select') as HTMLSelectElement | null;
+    const pills = document.querySelectorAll<HTMLAnchorElement>('.category-pill');
+
+    if (!nav) return;
+
+    // 1. Update fade indicators based on scroll position
+    function updateFades() {
+      if (!nav) return;
+      const atStart = nav.scrollLeft <= 5;
+      const atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 5;
+      if (leftFade) leftFade.style.opacity = atStart ? '0' : '1';
+      if (rightFade) rightFade.style.opacity = atEnd ? '0' : '1';
+    }
+
+    nav.addEventListener('scroll', updateFades, { passive: true });
+    updateFades();
+
+    // 2. Scroll active pill into view smoothly
+    const activePill = nav.querySelector<HTMLElement>('[data-active="true"]');
+    if (activePill) {
+      activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    // 3. Handle filtering on /products page
+    const isMasterProductsPage = window.location.pathname.replace(/\/$/, '') === '/products';
+
+    function setCategory(catId: string, shouldScroll = false) {
+      // Dispatch custom event for ProductFilterBar
+      window.dispatchEvent(new CustomEvent('filter-category', { detail: { category: catId } }));
+
+      // Update mobile select
+      if (mobileSelect && mobileSelect.value !== catId) {
+        mobileSelect.value = catId;
+      }
+
+      // Update pill styles
+      pills.forEach((p) => {
+        const isMatch = p.dataset.categoryPill === catId;
+        p.dataset.active = isMatch ? 'true' : 'false';
+        const countBadge = p.querySelector('.category-pill-count');
+
+        if (isMatch) {
+          p.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+          p.classList.add('bg-[#102C50]', 'text-white', 'border-[#102C50]', 'shadow-sm');
+          if (countBadge) {
+            countBadge.classList.remove('bg-slate-100', 'text-slate-600');
+            countBadge.classList.add('bg-[#183B63]', 'text-white');
+          }
+          if (shouldScroll) {
+            p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        } else {
+          p.classList.remove('bg-[#102C50]', 'text-white', 'border-[#102C50]', 'shadow-sm');
+          p.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
+          if (countBadge) {
+            countBadge.classList.remove('bg-[#183B63]', 'text-white');
+            countBadge.classList.add('bg-slate-100', 'text-slate-600');
+          }
+        }
+      });
+
+      // Update URL query string without reloading page
+      const url = new URL(window.location.href);
+      if (catId === 'all') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', catId);
+      }
+      window.history.replaceState({}, '', url.toString());
+    }
+
+    // If on /products, intercept clicks to filter instantly in place
+    if (isMasterProductsPage) {
+      pills.forEach((pill) => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          const catId = pill.dataset.categoryPill || 'all';
+          setCategory(catId, true);
+        });
+      });
+
+      mobileSelect?.addEventListener('change', (e) => {
+        const catId = (e.target as HTMLSelectElement).value;
+        setCategory(catId, true);
+      });
+
+      // Check URL query param on initial load
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryCat = urlParams.get('category');
+      if (queryCat) {
+        setCategory(queryCat, true);
+      }
+    } else {
+      // If on /products/category/[cat], dropdown navigates
+      mobileSelect?.addEventListener('change', (e) => {
+        const selectedOption = (e.target as HTMLSelectElement).selectedOptions[0];
+        const targetHref = selectedOption?.dataset.href;
+        if (targetHref) window.location.href = targetHref;
+      });
+    }
+  }
+
+  setupCategoryNavigation();
+  document.addEventListener('astro:page-load', setupCategoryNavigation);
+</script>
