@@ -18,14 +18,14 @@ export const SITE_CONFIG = {
     /**
      * Import Operations Feature Flag:
      * -------------------------------------------------------------
-     * Set to `false` when the enterprise is strictly focused on exports.
+     * Set to `false` when the enterprise is strictly focused on outbound export trade.
      * 
      * When `false`:
      *  - "Import" links in Header (desktop & mobile) are hidden.
      *  - "Import Capabilities" in the Footer is hidden.
      *  - The "Import" trade filter on the /products page is hidden.
      *  - Product trade badges display as "Global Export" / "Export Ready".
-     *  - Any direct visit to /import gracefully redirects to /export (302).
+     *  - Any direct visit to /import gracefully redirects to /trade (302).
      *  - Headings and marketing copy focus 100% on export excellence.
      * 
      * To RE-ENABLE in the future:
