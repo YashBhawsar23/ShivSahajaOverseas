@@ -12,9 +12,16 @@ const primaryTextColor = isLight ? 'text-white' : 'text-[#102C50]';
 const subtitleColor = isLight ? 'text-slate-300' : 'text-slate-600';
 ---
 
-<a href="/" class:list={['inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] rounded-lg p-1', className]} aria-label="Shivsahaja Overseas Home">
+<a
+  href="/"
+  class:list={[
+    'inline-flex items-center gap-2 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] rounded-lg p-0.5 sm:p-1',
+    className
+  ]}
+  aria-label="Shivsahaja Overseas Home"
+>
   <!-- Brand Emblem Vector -->
-  <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+  <div class="relative w-8 h-8 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-sm">
       <defs>
         <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -47,12 +54,12 @@ const subtitleColor = isLight ? 'text-slate-300' : 'text-slate-600';
 
   <!-- Corporate Typography (Protected from automatic translation) -->
   <div class="flex flex-col leading-tight notranslate" translate="no">
-    <div class:list={['font-bold tracking-tight text-lg sm:text-xl font-heading flex items-baseline gap-1.5', primaryTextColor]}>
+    <div class:list={['font-bold tracking-tight text-[15px] sm:text-xl font-heading flex items-baseline gap-1 sm:gap-1.5', primaryTextColor]}>
       <span>SHIVSAHAJA</span>
       <span class="text-[#B69A63] font-light">OVERSEAS</span>
     </div>
     {showTagline && (
-      <span class:list={['text-[9px] sm:text-[10px] tracking-wider uppercase font-medium mt-0.5', subtitleColor]}>
+      <span class:list={['text-[8.5px] sm:text-[10px] tracking-wider uppercase font-medium mt-0.5', subtitleColor]}>
         Global Trade &bull; Trusted Partner
       </span>
     )}

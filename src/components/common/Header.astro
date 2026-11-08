@@ -69,7 +69,7 @@ const isActive = (href: string) => {
   </div>
 
   <!-- Main Navigation Bar -->
-  <div class="py-3 sm:py-3.5">
+  <div class="py-2.5 sm:py-3.5">
     <Container class="flex items-center justify-between">
       <!-- Company Logo -->
       <BrandLogo variant="light" />
@@ -144,10 +144,12 @@ const isActive = (href: string) => {
         })}
       </nav>
 
-      <!-- CTA & Mobile Toggle -->
-      <div class="flex items-center gap-3">
-        <LanguageSelector variant="header" class="hidden sm:inline-block" />
+      <!-- CTA & Mobile Cluster -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <!-- Always-Visible Header Language Selector (Mobile & Desktop) -->
+        <LanguageSelector variant="header" />
 
+        <!-- Request Quote CTA (Tablet & Desktop) -->
         <div class="hidden sm:block">
           <Button href="/contact" variant="gold" size="sm" class="shadow-md">
             Request Quote
@@ -161,7 +163,7 @@ const isActive = (href: string) => {
           aria-expanded="false"
           aria-controls="mobile-nav-drawer"
           aria-label="Toggle navigation menu"
-          class="lg:hidden p-2 text-slate-200 hover:text-white hover:bg-[#183B63] rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63]"
+          class="lg:hidden p-1.5 sm:p-2 text-slate-200 hover:text-white hover:bg-[#183B63] rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63]"
         >
           <svg class="w-6 h-6 menu-open-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -174,7 +176,7 @@ const isActive = (href: string) => {
     </Container>
   </div>
 
-  <!-- Mobile Drawer / Dropdown -->
+  <!-- Mobile Drawer / Dropdown (Language picker removed as requested) -->
   <div
     id="mobile-nav-drawer"
     class="hidden lg:hidden bg-[#0A1C33] border-t border-[#183B63] shadow-2xl transition-all duration-300"
@@ -242,8 +244,7 @@ const isActive = (href: string) => {
         );
       })}
 
-      <div class="pt-3 pb-1 border-t border-[#183B63]/80 mt-2 space-y-2.5">
-        <LanguageSelector variant="mobile" />
+      <div class="pt-3 pb-1 border-t border-[#183B63]/80 mt-2">
         <Button href="/contact" variant="gold" size="md" class="w-full text-center">
           Request Trade Quote
         </Button>
