@@ -2,6 +2,7 @@
 import BrandLogo from './BrandLogo.astro';
 import Button from './Button.astro';
 import Container from './Container.astro';
+import LanguageSelector from './LanguageSelector.astro';
 import { SITE_CONFIG } from '../../config/site';
 import { categories } from '../../content.config';
 
@@ -61,6 +62,8 @@ const isActive = (href: string) => {
         <a href="/contact" class="text-[#CBB482] hover:text-white transition-colors underline-offset-2 hover:underline">
           Quick Trade Desk &rarr;
         </a>
+        <span class="text-slate-500">|</span>
+        <LanguageSelector variant="topbar" />
       </div>
     </Container>
   </div>
@@ -143,6 +146,8 @@ const isActive = (href: string) => {
 
       <!-- CTA & Mobile Toggle -->
       <div class="flex items-center gap-3">
+        <LanguageSelector variant="header" class="hidden sm:inline-block" />
+
         <div class="hidden sm:block">
           <Button href="/contact" variant="gold" size="sm" class="shadow-md">
             Request Quote
@@ -236,7 +241,9 @@ const isActive = (href: string) => {
           </a>
         );
       })}
-      <div class="pt-3 pb-1 border-t border-[#183B63]/80 mt-2">
+
+      <div class="pt-3 pb-1 border-t border-[#183B63]/80 mt-2 space-y-2.5">
+        <LanguageSelector variant="mobile" />
         <Button href="/contact" variant="gold" size="md" class="w-full text-center">
           Request Trade Quote
         </Button>

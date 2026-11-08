@@ -26,6 +26,9 @@ const { title, description, image, type = 'website', hasBottomBar = false } = As
     'flex flex-col min-h-screen bg-[#F8F7F3] text-slate-800 antialiased selection:bg-[#102C50] selection:text-white',
     { 'has-mobile-bottom-bar': hasBottomBar }
   ]}>
+    <!-- Hidden Google Translate Container -->
+    <div id="google_translate_element" class="sr-only" aria-hidden="true"></div>
+
     <!-- Accessible Skip Link -->
     <a
       href="#main-content"
@@ -47,6 +50,19 @@ const { title, description, image, type = 'website', hasBottomBar = false } = As
 
     <!-- Universal Sticky WhatsApp Inquiry Widget -->
     <WhatsAppButton />
+
+    <!-- Google Translate Script Initialization -->
+    <script is:inline>
+      window.googleTranslateElementInit = function() {
+        if (window.google && window.google.translate) {
+          new window.google.translate.TranslateElement({
+            pageLanguage: 'en',
+            autoDisplay: false
+          }, 'google_translate_element');
+        }
+      };
+    </script>
+    <script is:inline src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- Lenis Smooth Momentum Scrolling -->
     <script>

@@ -129,3 +129,55 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Google Website Translator Customization & Frame Suppression
+   Ensures seamless, un-invasive in-place translation across all 130+ languages
+   ========================================================================== */
+
+/* 1. Completely hide Google's default top banner iframe */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 2. Prevent Google's injected 40px top displacement on body */
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+/* 3. Hide Google translate popups and hover balloons */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 4. Remove yellow highlight on translated text */
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 5. Keep native Google Translate element accessible to DOM but hidden from viewport */
+#google_translate_element {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
