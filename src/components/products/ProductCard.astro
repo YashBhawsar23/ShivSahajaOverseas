@@ -7,9 +7,10 @@ interface Props {
   product: ProductEntry;
   class?: string;
   variant?: 'full' | 'minimal';
+  eager?: boolean;
 }
 
-const { product, class: className = '', variant = 'full' } = Astro.props;
+const { product, class: className = '', variant = 'full', eager = false } = Astro.props;
 const { data } = product;
 const categoryInfo = getCategoryDetails(data.category);
 const isMinimal = variant === 'minimal';
@@ -43,7 +44,7 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
         <img
           src={data.image}
           alt={data.name}
-          loading="lazy"
+          loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
@@ -105,18 +106,6 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
   <!-- Card Body -->
   <div class="p-5 flex-1 flex flex-col justify-between">
     <div>
-      <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2">
-        <span class="inline-flex items-center gap-1 font-medium text-slate-600">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#B69A63]"></span>
-          {data.origin}
-        </span>
-        {data.hsCode && (
-          <span class="text-[11px] bg-slate-100 px-2 py-0.5 rounded text-slate-600 font-mono" title="HS Code Reference">
-            HS: {data.hsCode}
-          </span>
-        )}
-      </div>
-
       <h3 class="text-lg font-bold text-[#102C50] group-hover:text-[#B69A63] transition-colors line-clamp-1">
         <a href={`/products/${data.slug}`} class="focus:outline-none">
           {data.name}
@@ -140,7 +129,7 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
         href={`/products/${data.slug}`}
         class="inline-flex items-center text-xs font-bold text-[#102C50] hover:text-[#B69A63] transition-colors group/link"
       >
-        <span>Specifications</span>
+        <span>View Details</span>
         <svg class="w-3.5 h-3.5 ml-1 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
         </svg>
