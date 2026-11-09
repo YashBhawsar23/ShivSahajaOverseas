@@ -7,6 +7,8 @@ interface Props {
   class?: string;
   emptyMessage?: string;
   variant?: 'full' | 'minimal';
+  mobileCarousel?: boolean;
+  id?: string;
 }
 
 const {
@@ -14,6 +16,8 @@ const {
   class: className = '',
   emptyMessage = 'No commodities match your selection. Please contact our trade desk for custom sourcing requests.',
   variant = 'full',
+  mobileCarousel = false,
+  id = 'product-grid',
 } = Astro.props;
 ---
 
@@ -21,13 +25,21 @@ const {
   products.length > 0 ? (
     <div
       class:list={[
-        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8',
+        mobileCarousel
+          ? 'flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pt-1 pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:p-0'
+          : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8',
         className
       ]}
-      id="product-grid"
+      id={id}
+      data-mobile-carousel={mobileCarousel ? 'true' : undefined}
     >
       {products.map((product) => (
-        <ProductCard product={product} variant={variant} />
+        <ProductCard
+          product={product}
+          variant={variant}
+          eager={mobileCarousel}
+          class={mobileCarousel ? 'w-full flex-shrink-0 snap-center md:w-auto md:flex-shrink' : ''}
+        />
       ))}
     </div>
   ) : (

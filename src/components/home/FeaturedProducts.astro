@@ -7,9 +7,9 @@ import { getFeaturedProducts } from '../../utils/products';
 const featuredProducts = await getFeaturedProducts(6);
 ---
 
-<section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Featured Commodities">
+<section class="py-16 sm:py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Featured Commodities">
   <Container>
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
       <div>
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B69A63]/15 text-[#91753C] text-xs font-bold uppercase tracking-wider mb-3">
           Prime Selections
@@ -27,7 +27,175 @@ const featuredProducts = await getFeaturedProducts(6);
       </Button>
     </div>
 
-    <!-- Product Grid -->
-    <ProductGrid products={featuredProducts} variant="minimal" />
+    <!-- Product Grid (Desktop Grid / Mobile Horizontal Carousel) -->
+    <ProductGrid
+      products={featuredProducts}
+      variant="minimal"
+      mobileCarousel={true}
+      id="featured-products-carousel"
+    />
+
+    <!-- Mobile Carousel Navigation Controls -->
+    {featuredProducts.length > 1 && (
+      <div class="mt-5 flex items-center justify-center gap-4 md:hidden" aria-label="Featured products carousel controls">
+        <button
+          type="button"
+          id="featured-carousel-prev"
+          aria-label="Previous featured product"
+          disabled
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="flex items-center gap-2" id="featured-carousel-dots" role="tablist" aria-label="Select featured commodity">
+            {featuredProducts.map((prod, idx) => (
+              <button
+                type="button"
+                data-carousel-dot={idx}
+                aria-label={`Show ${prod.data.name}`}
+                aria-current={idx === 0 ? 'true' : 'false'}
+                class:list={[
+                  'featured-carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer',
+                  idx === 0 ? 'w-6 bg-[#102C50]' : 'w-2 bg-[#B69A63]/40 hover:bg-[#B69A63]'
+                ]}
+              />
+            ))}
+          </div>
+          <span class="text-[11px] font-semibold text-slate-500 tracking-wide">
+            <span id="featured-carousel-index" class="font-bold text-[#102C50]">1</span> / {featuredProducts.length} &bull; Swipe or tap
+          </span>
+        </div>
+
+        <button
+          type="button"
+          id="featured-carousel-next"
+          aria-label="Next featured product"
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    )}
   </Container>
 </section>
+
+<script>
+  function setupFeaturedCarousel() {
+    const track = document.getElementById('featured-products-carousel');
+    const prevBtn = document.getElementById('featured-carousel-prev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('featured-carousel-next') as HTMLButtonElement | null;
+    const indexEl = document.getElementById('featured-carousel-index');
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.featured-carousel-dot'));
+
+    if (!track || track.dataset.carouselBound === 'true') return;
+    const slides = Array.from(track.querySelectorAll<HTMLElement>('article'));
+    if (slides.length <= 1) return;
+
+    track.dataset.carouselBound = 'true';
+    let activeIndex = 0;
+    let rafPending = false;
+    let isProgrammaticScroll = false;
+    let programmaticTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function updateControls(idx: number) {
+      activeIndex = idx;
+      if (indexEl) indexEl.textContent = String(idx + 1);
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+
+      dots.forEach((dot, i) => {
+        const isCurrent = i === idx;
+        dot.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+        dot.classList.toggle('w-6', isCurrent);
+        dot.classList.toggle('bg-[#102C50]', isCurrent);
+        dot.classList.toggle('w-2', !isCurrent);
+        dot.classList.toggle('bg-[#B69A63]/40', !isCurrent);
+        dot.classList.toggle('hover:bg-[#B69A63]', !isCurrent);
+      });
+    }
+
+    function goToSlide(idx: number) {
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(slides.length - 1, idx));
+      const trackRect = track.getBoundingClientRect();
+      const slideRect = slides[clamped].getBoundingClientRect();
+      const targetLeft = track.scrollLeft + (slideRect.left - trackRect.left);
+
+      isProgrammaticScroll = true;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      programmaticTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, 550);
+
+      updateControls(clamped);
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
+
+    function detectNearestSlide() {
+      if (!track || isProgrammaticScroll) return;
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, i) => {
+        const rect = slide.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(center - trackCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
+        }
+      });
+
+      if (bestIdx !== activeIndex) {
+        updateControls(bestIdx);
+      }
+    }
+
+    track.addEventListener(
+      'touchstart',
+      () => {
+        isProgrammaticScroll = false;
+        if (programmaticTimer) clearTimeout(programmaticTimer);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener('scrollend', () => {
+      isProgrammaticScroll = false;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      detectNearestSlide();
+    });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          detectNearestSlide();
+          rafPending = false;
+        });
+      },
+      { passive: true }
+    );
+
+    prevBtn?.addEventListener('click', () => goToSlide(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(activeIndex + 1));
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => goToSlide(idx));
+    });
+
+    updateControls(0);
+  }
+
+  setupFeaturedCarousel();
+  document.addEventListener('astro:page-load', setupFeaturedCarousel);
+</script>

@@ -6,12 +6,12 @@ import { categories, getAllProducts } from '../../utils/products';
 const allProducts = await getAllProducts();
 
 const categoryImages: Record<string, string> = {
-  cotton: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
-  spices: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
-  'grains-flour': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80',
-  'seeds-pulses': 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=80',
-  vegetables: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80',
   fruits: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=80',
+  vegetables: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80',
+  spices: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
+  'seeds-pulses': 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=80',
+  'grains-flour': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80',
+  cotton: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
 };
 
 const enrichedCategories = categories.map((cat) => ({
@@ -21,25 +21,30 @@ const enrichedCategories = categories.map((cat) => ({
 }));
 ---
 
-<section class="py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Product Categories">
+<section class="py-16 sm:py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Product Categories">
   <Container>
     <SectionHeader
       badge="Commodity Portfolio"
       title="Sourced from Prime Agricultural Belts"
-      subtitle="From premium raw cotton to nutrient-rich food grains and aromatic spices, our commodities comply with international phytosanitary and export benchmarks."
+      subtitle="From fresh horticultural produce and aromatic spices to nutrient-rich grains and raw cotton, our commodities comply with international phytosanitary and export benchmarks."
     />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    <!-- Category Grid (Tablet/Desktop Grid / Mobile Horizontal Carousel) -->
+    <div
+      id="category-grid-carousel"
+      class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pt-1 pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-visible sm:p-0"
+    >
       {enrichedCategories.map((cat) => (
         <a
           href={`/products/category/${cat.id}`}
-          class="group relative h-80 rounded-2xl overflow-hidden border border-[#E8E5DC] shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6"
+          class="group relative h-80 w-full flex-shrink-0 snap-center sm:w-auto sm:flex-shrink rounded-2xl overflow-hidden border border-[#E8E5DC] shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6"
         >
           <!-- Background Image with Zoom -->
           <img
             src={cat.image}
             alt={cat.name}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
           />
 
@@ -70,5 +75,168 @@ const enrichedCategories = categories.map((cat) => ({
         </a>
       ))}
     </div>
+
+    <!-- Mobile Carousel Navigation Controls -->
+    {enrichedCategories.length > 1 && (
+      <div class="mt-5 flex items-center justify-center gap-4 sm:hidden" aria-label="Product categories carousel controls">
+        <button
+          type="button"
+          id="category-carousel-prev"
+          aria-label="Previous product category"
+          disabled
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="flex items-center gap-2" id="category-carousel-dots" role="tablist" aria-label="Select product category">
+            {enrichedCategories.map((cat, idx) => (
+              <button
+                type="button"
+                data-category-dot={idx}
+                aria-label={`Show ${cat.name}`}
+                aria-current={idx === 0 ? 'true' : 'false'}
+                class:list={[
+                  'category-carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer',
+                  idx === 0 ? 'w-6 bg-[#102C50]' : 'w-2 bg-[#B69A63]/40 hover:bg-[#B69A63]'
+                ]}
+              />
+            ))}
+          </div>
+          <span class="text-[11px] font-semibold text-slate-500 tracking-wide">
+            <span id="category-carousel-index" class="font-bold text-[#102C50]">1</span> / {enrichedCategories.length} &bull; Swipe or tap
+          </span>
+        </div>
+
+        <button
+          type="button"
+          id="category-carousel-next"
+          aria-label="Next product category"
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    )}
   </Container>
 </section>
+
+<script>
+  function setupCategoryCarousel() {
+    const track = document.getElementById('category-grid-carousel');
+    const prevBtn = document.getElementById('category-carousel-prev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('category-carousel-next') as HTMLButtonElement | null;
+    const indexEl = document.getElementById('category-carousel-index');
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.category-carousel-dot'));
+
+    if (!track || track.dataset.carouselBound === 'true') return;
+    const slides = Array.from(track.querySelectorAll<HTMLElement>(':scope > a'));
+    if (slides.length <= 1) return;
+
+    track.dataset.carouselBound = 'true';
+    let activeIndex = 0;
+    let rafPending = false;
+    let isProgrammaticScroll = false;
+    let programmaticTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function updateControls(idx: number) {
+      activeIndex = idx;
+      if (indexEl) indexEl.textContent = String(idx + 1);
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+
+      dots.forEach((dot, i) => {
+        const isCurrent = i === idx;
+        dot.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+        dot.classList.toggle('w-6', isCurrent);
+        dot.classList.toggle('bg-[#102C50]', isCurrent);
+        dot.classList.toggle('w-2', !isCurrent);
+        dot.classList.toggle('bg-[#B69A63]/40', !isCurrent);
+        dot.classList.toggle('hover:bg-[#B69A63]', !isCurrent);
+      });
+    }
+
+    function goToSlide(idx: number) {
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(slides.length - 1, idx));
+      const trackRect = track.getBoundingClientRect();
+      const slideRect = slides[clamped].getBoundingClientRect();
+      const targetLeft = track.scrollLeft + (slideRect.left - trackRect.left);
+
+      isProgrammaticScroll = true;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      programmaticTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, 550);
+
+      updateControls(clamped);
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
+
+    function detectNearestSlide() {
+      if (!track || isProgrammaticScroll) return;
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, i) => {
+        const rect = slide.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(center - trackCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
+        }
+      });
+
+      if (bestIdx !== activeIndex) {
+        updateControls(bestIdx);
+      }
+    }
+
+    track.addEventListener(
+      'touchstart',
+      () => {
+        isProgrammaticScroll = false;
+        if (programmaticTimer) clearTimeout(programmaticTimer);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener('scrollend', () => {
+      isProgrammaticScroll = false;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      detectNearestSlide();
+    });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          detectNearestSlide();
+          rafPending = false;
+        });
+      },
+      { passive: true }
+    );
+
+    prevBtn?.addEventListener('click', () => goToSlide(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(activeIndex + 1));
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => goToSlide(idx));
+    });
+
+    updateControls(0);
+  }
+
+  setupCategoryCarousel();
+  document.addEventListener('astro:page-load', setupCategoryCarousel);
+</script>
