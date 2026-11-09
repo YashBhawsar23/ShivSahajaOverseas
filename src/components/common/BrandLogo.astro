@@ -1,67 +1,80 @@
 ---
 interface Props {
   variant?: 'light' | 'dark';
+  layout?: 'horizontal' | 'stacked';
   showTagline?: boolean;
   class?: string;
 }
 
-const { variant = 'dark', showTagline = true, class: className = '' } = Astro.props;
+const {
+  variant = 'dark',
+  layout = 'horizontal',
+  showTagline = false,
+  class: className = '',
+} = Astro.props;
 
-const isLight = variant === 'light';
-const primaryTextColor = isLight ? 'text-white' : 'text-[#102C50]';
-const subtitleColor = isLight ? 'text-slate-300' : 'text-slate-600';
+// 'light' variant = White & Gold graphics intended for dark navy surfaces (Header/Footer)
+// 'dark' variant = Original Dark Navy (#0B2A4E) & Gold (#A68853) graphics for light surfaces
+const isLightInk = variant === 'light';
+
+const emblemSrc = isLightInk ? '/images/logo-emblem-dark.svg' : '/images/logo-emblem.svg';
+const wordmarkSrc = isLightInk ? '/images/logo-wordmark-dark.svg' : '/images/logo-wordmark.svg';
+const fullStackedSrc = isLightInk ? '/images/logo-official-dark.svg' : '/images/logo-official.svg';
+const subtitleColor = isLightInk ? 'text-[#CBB482]/90' : 'text-slate-600';
 ---
 
 <a
   href="/"
   class:list={[
-    'inline-flex items-center gap-2 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] rounded-lg p-0.5 sm:p-1',
-    className
+    'inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] rounded-lg notranslate',
+    layout === 'stacked' ? 'flex-col items-start p-1' : 'gap-2 sm:gap-3 p-0.5 sm:p-1',
+    className,
   ]}
-  aria-label="Shivsahaja Overseas Home"
+  aria-label="Shivsahaja Overseas — Home"
+  translate="no"
 >
-  <!-- Brand Emblem Vector -->
-  <div class="relative w-8 h-8 sm:w-11 sm:h-11 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-sm">
-      <defs>
-        <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#D4AF37"/>
-          <stop offset="50%" stop-color="#B69A63"/>
-          <stop offset="100%" stop-color="#91753C"/>
-        </linearGradient>
-        <linearGradient id="logoNavy" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#183B63"/>
-          <stop offset="100%" stop-color="#102C50"/>
-        </linearGradient>
-      </defs>
-      
-      <!-- Hexagonal / Shield Base for Global Strength -->
-      <rect x="2" y="2" width="60" height="60" rx="14" fill={isLight ? '#183B63' : '#102C50'} stroke="url(#logoGold)" stroke-width="2"/>
-      
-      <!-- Global Trade Latitude & Longitude Meridians -->
-      <circle cx="32" cy="32" r="21" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
-      <ellipse cx="32" cy="32" rx="10" ry="21" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
-      <line x1="11" y1="32" x2="53" y2="32" stroke="#B69A63" stroke-width="1.2" stroke-opacity="0.35"/>
-
-      <!-- Prominent Dynamic "S" Monogram -->
-      <path d="M42 22 C42 16.5 37.5 14.5 32 14.5 C25 14.5 21.5 18 21.5 23 C21.5 30 42.5 28 42.5 38.5 C42.5 45.5 36.5 49.5 31.5 49.5 C24 49.5 20.5 45 20 40" 
-            stroke="url(#logoGold)" 
-            stroke-width="5" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- Corporate Typography (Protected from automatic translation) -->
-  <div class="flex flex-col leading-tight notranslate" translate="no">
-    <div class:list={['font-bold tracking-tight text-[15px] sm:text-xl font-heading flex items-baseline gap-1 sm:gap-1.5', primaryTextColor]}>
-      <span>SHIVSAHAJA</span>
-      <span class="text-[#B69A63] font-light">OVERSEAS</span>
-    </div>
-    {showTagline && (
-      <span class:list={['text-[8.5px] sm:text-[10px] tracking-wider uppercase font-medium mt-0.5', subtitleColor]}>
-        Global Trade &bull; Trusted Partner
-      </span>
-    )}
-  </div>
+  {layout === 'stacked' ? (
+    <img
+      src={fullStackedSrc}
+      alt="Shivsahaja Overseas — Global Trade | Trusted Partner | Borderless Growth"
+      width="970"
+      height="768"
+      loading="eager"
+      decoding="sync"
+      class="w-48 sm:w-56 h-auto transition-transform duration-300 group-hover:scale-[1.02]"
+    />
+  ) : (
+    <>
+      <img
+        src={emblemSrc}
+        alt=""
+        width="776"
+        height="479"
+        loading="eager"
+        decoding="sync"
+        class="h-[30px] sm:h-11 w-auto flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
+      />
+      <div class="flex flex-col leading-none">
+        <img
+          src={wordmarkSrc}
+          alt="Shivsahaja Overseas"
+          width="970"
+          height="179"
+          loading="eager"
+          decoding="sync"
+          class="h-[21px] sm:h-8 w-auto flex-shrink-0"
+        />
+        {showTagline && (
+          <span
+            class:list={[
+              'text-[7.5px] sm:text-[9px] tracking-[0.16em] uppercase font-medium mt-1 whitespace-nowrap',
+              subtitleColor,
+            ]}
+          >
+            Global Trade | Trusted Partner | Borderless Growth
+          </span>
+        )}
+      </div>
+    </>
+  )}
 </a>
