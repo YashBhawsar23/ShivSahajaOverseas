@@ -7,7 +7,6 @@ description: "Indian Shankar-6 and MCU-5 cotton varieties are celebrated globall
 image: "https://images.unsplash.com/photo-1529087795572-98e214aeeb79?auto=format&fit=crop&w=1000&q=80"
 gallery:
   - "https://images.unsplash.com/photo-1529087795572-98e214aeeb79?auto=format&fit=crop&w=1000&q=80"
-  - "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=1000&q=80"
 hsCode: "5201.00.19"
 tradeType: "export"
 origin: "India (Gujarat / Maharashtra / Telangana)"

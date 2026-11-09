@@ -27,7 +27,7 @@ const productSchema = {
   '@type': 'Product',
   name: data.name,
   description: data.shortDescription,
-  image: data.image,
+  image: data.image.startsWith('http') ? data.image : `https://shivsahajaoverseas.com${data.image}`,
   category: categoryInfo?.name || data.category,
   brand: {
     '@type': 'Brand',
