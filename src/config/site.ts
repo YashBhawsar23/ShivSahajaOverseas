@@ -10,6 +10,28 @@ export const SITE_CONFIG = {
   legalName: 'Shivsahaja Overseas',
   tagline: 'Global Trade | Trusted Partner | Borderless Growth',
   siteUrl: 'https://shivsahajaoverseas.com',
+
+  /**
+   * Verified Corporate Contact & Registered Office Address
+   */
+  contact: {
+    email: 'enquiry@shivsahajaoverseas.com',
+    address: {
+      building: 'Maa Bhagwati Kripa Building',
+      street: 'Mandir Chowk, Bistan',
+      locality: 'Bistan',
+      city: 'Khargone',
+      state: 'Madhya Pradesh',
+      postalCode: '451441',
+      country: 'India',
+      countryCode: 'IN',
+      lines: [
+        'Maa Bhagwati Kripa Building,',
+        'Mandir Chowk, Bistan,',
+        'Khargone, Madhya Pradesh, 451441, India',
+      ],
+    },
+  },
   
   /**
    * Business Operations Feature Flags

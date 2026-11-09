@@ -3,8 +3,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { getAllProducts } from '../utils/products';
+import { SITE_CONFIG } from '../config/site';
 
 const allProducts = await getAllProducts();
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_CONFIG.legalName,
+  url: SITE_CONFIG.siteUrl,
+  email: SITE_CONFIG.contact.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${SITE_CONFIG.contact.address.building}, ${SITE_CONFIG.contact.address.street}`,
+    addressLocality: SITE_CONFIG.contact.address.city,
+    addressRegion: SITE_CONFIG.contact.address.state,
+    postalCode: SITE_CONFIG.contact.address.postalCode,
+    addressCountry: SITE_CONFIG.contact.address.countryCode,
+  },
+};
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -30,6 +47,7 @@ const breadcrumbSchema = {
   title="Contact Trade Desk & Request Quotation"
   description="Connect with Shivsahaja Overseas trade desk. Request formal B2B price quotations, CIF/FOB ocean freight rates, and product specifications for Indian agro commodities."
 >
+  <JsonLd slot="head" schema={organizationSchema} />
   <JsonLd slot="head" schema={breadcrumbSchema} />
 
   <!-- Hero Header -->
@@ -76,9 +94,18 @@ const breadcrumbSchema = {
                   </svg>
                 </div>
                 <div>
-                  <span class="block font-bold text-[#102C50]">Company Name:</span>
-                  <p class="font-medium">Shivsahaja Overseas</p>
-                  <p class="text-xs text-slate-400 mt-0.5">[Official Corporate Office - Maharashtra / Gujarat, India]</p>
+                  <span class="block font-bold text-[#102C50]">Company &amp; Corporate Office:</span>
+                  <p class="font-semibold text-slate-800">{SITE_CONFIG.legalName}</p>
+                  <address class="not-italic text-xs text-slate-600 mt-1 leading-relaxed">
+                    <span class="block">{SITE_CONFIG.contact.address.building},</span>
+                    <span class="block">{SITE_CONFIG.contact.address.street},</span>
+                    <span class="block">
+                      {SITE_CONFIG.contact.address.city}, {SITE_CONFIG.contact.address.state},{' '}
+                      <span class="whitespace-nowrap">
+                        {SITE_CONFIG.contact.address.postalCode}, {SITE_CONFIG.contact.address.country}
+                      </span>
+                    </span>
+                  </address>
                 </div>
               </div>
 
