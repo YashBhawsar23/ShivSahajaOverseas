@@ -4,34 +4,6 @@ import Container from '../components/common/Container.astro';
 
 const galleryItems = [
   {
-    title: 'Raw Cotton Ginning & Baling',
-    category: 'cotton',
-    categoryName: 'Cotton & Fibers',
-    image: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=1000&q=80',
-    caption: 'Hydraulically pressed Shankar-6 cotton bales prepared for container stuffing at our contracted ginning partner facility in Gujarat.',
-  },
-  {
-    title: 'Sortex Cleaning & Purity Grader',
-    category: 'processing',
-    categoryName: 'Spices & Processing',
-    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=80',
-    caption: 'High-speed optical color sorters separating discolored pods and seeds from premium Guntur red chilli and turmeric batches.',
-  },
-  {
-    title: 'Deepwater Container Terminal Drayage',
-    category: 'logistics',
-    categoryName: 'Port Logistics',
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80',
-    caption: 'Containerized vessel loading operations at JNPT (Nhava Sheva Port), executing weekly scheduled departures to the Middle East and Europe.',
-  },
-  {
-    title: 'Milling Wheat & Grain Warehousing',
-    category: 'grains',
-    categoryName: 'Grains & Pulses',
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1000&q=80',
-    caption: 'Moisture-controlled grain silo storage and aspirator pre-cleaning for hard amber milling wheat.',
-  },
-  {
     title: 'Bhagwa Pomegranate Orchard Packhouse',
     category: 'perishables',
     categoryName: 'Fresh Fruits',
@@ -48,16 +20,16 @@ const galleryItems = [
   {
     title: 'Nashik Red Onion Sorting & Leno Bag Packing',
     category: 'perishables',
-    categoryName: 'Vegetables',
+    categoryName: 'Fresh Vegetables',
     image: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=1000&q=80',
     caption: 'Cured and stem-cut Nashik red onions graded into 45mm+ and 55mm+ sizes in ventilated mesh leno bags.',
   },
   {
-    title: 'Kabuli Chana Color Sorting & Bagging',
-    category: 'grains',
-    categoryName: 'Grains & Pulses',
-    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=1000&q=80',
-    caption: 'Export bagging of jumbo count Kabuli Chana into 25kg PP bags with custom buyer markings.',
+    title: 'Sortex Cleaning & Purity Grader',
+    category: 'processing',
+    categoryName: 'Spices & Processing',
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=80',
+    caption: 'High-speed optical color sorters separating discolored pods and seeds from premium Guntur red chilli and turmeric batches.',
   },
   {
     title: 'Spice Cryogenic Pin-Milling',
@@ -65,6 +37,34 @@ const galleryItems = [
     categoryName: 'Spices & Processing',
     image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80',
     caption: 'Low-temperature cryogenic milling of Salem turmeric fingers preserving volatile oils and natural curcuminoids.',
+  },
+  {
+    title: 'Kabuli Chana Color Sorting & Bagging',
+    category: 'grains',
+    categoryName: 'Seeds & Pulses',
+    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Export bagging of jumbo count Kabuli Chana into 25kg PP bags with custom buyer markings.',
+  },
+  {
+    title: 'Milling Wheat & Grain Warehousing',
+    category: 'grains',
+    categoryName: 'Grains & Pulses',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Moisture-controlled grain silo storage and aspirator pre-cleaning for hard amber milling wheat.',
+  },
+  {
+    title: 'Raw Cotton Ginning & Baling',
+    category: 'cotton',
+    categoryName: 'Cotton & Fibers',
+    image: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Hydraulically pressed Shankar-6 cotton bales prepared for container stuffing at our contracted ginning partner facility in Gujarat.',
+  },
+  {
+    title: 'Deepwater Container Terminal Drayage',
+    category: 'logistics',
+    categoryName: 'Port Logistics',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80',
+    caption: 'Containerized vessel loading operations at JNPT (Nhava Sheva Port), executing weekly scheduled departures to the Middle East and Europe.',
   },
 ];
 ---
@@ -104,10 +104,10 @@ const galleryItems = [
         </button>
         <button
           type="button"
-          data-filter="cotton"
+          data-filter="perishables"
           class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
         >
-          Cotton &amp; Fibers
+          Fruits &amp; Vegetables
         </button>
         <button
           type="button"
@@ -121,14 +121,14 @@ const galleryItems = [
           data-filter="grains"
           class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
         >
-          Grains &amp; Pulses
+          Pulses &amp; Grains
         </button>
         <button
           type="button"
-          data-filter="perishables"
+          data-filter="cotton"
           class="gallery-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-[#B69A63] transition-colors cursor-pointer"
         >
-          Fruits &amp; Vegetables
+          Cotton &amp; Fibers
         </button>
         <button
           type="button"
