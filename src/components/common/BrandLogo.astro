@@ -54,7 +54,7 @@ const subtitleColor = isLightInk ? 'text-[#CBB482]/90' : 'text-slate-600';
         decoding="sync"
         class="h-[30px] sm:h-11 w-auto flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
       />
-      <div class="flex flex-col leading-none">
+      <div class="flex flex-col items-start leading-none min-w-0">
         <img
           src={wordmarkSrc}
           alt="Shivsahaja Overseas"
@@ -67,7 +67,7 @@ const subtitleColor = isLightInk ? 'text-[#CBB482]/90' : 'text-slate-600';
         {showTagline && (
           <span
             class:list={[
-              'text-[7.5px] sm:text-[9px] tracking-[0.16em] uppercase font-medium mt-1 whitespace-nowrap',
+              'text-[6.5px] min-[390px]:text-[7.5px] sm:text-[9px] tracking-[0.12em] min-[390px]:tracking-[0.16em] uppercase font-medium mt-1 whitespace-nowrap',
               subtitleColor,
             ]}
           >

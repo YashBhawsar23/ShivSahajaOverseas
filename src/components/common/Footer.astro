@@ -24,19 +24,30 @@ const companyLinks = [
 ];
 ---
 
-<footer class="bg-[#0A1C33] text-slate-300 border-t-2 border-[#B69A63]/30 pt-16 pb-12">
+<footer class="site-footer bg-[#0A1C33] text-slate-300 border-t-2 border-[#B69A63]/30 pt-9 pb-24 lg:pt-16 lg:pb-12">
   <Container>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-x-5 gap-y-6 lg:gap-8 mb-6 lg:mb-12">
       <!-- Col 1 & 2: Brand & Positioning -->
-      <div class="lg:col-span-2 space-y-4">
-        <BrandLogo variant="light" layout="stacked" showTagline={true} />
-        
-        <p class="text-sm text-slate-300 leading-relaxed max-w-sm mt-3">
+      <div class="col-span-2 space-y-3 lg:space-y-4">
+        <div class="lg:hidden">
+          <BrandLogo variant="light" layout="horizontal" showTagline={true} />
+        </div>
+        <div class="hidden lg:block">
+          <BrandLogo variant="light" layout="stacked" showTagline={true} />
+        </div>
+
+        <p class="lg:hidden text-xs text-slate-300 leading-relaxed max-w-md">
+          Premier Indian exporter of verified fresh produce, spices, pulses, grains, and raw cotton worldwide.
+        </p>
+        <p class="hidden lg:block text-sm text-slate-300 leading-relaxed max-w-sm mt-3">
           Shivsahaja Overseas is a premier Indian trading enterprise specializing in the sourcing, processing, and global distribution of verified fresh produce, spices, pulses, food grains, and raw cotton.
         </p>
 
-        <div class="pt-2 text-xs text-slate-400 space-y-1.5">
-          <p class="font-medium text-[#CBB482]">Government & Regulatory Alignment:</p>
+        <p class="lg:hidden text-[11px] text-slate-400 leading-snug">
+          <span class="font-semibold text-[#CBB482]">Compliant:</span> DGFT &bull; APEDA &bull; FSSAI &bull; Spices Board of India
+        </p>
+        <div class="hidden lg:block pt-2 text-xs text-slate-400 space-y-1.5">
+          <p class="font-medium text-[#CBB482]">Government &amp; Regulatory Alignment:</p>
           <p class="leading-relaxed">
             Registered under the Director General of Foreign Trade (DGFT), compliant with APEDA, Spices Board of India, and FSSAI export standards.
           </p>
@@ -44,16 +55,16 @@ const companyLinks = [
       </div>
 
       <!-- Col 3: Product Catalogue -->
-      <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
+      <div class="col-span-1">
+        <h3 class="font-bold text-xs lg:text-sm uppercase tracking-wider mb-3 lg:mb-4 border-b border-[#183B63] pb-1.5 lg:pb-2 text-[#CBB482]">
           Product Catalogue
         </h3>
-        <ul class="space-y-2.5 text-sm">
+        <ul class="space-y-2 lg:space-y-2.5 text-xs lg:text-sm">
           {productCategories.map((cat) => (
             <li>
               <a href={cat.href} class="text-slate-300 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 group">
                 <span class="text-[#B69A63] group-hover:translate-x-0.5 transition-transform">&rsaquo;</span>
-                {cat.name}
+                <span>{cat.name}</span>
               </a>
             </li>
           ))}
@@ -61,16 +72,16 @@ const companyLinks = [
       </div>
 
       <!-- Col 4: Corporate Quick Links -->
-      <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
-          Trade & Company
+      <div class="col-span-1">
+        <h3 class="font-bold text-xs lg:text-sm uppercase tracking-wider mb-3 lg:mb-4 border-b border-[#183B63] pb-1.5 lg:pb-2 text-[#CBB482]">
+          Trade &amp; Company
         </h3>
-        <ul class="space-y-2.5 text-sm">
+        <ul class="space-y-2 lg:space-y-2.5 text-xs lg:text-sm">
           {companyLinks.map((link) => (
             <li>
               <a href={link.href} class="text-slate-300 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 group">
                 <span class="text-[#B69A63] group-hover:translate-x-0.5 transition-transform">&rsaquo;</span>
-                {link.name}
+                <span>{link.name}</span>
               </a>
             </li>
           ))}
@@ -78,18 +89,24 @@ const companyLinks = [
       </div>
 
       <!-- Col 5: Verified Trade Desk & Contact -->
-      <div>
-        <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 border-b border-[#183B63] pb-2 text-[#CBB482]">
-          Trade Desk
-        </h3>
-        <div class="space-y-3 text-xs text-slate-300">
+      <div class="col-span-2 lg:col-span-1 bg-[#102C50]/55 border border-[#183B63] rounded-xl p-4 lg:bg-transparent lg:border-0 lg:rounded-none lg:p-0">
+        <div class="flex items-center justify-between gap-2 mb-3 lg:mb-4 border-b border-[#183B63] pb-2">
+          <h3 class="font-bold text-xs lg:text-sm uppercase tracking-wider text-[#CBB482]">
+            Trade Desk
+          </h3>
+          <span class="lg:hidden inline-block bg-[#183B63] text-slate-300 text-[10px] px-2 py-0.5 rounded border border-[#B69A63]/30 whitespace-nowrap">
+            IEC: Registered Exporter
+          </span>
+        </div>
+
+        <div class="space-y-2.5 lg:space-y-3 text-xs text-slate-300">
           <div>
-            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Corporate Office:</span>
+            <span class="hidden lg:block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Corporate Office:</span>
             <address class="not-italic leading-relaxed text-slate-300">
-              <span class="block font-medium text-slate-100">{SITE_CONFIG.legalName}</span>
-              <span class="block">{SITE_CONFIG.contact.address.building},</span>
-              <span class="block">{SITE_CONFIG.contact.address.street},</span>
-              <span class="block">
+              <span class="font-medium text-slate-100">{SITE_CONFIG.legalName}</span><span class="lg:hidden"> &mdash; </span><br class="hidden lg:inline" />
+              <span>{SITE_CONFIG.contact.address.building},</span><span class="lg:hidden"> </span><br class="hidden lg:inline" />
+              <span>{SITE_CONFIG.contact.address.street},</span><span class="lg:hidden"> </span><br class="hidden lg:inline" />
+              <span>
                 {SITE_CONFIG.contact.address.city}, {SITE_CONFIG.contact.address.state},{' '}
                 <span class="whitespace-nowrap">
                   {SITE_CONFIG.contact.address.postalCode}, {SITE_CONFIG.contact.address.country}
@@ -99,20 +116,20 @@ const companyLinks = [
           </div>
 
           <div>
-            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Trade Inquiries:</span>
-            <a href="mailto:enquiry@shivsahajaoverseas.com" class="text-[#CBB482] hover:underline block break-all">
-              enquiry@shivsahajaoverseas.com
+            <span class="hidden lg:block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Trade Inquiries:</span>
+            <a href={`mailto:${SITE_CONFIG.contact.email}`} class="text-[#CBB482] hover:underline block break-all font-medium lg:font-normal">
+              {SITE_CONFIG.contact.email}
             </a>
           </div>
 
           <div>
-            <span class="block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Operations & Logistics:</span>
-            <p class="text-slate-300">
-              JNPT Nhava Sheva &bull; Mundra Port &bull; Hazira Port
+            <span class="hidden lg:block text-slate-400 font-semibold mb-0.5 uppercase tracking-wider text-[10px]">Operations &amp; Logistics:</span>
+            <p class="text-[11px] lg:text-xs text-slate-400 lg:text-slate-300">
+              <span class="lg:hidden">Ports: </span>JNPT Nhava Sheva &bull; Mundra<span class="hidden lg:inline"> Port</span> &bull; Hazira<span class="hidden lg:inline"> Port</span>
             </p>
           </div>
 
-          <div class="pt-2">
+          <div class="hidden lg:block pt-2">
             <span class="inline-block bg-[#183B63] text-slate-300 text-[10px] px-2.5 py-1 rounded border border-[#B69A63]/30">
               IEC: Registered Exporter
             </span>
@@ -122,14 +139,28 @@ const companyLinks = [
     </div>
 
     <!-- Bottom Bar -->
-    <div class="pt-8 mt-8 border-t border-[#183B63] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+    <div class="pt-5 mt-5 lg:pt-8 lg:mt-8 border-t border-[#183B63] flex flex-col lg:flex-row items-center justify-between text-[11px] lg:text-xs text-slate-400 gap-1.5 lg:gap-4 text-center lg:text-left lg:pr-20 2xl:pr-0">
       <p>
-        &copy; {currentYear} Shivsahaja Overseas. All rights reserved. Borderless Growth &bull; Trusted Partner.
+        &copy; {currentYear} Shivsahaja Overseas. All rights reserved.<span class="hidden lg:inline"> Borderless Growth &bull; Trusted Partner.</span>
       </p>
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap items-center justify-center lg:justify-end gap-x-2 lg:gap-x-4 xl:gap-x-6 gap-y-1">
         <span>Incoterms 2020: FOB &bull; CIF &bull; CFR</span>
-        <span>Made for International B2B Trade</span>
+        <span class="lg:hidden">&bull; Global B2B Trade</span>
+        <span class="hidden lg:inline">Made for International B2B Trade</span>
       </div>
     </div>
   </Container>
 </footer>
+
+<style>
+  /* Clear sticky product bar + lifted WhatsApp FAB on mobile pages with hasBottomBar={true} */
+  :global(body.has-mobile-bottom-bar) .site-footer {
+    padding-bottom: 9.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    :global(body.has-mobile-bottom-bar) .site-footer {
+      padding-bottom: 3rem;
+    }
+  }
+</style>
