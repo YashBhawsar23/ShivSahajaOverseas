@@ -57,6 +57,22 @@ export const SITE_CONFIG = {
     enableImport: false,
 
     /**
+     * Global Trade Page Feature Flag:
+     * -------------------------------------------------------------
+     * Set to `false` to temporarily disable the /trade ("Global Trade") page.
+     * 
+     * When `false`:
+     *  - "Global Trade" link in Header (desktop & mobile) is hidden.
+     *  - "Global Trade Operations" link in the Footer is hidden.
+     *  - Direct visits to /trade (plus /export and disabled /import) redirect cleanly to / (302).
+     *  - /trade and /export are excluded from the generated sitemap.
+     * 
+     * To RE-ENABLE in the future:
+     *  Simply set `enableGlobalTrade: true`.
+     */
+    enableGlobalTrade: false,
+
+    /**
      * Product Live Search Bar Feature Flag:
      * -------------------------------------------------------------
      * Set to `false` when the client wants to temporarily disable/hide

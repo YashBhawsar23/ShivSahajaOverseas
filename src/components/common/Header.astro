@@ -30,7 +30,7 @@ const allNavItems: NavItem[] = [
       href: `/products/category/${c.id}`,
     })),
   },
-  { label: 'Global Trade', href: '/trade' },
+  { label: 'Global Trade', href: '/trade', hidden: !SITE_CONFIG.features.enableGlobalTrade },
   { label: 'Import', href: '/import', hidden: !SITE_CONFIG.features.enableImport },
   { label: 'Certifications', href: '/certifications' },
   { label: 'Gallery', href: '/gallery' },

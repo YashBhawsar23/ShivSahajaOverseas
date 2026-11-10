@@ -1,4 +1,7 @@
 ---
-// Graceful 301 permanent redirect: /export -> /trade
-return Astro.redirect('/trade', 301);
+import { SITE_CONFIG } from '../config/site';
+
+// Redirect /export -> /trade when enabled, or temporarily to / when Global Trade is disabled
+const targetUrl = SITE_CONFIG.features.enableGlobalTrade ? '/trade' : '/';
+return Astro.redirect(targetUrl, SITE_CONFIG.features.enableGlobalTrade ? 301 : 302);
 ---

@@ -3,7 +3,8 @@ import { SITE_CONFIG } from '../config/site';
 
 // When import operations are disabled, redirect to the primary Global Trade hub
 if (!SITE_CONFIG.features.enableImport) {
-  return Astro.redirect('/trade', 302);
+  const fallbackUrl = SITE_CONFIG.features.enableGlobalTrade ? '/trade' : '/';
+  return Astro.redirect(fallbackUrl, 302);
 }
 ---
 <!DOCTYPE html>

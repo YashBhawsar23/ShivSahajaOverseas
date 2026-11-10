@@ -15,7 +15,11 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       filter: (page) => {
-        if (!SITE_CONFIG.features.enableImport && page.includes('/import')) {
+        const pathname = new URL(page, 'https://shivsahajaoverseas.com').pathname.replace(/\/+$/, '') || '/';
+        if (!SITE_CONFIG.features.enableImport && pathname === '/import') {
+          return false;
+        }
+        if (!SITE_CONFIG.features.enableGlobalTrade && (pathname === '/trade' || pathname === '/export')) {
           return false;
         }
         return true;

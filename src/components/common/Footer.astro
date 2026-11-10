@@ -16,7 +16,7 @@ const productCategories = [
 
 const companyLinks = [
   { name: 'About Shivsahaja', href: '/about' },
-  { name: 'Global Trade Operations', href: '/trade' },
+  ...(SITE_CONFIG.features.enableGlobalTrade ? [{ name: 'Global Trade Operations', href: '/trade' }] : []),
   ...(SITE_CONFIG.features.enableImport ? [{ name: 'Import Capabilities', href: '/import' }] : []),
   { name: 'Quality Certifications', href: '/certifications' },
   { name: 'Facility & Trade Gallery', href: '/gallery' },

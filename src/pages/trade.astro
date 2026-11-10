@@ -3,6 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
 import Button from '../components/common/Button.astro';
+import { SITE_CONFIG } from '../config/site';
+
+// When the Global Trade page is disabled, redirect cleanly to the homepage
+if (!SITE_CONFIG.features.enableGlobalTrade) {
+  return Astro.redirect('/', 302);
+}
 
 const supplyPillars = [
   {
