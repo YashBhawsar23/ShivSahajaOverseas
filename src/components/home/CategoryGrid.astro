@@ -7,17 +7,17 @@ const allProducts = await getAllProducts();
 
 const categoryImages: Record<string, string> = {
   fruits: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=80',
-  vegetables: 'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=800&q=80',
+  vegetables: '/images/products/onion.webp',
   spices: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
-  'seeds-pulses': 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=800&q=80',
+  'seeds-pulses': '/images/products/soybean.webp',
   'grains-flour': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80',
-  cotton: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
+  cotton: '/images/products/bengal-deshi-cotton.webp',
 };
 
 const enrichedCategories = categories.map((cat) => ({
   ...cat,
   count: allProducts.filter((p) => p.data.category === cat.id).length,
-  image: categoryImages[cat.id] || 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+  image: categoryImages[cat.id] || '/images/about-produce.jpg',
 }));
 ---
 
