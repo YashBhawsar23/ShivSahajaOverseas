@@ -417,7 +417,7 @@ const breadcrumbSchema = {
       });
 
       try {
-        const response = await fetch('/api/enquiry', {
+        const response = await fetch('/api/enquiry/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -425,7 +425,7 @@ const breadcrumbSchema = {
           body: JSON.stringify(data),
         });
 
-        const result = await response.json();
+        const result = await response.json().catch(() => ({}));
 
         if (response.ok && result.success) {
           if (successText && result.message) {
@@ -436,7 +436,7 @@ const breadcrumbSchema = {
           alertSuccess?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           if (errorText) {
-            errorText.textContent = result.error || 'Failed to process inquiry. Please email us directly.';
+            errorText.textContent = result.error || 'Failed to process inquiry. Please email us directly at enquiry@shivsahajaoverseas.com.';
           }
           alertError?.classList.remove('hidden');
           alertError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -446,6 +446,7 @@ const breadcrumbSchema = {
           errorText.textContent = 'Network or connection error. Please email enquiry@shivsahajaoverseas.com directly.';
         }
         alertError?.classList.remove('hidden');
+        alertError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         spinner?.classList.add('hidden');
