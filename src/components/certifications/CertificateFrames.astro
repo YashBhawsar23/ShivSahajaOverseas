@@ -1,0 +1,195 @@
+---
+import Container from '../common/Container.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+import { CERTIFICATE_SLOTS, type CertificateItem } from '../../config/site';
+
+interface Props {
+  certificates?: CertificateItem[];
+}
+
+const { certificates = CERTIFICATE_SLOTS } = Astro.props;
+const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image.trim().length > 0));
+---
+
+<section class="py-16 sm:py-20 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Official Company Certificates">
+  <Container>
+    <SectionHeader
+      badge="Official Documentation"
+      title="Company Registration Certificates"
+      subtitle="Verified export accreditations and statutory trade licenses displayed in full clarity for international buyer due diligence."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      {certificates.map((cert) => {
+        const hasImage = Boolean(cert.image && cert.image.trim().length > 0);
+        return (
+          <article class="group bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3.5 sm:p-4 flex flex-col">
+            {/* Outer Document Mat Frame */}
+            <div
+              class:list={[
+                'relative aspect-[3/4] w-full rounded-xl overflow-hidden flex items-center justify-center',
+                hasImage
+                  ? 'bg-white border border-[#E8E5DC]'
+                  : 'bg-gradient-to-b from-[#FAF9F5] to-[#F2EFE6] border border-dashed border-[#B69A63]/60',
+              ]}
+            >
+              {hasImage ? (
+                <button
+                  type="button"
+                  class="cert-zoom-trigger w-full h-full block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] relative"
+                  data-cert-src={cert.image}
+                  data-cert-title={cert.title}
+                  data-cert-alt={cert.alt || cert.title}
+                  aria-label={`View full size clear image of ${cert.title}`}
+                >
+                  <img
+                    src={cert.image}
+                    alt={cert.alt || cert.title}
+                    width="900"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-contain bg-white p-1.5 transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                  <span class="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#102C50]/90 text-white text-[10px] font-semibold tracking-wide shadow-sm backdrop-blur-sm opacity-90 group-hover:opacity-100">
+                    <svg class="w-3 h-3 text-[#CBB482]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                    </svg>
+                    View Clear Image
+                  </span>
+                </button>
+              ) : (
+                <div class="w-full h-full p-4 flex flex-col items-center justify-center text-center relative select-none">
+                  {/* Subtle Institutional Corner Borders */}
+                  <span class="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[#B69A63]/55 rounded-tl-xs" aria-hidden="true"></span>
+                  <span class="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-[#B69A63]/55 rounded-tr-xs" aria-hidden="true"></span>
+                  <span class="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b-2 border-l-2 border-[#B69A63]/55 rounded-bl-xs" aria-hidden="true"></span>
+                  <span class="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#B69A63]/55 rounded-br-xs" aria-hidden="true"></span>
+
+                  <span class="px-2.5 py-0.5 rounded-full bg-[#102C50]/8 text-[#102C50] text-[10px] font-bold uppercase tracking-widest mb-4 border border-[#102C50]/10">
+                    Frame {cert.slotNumber}
+                  </span>
+
+                  <div class="w-14 h-14 rounded-2xl bg-white border border-[#E8E5DC] shadow-sm flex items-center justify-center text-[#B69A63] mb-3.5 group-hover:scale-105 group-hover:border-[#B69A63]/50 transition-all">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+
+                  <p class="text-xs font-bold text-[#102C50] tracking-tight">
+                    Certificate Frame
+                  </p>
+                  <p class="text-[11px] text-slate-500 mt-1 max-w-[16ch] leading-snug">
+                    Reserved for high-resolution certificate image
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Frame Label Plate */}
+            <div class="pt-3.5 px-1 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-sm sm:text-base font-bold text-[#102C50] leading-snug">
+                  {cert.title}
+                </h3>
+                <p class="text-[11px] text-slate-500 mt-0.5 font-medium">
+                  {cert.subtitle}
+                </p>
+              </div>
+
+              <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                <span class="font-mono text-slate-400">#{cert.slotNumber}</span>
+                {hasImage ? (
+                  <span class="inline-flex items-center gap-1 font-semibold text-emerald-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Verified Copy
+                  </span>
+                ) : (
+                  <span class="inline-flex items-center gap-1 font-semibold text-[#91753C]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B69A63]"></span>
+                    Awaiting Upload
+                  </span>
+                )}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Container>
+
+  <!-- Full-Resolution Certificate Lightbox Modal (only rendered when uploaded images exist) -->
+  {hasAnyImage && (
+    <div
+      id="cert-lightbox"
+      class="hidden fixed inset-0 z-[100] bg-[#0A1C33]/90 backdrop-blur-sm p-4 sm:p-8 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cert-lightbox-title"
+    >
+      <div class="relative max-w-4xl w-full max-h-[92vh] bg-white rounded-2xl shadow-2xl border border-[#B69A63]/40 overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between px-5 py-3.5 bg-[#102C50] text-white border-b border-[#B69A63]/30">
+          <p id="cert-lightbox-title" class="text-sm sm:text-base font-bold text-[#CBB482] truncate pr-4"></p>
+          <button
+            type="button"
+            id="cert-lightbox-close"
+            aria-label="Close certificate preview"
+            class="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#183B63] transition-colors cursor-pointer"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div id="cert-lightbox-body" class="p-4 sm:p-6 bg-[#F8F7F3] overflow-auto flex items-center justify-center flex-1"></div>
+      </div>
+    </div>
+  )}
+</section>
+
+<script>
+  function setupCertificateLightbox() {
+    const triggers = document.querySelectorAll('.cert-zoom-trigger');
+    const modal = document.getElementById('cert-lightbox');
+    const modalBody = document.getElementById('cert-lightbox-body');
+    const modalTitle = document.getElementById('cert-lightbox-title');
+    const closeBtn = document.getElementById('cert-lightbox-close');
+
+    if (!modal || !modalBody || !modalTitle || !triggers.length) return;
+
+    function closeModal() {
+      modal?.classList.add('hidden');
+      if (modalBody) modalBody.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const el = btn as HTMLElement;
+        const src = el.dataset.certSrc;
+        if (!src) return;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = el.dataset.certAlt || '';
+        img.className = 'max-w-full max-h-[76vh] w-auto h-auto object-contain rounded-lg shadow-md bg-white';
+        modalBody.innerHTML = '';
+        modalBody.appendChild(img);
+        modalTitle.textContent = el.dataset.certTitle || 'Official Certificate';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        closeBtn?.focus();
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+  }
+
+  setupCertificateLightbox();
+  document.addEventListener('astro:page-load', setupCertificateLightbox);
+</script>

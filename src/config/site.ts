@@ -108,3 +108,53 @@ export const SITE_CONFIG = {
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;
+
+export interface CertificateItem {
+  id: string;
+  slotNumber: string;
+  title: string;
+  subtitle: string;
+  /** Path under /images/certificates/ (leave empty string '' while frame is awaiting upload). */
+  image: string;
+  alt: string;
+}
+
+/**
+ * Official Company Certificates (4 display frames on /certifications).
+ * To publish a certificate, save a high-resolution image in `public/images/certificates/`
+ * and set `image` to e.g. '/images/certificates/cert-1.webp' along with `title` & `alt`.
+ */
+export const CERTIFICATE_SLOTS: CertificateItem[] = [
+  {
+    id: 'certificate-01',
+    slotNumber: '01',
+    title: 'Certificate Slot 01',
+    subtitle: 'Official Statutory Registration',
+    image: '',
+    alt: 'Official Statutory Certificate 01 — Shivsahaja Overseas',
+  },
+  {
+    id: 'certificate-02',
+    slotNumber: '02',
+    title: 'Certificate Slot 02',
+    subtitle: 'Quality & Export Compliance',
+    image: '',
+    alt: 'Official Statutory Certificate 02 — Shivsahaja Overseas',
+  },
+  {
+    id: 'certificate-03',
+    slotNumber: '03',
+    title: 'Certificate Slot 03',
+    subtitle: 'Trade Authority Accreditation',
+    image: '',
+    alt: 'Official Statutory Certificate 03 — Shivsahaja Overseas',
+  },
+  {
+    id: 'certificate-04',
+    slotNumber: '04',
+    title: 'Certificate Slot 04',
+    subtitle: 'Food Safety & Standards Approval',
+    image: '',
+    alt: 'Official Statutory Certificate 04 — Shivsahaja Overseas',
+  },
+];
