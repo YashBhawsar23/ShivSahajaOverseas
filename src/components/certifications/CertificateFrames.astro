@@ -19,11 +19,14 @@ const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image
       subtitle="Verified export accreditations and statutory trade licenses displayed in full clarity for international buyer due diligence."
     />
 
-    <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-6 sm:gap-7">
+    <div
+      id="cert-carousel-track"
+      class="max-w-5xl mx-auto flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pt-1 pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center sm:gap-7 sm:overflow-visible sm:p-0"
+    >
       {certificates.map((cert) => {
         const hasImage = Boolean(cert.image && cert.image.trim().length > 0);
         return (
-          <article class="group w-full sm:w-[calc((100%-1.75rem)/2-0.5px)] lg:w-[calc((100%-3.5rem)/3-0.5px)] bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3.5 sm:p-4 flex flex-col">
+          <article class="group w-[80%] flex-shrink-0 snap-start sm:flex-shrink sm:w-[calc((100%-1.75rem)/2-0.5px)] lg:w-[calc((100%-3.5rem)/3-0.5px)] bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3.5 sm:p-4 flex flex-col">
             {/* Outer Document Mat Frame */}
             <div
               class:list={[
@@ -105,6 +108,54 @@ const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image
         );
       })}
     </div>
+
+    {/* Mobile Horizontal Carousel Controls (matches homepage pattern) */}
+    {certificates.length > 1 && (
+      <div class="mt-4 flex items-center justify-center gap-4 sm:hidden" aria-label="Certificate carousel controls">
+        <button
+          type="button"
+          id="cert-carousel-prev"
+          aria-label="Previous certificate"
+          disabled
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <div class="flex flex-col items-center gap-1.5">
+          <div class="flex items-center gap-2" id="cert-carousel-dots" role="tablist" aria-label="Select certificate">
+            {certificates.map((cert, idx) => (
+              <button
+                type="button"
+                data-cert-dot={idx}
+                aria-label={`Show ${cert.title}`}
+                aria-current={idx === 0 ? 'true' : 'false'}
+                class:list={[
+                  'cert-carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer',
+                  idx === 0 ? 'w-6 bg-[#102C50]' : 'w-2 bg-[#B69A63]/40 hover:bg-[#B69A63]',
+                ]}
+              />
+            ))}
+          </div>
+          <span class="text-[11px] font-semibold text-slate-500 tracking-wide">
+            <span id="cert-carousel-index" class="font-bold text-[#102C50]">1</span> / {certificates.length} &bull; Swipe or tap
+          </span>
+        </div>
+
+        <button
+          type="button"
+          id="cert-carousel-next"
+          aria-label="Next certificate"
+          class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    )}
   </Container>
 
   <!-- Full-Resolution Certificate Lightbox Modal (only rendered when uploaded images exist) -->
@@ -144,7 +195,8 @@ const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image
     const modalTitle = document.getElementById('cert-lightbox-title');
     const closeBtn = document.getElementById('cert-lightbox-close');
 
-    if (!modal || !modalBody || !modalTitle || !triggers.length) return;
+    if (!modal || !modalBody || !modalTitle || !triggers.length || modal.dataset.lightboxBound === 'true') return;
+    modal.dataset.lightboxBound = 'true';
 
     function closeModal() {
       modal?.classList.add('hidden');
@@ -179,6 +231,121 @@ const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image
     });
   }
 
-  setupCertificateLightbox();
-  document.addEventListener('astro:page-load', setupCertificateLightbox);
+  function setupCertificateCarousel() {
+    const track = document.getElementById('cert-carousel-track');
+    const prevBtn = document.getElementById('cert-carousel-prev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('cert-carousel-next') as HTMLButtonElement | null;
+    const indexEl = document.getElementById('cert-carousel-index');
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.cert-carousel-dot'));
+
+    if (!track || track.dataset.carouselBound === 'true') return;
+    const slides = Array.from(track.querySelectorAll<HTMLElement>(':scope > article'));
+    if (slides.length <= 1) return;
+
+    track.dataset.carouselBound = 'true';
+    let activeIndex = 0;
+    let rafPending = false;
+    let isProgrammaticScroll = false;
+    let programmaticTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function updateControls(idx: number) {
+      activeIndex = idx;
+      if (indexEl) indexEl.textContent = String(idx + 1);
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+
+      dots.forEach((dot, i) => {
+        const isCurrent = i === idx;
+        dot.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+        dot.classList.toggle('w-6', isCurrent);
+        dot.classList.toggle('bg-[#102C50]', isCurrent);
+        dot.classList.toggle('w-2', !isCurrent);
+        dot.classList.toggle('bg-[#B69A63]/40', !isCurrent);
+        dot.classList.toggle('hover:bg-[#B69A63]', !isCurrent);
+      });
+    }
+
+    function goToSlide(idx: number) {
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(slides.length - 1, idx));
+      const trackRect = track.getBoundingClientRect();
+      const slideRect = slides[clamped].getBoundingClientRect();
+      const targetLeft = track.scrollLeft + (slideRect.left - trackRect.left);
+
+      isProgrammaticScroll = true;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      programmaticTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, 550);
+
+      updateControls(clamped);
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
+
+    function detectNearestSlide() {
+      if (!track || isProgrammaticScroll) return;
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, i) => {
+        const rect = slide.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(center - trackCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
+        }
+      });
+
+      if (bestIdx !== activeIndex) {
+        updateControls(bestIdx);
+      }
+    }
+
+    track.addEventListener(
+      'touchstart',
+      () => {
+        isProgrammaticScroll = false;
+        if (programmaticTimer) clearTimeout(programmaticTimer);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener('scrollend', () => {
+      isProgrammaticScroll = false;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      detectNearestSlide();
+    });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          detectNearestSlide();
+          rafPending = false;
+        });
+      },
+      { passive: true }
+    );
+
+    prevBtn?.addEventListener('click', () => goToSlide(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(activeIndex + 1));
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => goToSlide(idx));
+    });
+
+    updateControls(0);
+  }
+
+  function initCertificateFrames() {
+    setupCertificateLightbox();
+    setupCertificateCarousel();
+  }
+
+  initCertificateFrames();
+  document.addEventListener('astro:page-load', initCertificateFrames);
 </script>
