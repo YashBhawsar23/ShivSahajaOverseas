@@ -120,7 +120,7 @@ export interface CertificateItem {
 }
 
 /**
- * Official Company Certificates (4 display frames on /certifications).
+ * Official Company Certificates (5 display frames on /certifications).
  * To publish a certificate, save a high-resolution image in `public/images/certificates/`
  * and set `image` to e.g. '/images/certificates/cert-1.webp' along with `title` & `alt`.
  */
@@ -150,11 +150,19 @@ export const CERTIFICATE_SLOTS: CertificateItem[] = [
     alt: 'Goods and Services Tax Registration Certificate Form GST REG-06 (GSTIN 23CMYPN3521R1Z8) issued to Shivsahaja Overseas, Khargone, Madhya Pradesh',
   },
   {
-    id: 'certificate-04',
+    id: 'apeda-certificate',
     slotNumber: '04',
-    title: 'Certificate Slot 04',
-    subtitle: 'Pending Statutory Accreditation',
+    title: 'APEDA — Agricultural & Processed Food Products Export Development Authority',
+    subtitle: 'Ministry of Commerce & Industry • Govt. of India',
     image: '',
-    alt: 'Official Statutory Certificate 04 — Shivsahaja Overseas',
+    alt: 'APEDA — Agricultural & Processed Food Products Export Development Authority Certificate — Shivsahaja Overseas',
+  },
+  {
+    id: 'spices-board',
+    slotNumber: '05',
+    title: 'SPICES BOARD — Spices Board of India Compliance Standards',
+    subtitle: 'Ministry of Commerce & Industry • Govt. of India',
+    image: '',
+    alt: 'SPICES BOARD — Spices Board of India Compliance Standards Certificate — Shivsahaja Overseas',
   },
 ];

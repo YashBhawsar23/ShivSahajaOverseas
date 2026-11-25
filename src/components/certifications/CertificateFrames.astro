@@ -19,11 +19,11 @@ const hasAnyImage = certificates.some((cert) => Boolean(cert.image && cert.image
       subtitle="Verified export accreditations and statutory trade licenses displayed in full clarity for international buyer due diligence."
     />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+    <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-6 sm:gap-7">
       {certificates.map((cert) => {
         const hasImage = Boolean(cert.image && cert.image.trim().length > 0);
         return (
-          <article class="group bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3.5 sm:p-4 flex flex-col">
+          <article class="group w-full sm:w-[calc((100%-1.75rem)/2-0.5px)] lg:w-[calc((100%-3.5rem)/3-0.5px)] bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3.5 sm:p-4 flex flex-col">
             {/* Outer Document Mat Frame */}
             <div
               class:list={[
