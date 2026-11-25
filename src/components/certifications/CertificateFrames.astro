@@ -1,0 +1,309 @@
+---
+import Container from '../common/Container.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+import { CERTIFICATE_SLOTS, type CertificateItem } from '../../config/site';
+
+interface Props {
+  certificates?: CertificateItem[];
+}
+
+const { certificates = CERTIFICATE_SLOTS } = Astro.props;
+const visibleCertificates = certificates.filter((cert) => Boolean(cert.image && cert.image.trim().length > 0));
+---
+
+{visibleCertificates.length > 0 && (
+  <section class="py-12 sm:py-16 bg-[#F8F7F3] border-b border-[#E8E5DC]" aria-label="Official Company Certificates">
+    <Container>
+      <SectionHeader
+        badge="Official Documentation"
+        title="Company Registration Certificates"
+        subtitle="Verified export accreditations and statutory trade licenses displayed in full clarity for international buyer due diligence."
+        class="mb-8 sm:mb-10"
+      />
+
+      <div
+        id="cert-carousel-track"
+        class="max-w-5xl mx-auto flex flex-nowrap items-start overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pt-1 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:items-stretch sm:justify-center sm:gap-7 sm:overflow-visible sm:p-0"
+      >
+        {visibleCertificates.map((cert) => (
+          <article class="group w-[80%] flex-shrink-0 snap-start sm:flex-shrink sm:w-[calc((100%-1.75rem)/2-0.5px)] lg:w-[calc((100%-3.5rem)/3-0.5px)] bg-white rounded-2xl border-2 border-[#E8E5DC] hover:border-[#B69A63] shadow-sm hover:shadow-xl transition-all duration-300 p-3 sm:p-3.5 flex flex-col">
+            {/* Outer Document Mat Frame */}
+            <div class="relative aspect-[210/297] w-full rounded-xl overflow-hidden flex items-center justify-center bg-white border border-[#E8E5DC]">
+              <button
+                type="button"
+                class="cert-zoom-trigger w-full h-full block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B69A63] relative"
+                data-cert-src={cert.image}
+                data-cert-title={cert.title}
+                data-cert-alt={cert.alt || cert.title}
+                aria-label={`View full size clear image of ${cert.title}`}
+              >
+                <img
+                  src={cert.image}
+                  alt={cert.alt || cert.title}
+                  width="1785"
+                  height="2526"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-contain bg-white p-1 transition-transform duration-300 group-hover:scale-[1.015]"
+                />
+              </button>
+            </div>
+
+            {/* Frame Label Plate */}
+            <div class="pt-3 px-0.5 sm:flex-1 flex flex-col sm:justify-between">
+              <div>
+                <h3 class="text-sm sm:text-[15px] font-bold text-[#102C50] leading-snug">
+                  {cert.title}
+                </h3>
+                <p class="text-[11px] text-slate-500 mt-0.5 font-medium leading-snug">
+                  {cert.subtitle}
+                </p>
+              </div>
+
+              <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                <span class="font-mono text-slate-400">#{cert.slotNumber}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Mobile Horizontal Carousel Controls (matches homepage pattern) */}
+      {visibleCertificates.length > 1 && (
+        <div class="mt-3 flex items-center justify-center gap-4 sm:hidden" aria-label="Certificate carousel controls">
+          <button
+            type="button"
+            id="cert-carousel-prev"
+            aria-label="Previous certificate"
+            disabled
+            class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div class="flex flex-col items-center gap-1.5">
+            <div class="flex items-center gap-2" id="cert-carousel-dots" role="tablist" aria-label="Select certificate">
+              {visibleCertificates.map((cert, idx) => (
+                <button
+                  type="button"
+                  data-cert-dot={idx}
+                  aria-label={`Show ${cert.title}`}
+                  aria-current={idx === 0 ? 'true' : 'false'}
+                  class:list={[
+                    'cert-carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer',
+                    idx === 0 ? 'w-6 bg-[#102C50]' : 'w-2 bg-[#B69A63]/40 hover:bg-[#B69A63]',
+                  ]}
+                />
+              ))}
+            </div>
+            <span class="text-[11px] font-semibold text-slate-500 tracking-wide">
+              <span id="cert-carousel-index" class="font-bold text-[#102C50]">1</span> / {visibleCertificates.length} &bull; Swipe or tap
+            </span>
+          </div>
+
+          <button
+            type="button"
+            id="cert-carousel-next"
+            aria-label="Next certificate"
+            class="w-10 h-10 rounded-full bg-white border border-[#E8E5DC] text-[#102C50] shadow-sm flex items-center justify-center hover:border-[#B69A63] hover:bg-[#102C50] hover:text-white transition-all cursor-pointer disabled:opacity-35 disabled:pointer-events-none flex-shrink-0"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
+    </Container>
+
+    <!-- Full-Resolution Certificate Lightbox Modal -->
+    <div
+      id="cert-lightbox"
+      class="hidden fixed inset-0 z-[100] bg-[#0A1C33]/90 backdrop-blur-sm p-4 sm:p-8 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cert-lightbox-title"
+    >
+      <div class="relative max-w-4xl w-full max-h-[92vh] bg-white rounded-2xl shadow-2xl border border-[#B69A63]/40 overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between px-5 py-3.5 bg-[#102C50] text-white border-b border-[#B69A63]/30">
+          <p id="cert-lightbox-title" class="text-sm sm:text-base font-bold text-[#CBB482] truncate pr-4"></p>
+          <button
+            type="button"
+            id="cert-lightbox-close"
+            aria-label="Close certificate preview"
+            class="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#183B63] transition-colors cursor-pointer"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div id="cert-lightbox-body" class="p-4 sm:p-6 bg-[#F8F7F3] overflow-auto flex items-center justify-center flex-1"></div>
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  function setupCertificateLightbox() {
+    const triggers = document.querySelectorAll('.cert-zoom-trigger');
+    const modal = document.getElementById('cert-lightbox');
+    const modalBody = document.getElementById('cert-lightbox-body');
+    const modalTitle = document.getElementById('cert-lightbox-title');
+    const closeBtn = document.getElementById('cert-lightbox-close');
+
+    if (!modal || !modalBody || !modalTitle || !triggers.length || modal.dataset.lightboxBound === 'true') return;
+    modal.dataset.lightboxBound = 'true';
+
+    function closeModal() {
+      modal?.classList.add('hidden');
+      if (modalBody) modalBody.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const el = btn as HTMLElement;
+        const src = el.dataset.certSrc;
+        if (!src) return;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = el.dataset.certAlt || '';
+        img.className = 'max-w-full max-h-[76vh] w-auto h-auto object-contain rounded-lg shadow-md bg-white';
+        modalBody.innerHTML = '';
+        modalBody.appendChild(img);
+        modalTitle.textContent = el.dataset.certTitle || 'Official Certificate';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        closeBtn?.focus();
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+  }
+
+  function setupCertificateCarousel() {
+    const track = document.getElementById('cert-carousel-track');
+    const prevBtn = document.getElementById('cert-carousel-prev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('cert-carousel-next') as HTMLButtonElement | null;
+    const indexEl = document.getElementById('cert-carousel-index');
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.cert-carousel-dot'));
+
+    if (!track || track.dataset.carouselBound === 'true') return;
+    const slides = Array.from(track.querySelectorAll<HTMLElement>(':scope > article'));
+    if (slides.length <= 1) return;
+
+    track.dataset.carouselBound = 'true';
+    let activeIndex = 0;
+    let rafPending = false;
+    let isProgrammaticScroll = false;
+    let programmaticTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function updateControls(idx: number) {
+      activeIndex = idx;
+      if (indexEl) indexEl.textContent = String(idx + 1);
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+
+      dots.forEach((dot, i) => {
+        const isCurrent = i === idx;
+        dot.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+        dot.classList.toggle('w-6', isCurrent);
+        dot.classList.toggle('bg-[#102C50]', isCurrent);
+        dot.classList.toggle('w-2', !isCurrent);
+        dot.classList.toggle('bg-[#B69A63]/40', !isCurrent);
+        dot.classList.toggle('hover:bg-[#B69A63]', !isCurrent);
+      });
+    }
+
+    function goToSlide(idx: number) {
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(slides.length - 1, idx));
+      const trackRect = track.getBoundingClientRect();
+      const slideRect = slides[clamped].getBoundingClientRect();
+      const targetLeft = track.scrollLeft + (slideRect.left - trackRect.left);
+
+      isProgrammaticScroll = true;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      programmaticTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, 550);
+
+      updateControls(clamped);
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
+
+    function detectNearestSlide() {
+      if (!track || isProgrammaticScroll) return;
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, i) => {
+        const rect = slide.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(center - trackCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
+        }
+      });
+
+      if (bestIdx !== activeIndex) {
+        updateControls(bestIdx);
+      }
+    }
+
+    track.addEventListener(
+      'touchstart',
+      () => {
+        isProgrammaticScroll = false;
+        if (programmaticTimer) clearTimeout(programmaticTimer);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener('scrollend', () => {
+      isProgrammaticScroll = false;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      detectNearestSlide();
+    });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          detectNearestSlide();
+          rafPending = false;
+        });
+      },
+      { passive: true }
+    );
+
+    prevBtn?.addEventListener('click', () => goToSlide(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(activeIndex + 1));
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => goToSlide(idx));
+    });
+
+    updateControls(0);
+  }
+
+  function initCertificateFrames() {
+    setupCertificateLightbox();
+    setupCertificateCarousel();
+  }
+
+  initCertificateFrames();
+  document.addEventListener('astro:page-load', initCertificateFrames);
+</script>

@@ -121,3 +121,60 @@ export function getPostalAddressSchema() {
     addressCountry: address.countryCode,
   } as const;
 }
+
+export interface CertificateItem {
+  id: string;
+  slotNumber: string;
+  title: string;
+  subtitle: string;
+  /** Path under /images/certificates/ (leave empty string '' while frame is awaiting upload). */
+  image: string;
+  alt: string;
+}
+
+/**
+ * Official Company Certificates (slots with an uploaded `image` display automatically on /certifications;
+ * pending slots remain hidden until their high-resolution image is added to `public/images/certificates/`).
+ */
+export const CERTIFICATE_SLOTS: CertificateItem[] = [
+  {
+    id: 'dgft-iec',
+    slotNumber: '01',
+    title: 'DGFT Importer-Exporter Code (IEC)',
+    subtitle: 'IEC No: CMYPN3521R • Govt. of India',
+    image: '/images/certificates/dgft-iec-certificate.webp',
+    alt: 'DGFT Importer-Exporter Code (IEC CMYPN3521R) certificate issued to Shivsahaja Overseas by the Ministry of Commerce and Industry, Government of India',
+  },
+  {
+    id: 'fssai-license',
+    slotNumber: '02',
+    title: 'FSSAI Central License (Form C)',
+    subtitle: 'License No: 11426999000622 • Exporter',
+    image: '/images/certificates/fssai-central-license.webp',
+    alt: 'FSSAI Central Food Safety License Form C (License Number 11426999000622) issued to Shivsahaja Overseas by Food Safety and Standards Authority of India',
+  },
+  {
+    id: 'gst-registration',
+    slotNumber: '03',
+    title: 'GST Registration (Form REG-06)',
+    subtitle: 'GSTIN: 23CMYPN3521R1Z8 • Regular',
+    image: '/images/certificates/gst-registration-certificate.webp',
+    alt: 'Goods and Services Tax Registration Certificate Form GST REG-06 (GSTIN 23CMYPN3521R1Z8) issued to Shivsahaja Overseas, Khargone, Madhya Pradesh',
+  },
+  {
+    id: 'apeda-certificate',
+    slotNumber: '04',
+    title: 'APEDA Registration',
+    subtitle: 'Agricultural & Processed Food Products Export Development Authority',
+    image: '',
+    alt: 'APEDA — Agricultural & Processed Food Products Export Development Authority Certificate — Shivsahaja Overseas',
+  },
+  {
+    id: 'spices-board',
+    slotNumber: '05',
+    title: 'SPICES BOARD Certification',
+    subtitle: 'Spices Board of India Compliance Standards',
+    image: '',
+    alt: 'SPICES BOARD — Spices Board of India Compliance Standards Certificate — Shivsahaja Overseas',
+  },
+];
