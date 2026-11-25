@@ -108,3 +108,16 @@ export const SITE_CONFIG = {
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;
+
+/** Builds a Schema.org PostalAddress object from the single verified office address. */
+export function getPostalAddressSchema() {
+  const { address } = SITE_CONFIG.contact;
+  return {
+    '@type': 'PostalAddress',
+    streetAddress: `${address.building}, ${address.street}`,
+    addressLocality: address.city,
+    addressRegion: address.state,
+    postalCode: address.postalCode,
+    addressCountry: address.countryCode,
+  } as const;
+}

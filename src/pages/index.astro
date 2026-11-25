@@ -10,22 +10,18 @@ import CertificationsPreview from '../components/home/CertificationsPreview.astr
 import FaqAccordion from '../components/home/FaqAccordion.astro';
 import ContactCtaSection from '../components/home/ContactCtaSection.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
+import { SITE_CONFIG, getPostalAddressSchema } from '../config/site';
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Corporation',
-  name: 'Shivsahaja Overseas',
-  legalName: 'Shivsahaja Overseas',
-  url: 'https://shivsahajaoverseas.com',
+  name: SITE_CONFIG.legalName,
+  legalName: SITE_CONFIG.legalName,
+  url: SITE_CONFIG.siteUrl,
   logo: 'https://shivsahajaoverseas.com/images/og-banner.png',
   description: 'Premier Indian agricultural export enterprise supplying verified fresh fruits, vegetables, spices, grains, pulses, and cotton.',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Indore',
-    addressRegion: 'Madhya Pradesh',
-    postalCode: '452001',
-    addressCountry: 'IN',
-  },
+  email: SITE_CONFIG.contact.email,
+  address: getPostalAddressSchema(),
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+91-99770-28934',

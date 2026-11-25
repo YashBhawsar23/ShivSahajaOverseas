@@ -4,7 +4,7 @@ import Container from '../components/common/Container.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
 import Button from '../components/common/Button.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, getPostalAddressSchema } from '../config/site';
 
 const { enableImport } = SITE_CONFIG.features;
 
@@ -61,16 +61,12 @@ const aboutPageSchema = {
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Corporation',
-  name: 'Shivsahaja Overseas',
-  url: 'https://shivsahajaoverseas.com',
+  name: SITE_CONFIG.legalName,
+  url: SITE_CONFIG.siteUrl,
   logo: 'https://shivsahajaoverseas.com/images/og-banner.png',
   description: 'Premier Indian agricultural export enterprise supplying verified fresh fruits, vegetables, spices, grains, pulses, and cotton worldwide.',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Indore',
-    addressRegion: 'Madhya Pradesh',
-    addressCountry: 'IN',
-  },
+  email: SITE_CONFIG.contact.email,
+  address: getPostalAddressSchema(),
 };
 ---
 
