@@ -120,9 +120,8 @@ export interface CertificateItem {
 }
 
 /**
- * Official Company Certificates (5 display frames on /certifications).
- * To publish a certificate, save a high-resolution image in `public/images/certificates/`
- * and set `image` to e.g. '/images/certificates/cert-1.webp' along with `title` & `alt`.
+ * Official Company Certificates (slots with an uploaded `image` display automatically on /certifications;
+ * pending slots remain hidden until their high-resolution image is added to `public/images/certificates/`).
  */
 export const CERTIFICATE_SLOTS: CertificateItem[] = [
   {
