@@ -43,11 +43,11 @@ const standards = [
     verificationStatus: 'Official Quarantine Protocol',
   },
   {
-    code: 'SURVEYOR SURVEYS',
+    code: 'PRE-SHIPMENT QA',
     title: 'Independent Third-Party Verification (SGS / Intertek / Geo-Chem)',
     ministry: 'Accredited International Inspection Agencies',
     scope: 'Pre-shipment sampling, container inspection, gross/tare weight witnessing, and Certificate of Analysis (COA) issued according to buyer purchase order specifications.',
-    verificationStatus: 'Independent Certification Available',
+    verificationStatus: 'SGS / Intertek Ready',
   },
 ];
 
@@ -96,46 +96,37 @@ const certificationsSchema = {
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {standards.map((std) => (
-          <div class="p-7 rounded-2xl bg-[#F8F7F3] border border-[#E8E5DC] flex flex-col justify-between hover:border-[#B69A63] hover:shadow-lg transition-all duration-300">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="px-3 py-1 rounded-lg text-xs font-bold bg-[#102C50] text-[#CBB482] font-mono tracking-wider">
-                  {std.code}
-                </span>
-                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                  {std.verificationStatus}
-                </span>
-              </div>
-
-              <h3 class="text-lg font-bold text-[#102C50] mb-1.5 leading-snug">
-                {std.title}
-              </h3>
-
-              <span class="block text-xs font-semibold text-[#91753C] mb-3">
-                {std.ministry}
+          <div class="p-6 sm:p-7 rounded-2xl bg-[#F8F7F3] border border-[#E8E5DC] flex flex-col hover:border-[#B69A63] hover:shadow-lg transition-all duration-300">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <span class="px-3 py-1 rounded-lg text-xs font-bold bg-[#102C50] text-[#CBB482] font-mono tracking-wider whitespace-nowrap">
+                {std.code}
               </span>
-
-              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {std.scope}
-              </p>
+              <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+                {std.verificationStatus}
+              </span>
             </div>
 
-            <div class="mt-6 pt-3 border-t border-slate-200/60 flex items-center gap-1.5 text-[11px] text-slate-500">
-              <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span>Export Documentation Dispatched with B/L</span>
-            </div>
+            <h3 class="text-lg font-bold text-[#102C50] mb-1.5 leading-snug">
+              {std.title}
+            </h3>
+
+            <span class="block text-xs font-semibold text-[#91753C] mb-3">
+              {std.ministry}
+            </span>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {std.scope}
+            </p>
           </div>
         ))}
       </div>
 
       <!-- Compliance Notice Card -->
-      <div class="mt-14 p-6 sm:p-8 rounded-2xl bg-[#102C50] text-white shadow-xl max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-[#102C50] text-white shadow-xl max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div class="space-y-1 text-center sm:text-left">
-          <h4 class="text-lg font-bold text-[#CBB482]">Need Certificate Copies for Bank L/C Verification?</h4>
+          <h2 class="text-lg font-bold text-[#CBB482]">Need Shipment-Specific Lab Reports or Bank L/C Dossiers?</h2>
           <p class="text-xs sm:text-sm text-slate-300">
-            Official registration certificates and sample laboratory reports are provided directly to accredited commercial buyers.
+            Per-consignment Phytosanitary Certificates, Chamber Certificate of Origin (COO), and third-party SGS/Intertek reports are provided for every order.
           </p>
         </div>
         <Button href="/contact" variant="gold" size="md" class="flex-shrink-0">
