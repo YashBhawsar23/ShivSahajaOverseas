@@ -21,8 +21,8 @@ packaging: "25kg / 50kg PP bags with inner poly lining"
 moq: "1 x 20ft FCL Container (20 MT)"
 featured: false
 seo:
-  title: "Non-GMO Indian Corn Flour Exporter | Milled Maize Flour Supply"
-  description: "B2B supply of non-GMO Indian corn flour. Uniform particle granulation for industrial food processing and bakery use."
+  title: "Non-GMO Indian Corn Flour Exporter | Milled Maize Flour"
+  description: "B2B export supply of premium non-GMO Indian corn flour. Uniform particle granulation and certified food-grade purity for industrial bakeries and food processors."
 ---
 
 ### Natural Milling Precision

@@ -33,12 +33,28 @@ const productSchema = {
     '@type': 'Brand',
     name: 'Shivsahaja Overseas',
   },
+  sku: data.hsCode || data.slug,
+  mpn: data.hsCode || data.slug,
+  countryOfOrigin: {
+    '@type': 'Country',
+    name: 'India',
+  },
   offers: {
-    '@type': 'AggregateOffer',
+    '@type': 'Offer',
     priceCurrency: 'USD',
+    price: '0.00',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '0.00',
+      priceCurrency: 'USD',
+      name: 'Commercial wholesale rate on application (Incoterms: FOB / CIF / CFR)',
+    },
     availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',
-    price: '0.00',
+    seller: {
+      '@type': 'Organization',
+      name: 'Shivsahaja Overseas',
+    },
     description: 'B2B commercial wholesale quotation available upon inquiry based on Incoterms (FOB/CIF/CFR).',
   },
 };
@@ -73,6 +89,12 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+const defaultPhone = '919977028934';
+const waMessage = data.hsCode
+  ? `Hello Shivsahaja Overseas, I am interested in a commercial price quotation for ${data.name} (HS Code: ${data.hsCode}). Please share current FOB/CIF availability, export grading, and pricing.`
+  : `Hello Shivsahaja Overseas, I am interested in a commercial price quotation for ${data.name}. Please share current FOB/CIF availability, export grading, and pricing.`;
+const whatsappUrl = `https://wa.me/${defaultPhone}?text=${encodeURIComponent(waMessage)}`;
 ---
 
 <BaseLayout
@@ -81,6 +103,7 @@ const breadcrumbSchema = {
   image={data.image}
   type="product"
   hasBottomBar={true}
+  hideFloatingWhatsApp={true}
 >
   <JsonLd slot="head" schema={productSchema} />
   <JsonLd slot="head" schema={breadcrumbSchema} />
@@ -119,6 +142,7 @@ const breadcrumbSchema = {
             <ProductEnquiryCTA
               productName={data.name}
               moq={data.moq}
+              hsCode={data.hsCode}
             />
           </div>
         </div>
@@ -140,6 +164,7 @@ const breadcrumbSchema = {
             <ProductEnquiryCTA
               productName={data.name}
               moq={data.moq}
+              hsCode={data.hsCode}
             />
           </div>
         </div>
@@ -167,6 +192,20 @@ const breadcrumbSchema = {
       </div>
 
       <div class="flex items-center gap-2 flex-shrink-0">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center p-2 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-sm transition-colors"
+          aria-label={`Inquire about ${data.name} on WhatsApp`}
+          title="Inquire on WhatsApp"
+        >
+          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z" />
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.925-7.062A9.925 9.925 0 0012.012 2zm0 18.234h-.003a8.28 8.28 0 01-4.223-1.152l-.303-.18-3.111.737.747-3.033-.197-.314a8.257 8.257 0 01-1.267-4.298c.001-4.571 3.725-8.291 8.303-8.291 2.214 0 4.295.863 5.86 2.428a8.243 8.243 0 012.425 5.864c-.001 4.572-3.725 8.291-8.298 8.291z" />
+          </svg>
+        </a>
+
         <a
           href={`/contact?commodity=${encodeURIComponent(data.name)}`}
           class="inline-flex items-center justify-center p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#102C50] transition-colors"

@@ -21,8 +21,8 @@ packaging: "50kg new PP bags or 1 MT jumbo bulk bags"
 moq: "1 x 20ft FCL Container (24 MT)"
 featured: true
 seo:
-  title: "Non-GMO Indian Soybean Exporter | High Protein Food Grade Soybeans"
-  description: "Exporting 100% non-GMO Indian yellow soybeans. High protein and oil content for soy food manufacturing, crushing, and animal feed."
+  title: "Non-GMO Indian Soybean Exporter | Food Grade Soy"
+  description: "Exporting 100% non-GMO Indian yellow soybeans. High protein and oil content for soy food manufacturing, oil crushing, and commercial animal feed."
 ---
 
 ### 100% Non-GMO Certified

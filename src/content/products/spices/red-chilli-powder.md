@@ -21,8 +21,8 @@ packaging: "25kg / 50kg food-grade multilayer poly-lined paper sacks or customiz
 moq: "1 x 20ft FCL Container (18 MT)"
 featured: true
 seo:
-  title: "Pure Indian Red Chilli Powder Exporter | Guntur & Byadgi Spice Supply"
-  description: "Exporting premium purity red chilli powder directly from Guntur spice hubs. Zero adulteration, laboratory certified for worldwide markets."
+  title: "Indian Red Chilli Powder Exporter | Guntur & Byadgi"
+  description: "Exporting premium purity red chilli powder directly from Guntur spice hubs. Zero adulteration, laboratory certified for international food processors."
 ---
 
 ### Natural Pungency & Color

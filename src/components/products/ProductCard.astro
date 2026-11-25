@@ -43,7 +43,7 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
       <div class="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
         <img
           src={data.image}
-          alt={data.name}
+          alt={data.name} width="400" height="300"
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -75,7 +75,7 @@ const tradeTypeBadgeClass = tradeTypeBadgeClasses[data.tradeType] || 'bg-emerald
   <div class="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
     <img
       src={data.image}
-      alt={data.name}
+      alt={data.name} width="400" height="300"
       loading="lazy"
       decoding="async"
       class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"

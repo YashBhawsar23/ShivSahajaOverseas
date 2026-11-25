@@ -20,8 +20,8 @@ packaging: "Moisture-sealed export cartons or compressed bump bales"
 moq: "1 x 20ft FCL Container (~14 MT)"
 featured: false
 seo:
-  title: "Carded and Combed Cotton Sliver Exporter | Shivsahaja Overseas"
-  description: "B2B supply of combed and carded cotton slivers for high-end yarn spinning and luxury knit fabrics."
+  title: "Carded & Combed Cotton Exporter | Shivsahaja Overseas"
+  description: "Export supply of premium combed and carded cotton slivers from India for high-end spinning mills and luxury textile manufacturing under CIF/FOB terms."
 ---
 
 ### High Purity Fiber Processing

@@ -21,8 +21,8 @@ packaging: "25kg / 50kg export woven polypropylene bags with inner polyethylene 
 moq: "1 x 20ft FCL Container (20 MT)"
 featured: false
 seo:
-  title: "Indian Refined Wheat Flour (Maida) Exporter | Bakery All-Purpose Flour"
-  description: "Exporting premium refined wheat flour (Maida) from certified Indian roller flour mills. High gluten and fine granularity for bakeries."
+  title: "Indian Maida Exporter | Refined Wheat Flour Supply"
+  description: "Exporting premium refined wheat flour (Maida) from certified Indian roller flour mills. High gluten and uniform granularity for commercial bakeries."
 ---
 
 ### Baking Performance

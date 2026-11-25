@@ -20,7 +20,7 @@ packaging: "3kg / 5kg ventilated CFB cartons with shredded paper or foam cushion
 moq: "Air Freight: 1,000 kg / Sea Reefer: 1 x 20ft Container (+12°C)"
 featured: false
 seo:
-  title: "Fresh Indian Sapota Chikoo Exporter | Kalipatti Sapodilla Wholesale"
+  title: "Fresh Indian Sapota Chikoo Exporter | Kalipatti"
   description: "Exporting high brix Indian Sapota (Chikoo) from GI coastal zones. Sweet, caramel flavored fruit packed for international air and sea logistics."
 ---
 

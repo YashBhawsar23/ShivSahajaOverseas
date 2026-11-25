@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 
 const galleryItems = [
   {
@@ -67,12 +68,31 @@ const galleryItems = [
     caption: 'Containerized vessel loading operations at JNPT (Nhava Sheva Port), executing weekly scheduled departures to the Middle East and Europe.',
   },
 ];
+
+const galleryPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Shivsahaja Overseas Infrastructure & Commodity Gallery',
+  url: 'https://shivsahajaoverseas.com/gallery',
+  description: 'Visual gallery of sourcing packhouses, processing facilities, quality grading lines, and port operations.',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shivsahajaoverseas.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Gallery', item: 'https://shivsahajaoverseas.com/gallery' },
+  ],
+};
 ---
 
 <BaseLayout
   title="Infrastructure & Commodity Gallery"
   description="Explore the operational facilities, commodity inspections, port logistics, and processing technology behind Shivsahaja Overseas trade operations."
 >
+  <JsonLd slot="head" schema={galleryPageSchema} />
+  <JsonLd slot="head" schema={breadcrumbSchema} />
   <!-- Hero Section -->
   <section class="py-20 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white relative">
     <Container>
@@ -139,6 +159,9 @@ const galleryItems = [
         </button>
       </div>
 
+      <!-- Gallery Grid Section Heading (Screen Reader / Semantic Outline) -->
+      <h2 class="sr-only">Operational Facilities and Export Infrastructure Gallery</h2>
+
       <!-- Gallery Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="gallery-grid">
         {galleryItems.map((item) => (
@@ -150,7 +173,7 @@ const galleryItems = [
               <img
                 src={item.image}
                 alt={item.title}
-                loading="lazy"
+                loading="lazy" width="800" height="600"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
               <div class="absolute top-3 left-3">

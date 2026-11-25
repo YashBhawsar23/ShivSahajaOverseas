@@ -3,7 +3,7 @@ name: "Maize Seeds (Yellow Corn Grain / Seed)"
 slug: "maize-seeds"
 category: "seeds-pulses"
 shortDescription: "Cleaned yellow maize kernels for poultry feed, starch extraction, and certified hybrid sowing."
-description: "Selected from high-yielding hybrid varieties, our Yellow Maize is thoroughly dried, aspirated, and screened. Possesses high metabolizable energy, balanced amino acid profiles, and low moisture, making it ideal for animal feed mills, wet corn milling, and certified seed multiplication."
+description: "Sourced from high-yielding non-GMO cultivation zones in Madhya Pradesh and Bihar, our Yellow Maize is thoroughly dried, aspirated, and screened. Possesses high metabolizable energy, balanced amino acid profiles, and low moisture, making it ideal for animal feed mills, wet corn milling, and certified seed multiplication."
 image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1000&q=80"
 gallery:
   - "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1000&q=80"
@@ -21,8 +21,8 @@ packaging: "50kg PP bags or loose in container liner bags"
 moq: "1 x 20ft FCL Container (24 MT)"
 featured: false
 seo:
-  title: "Non-GMO Yellow Maize Exporter India | Indian Corn Seed & Grain"
-  description: "B2B exporter of clean Indian yellow maize seeds and grains. Non-GMO, low aflatoxin for international feed and starch manufacturing."
+  title: "Non-GMO Yellow Maize Exporter India | Indian Corn"
+  description: "B2B exporter of clean Indian yellow maize seeds and grains. Non-GMO, low aflatoxin specifications for animal feed and industrial starch production."
 ---
 
 ### Aflatoxin-Tested Quality

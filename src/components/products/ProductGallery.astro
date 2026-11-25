@@ -17,6 +17,9 @@ const allImages = [mainImage, ...gallery.filter((img) => img !== mainImage)];
       id="gallery-main-image"
       src={allImages[0]}
       alt={`${productName} primary display`}
+      width="800"
+      height="600"
+      fetchpriority="high"
       class="w-full h-full object-cover object-center transition-all duration-300"
       loading="eager"
     />
@@ -45,6 +48,8 @@ const allImages = [mainImage, ...gallery.filter((img) => img !== mainImage)];
           <img
             src={img}
             alt={`${productName} thumbnail ${idx + 1}`}
+            width="80"
+            height="80"
             class="w-full h-full object-cover"
             loading="lazy"
           />

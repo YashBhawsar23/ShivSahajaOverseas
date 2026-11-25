@@ -16,6 +16,18 @@ export async function getStaticPaths() {
 const { category } = Astro.props;
 const products = await getProductsByCategory(category.id);
 
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Indian ${category.name} Export Selection`,
+  itemListElement: products.map((p, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: p.data.name,
+    url: `https://shivsahajaoverseas.com/products/${p.data.slug}`,
+  })),
+};
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -44,9 +56,10 @@ const breadcrumbSchema = {
 
 <BaseLayout
   title={`${category.name} Exporter & Supplier India`}
-  description={`Export quality Indian ${category.name.toLowerCase()}. Verified specifications, sortex cleaned, and containerized logistics by Shivsahaja Overseas.`}
+  description={`Export-grade Indian ${category.name.toLowerCase()} sourced from prime agricultural belts. Verified specifications, sortex cleaned, and FOB/CIF shipping.`}
 >
   <JsonLd slot="head" schema={breadcrumbSchema} />
+  <JsonLd slot="head" schema={itemListSchema} />
 
   <!-- Category Hero Header -->
   <section class="py-16 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white">

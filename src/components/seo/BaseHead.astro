@@ -14,12 +14,20 @@ const siteUrl = 'https://shivsahajaoverseas.com';
 const {
   title,
   description = siteDescriptionDefault,
-  image = '/images/og-banner.svg',
+  image = '/images/og-banner.png',
   canonicalURL = Astro.url.href,
   type = 'website',
 } = Astro.props;
 
-const pageTitle = title ? `${title} | Shivsahaja Overseas` : siteTitleDefault;
+const brandSuffix = ' | Shivsahaja Overseas';
+let pageTitle = title || siteTitleDefault;
+if (title && !title.includes('Shivsahaja Overseas')) {
+  if (title.length + brandSuffix.length <= 60) {
+    pageTitle = `${title}${brandSuffix}`;
+  } else {
+    pageTitle = title;
+  }
+}
 const resolvedCanonical = typeof canonicalURL === 'string' ? canonicalURL : canonicalURL.href;
 const resolvedImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 ---
@@ -57,6 +65,9 @@ const resolvedImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={resolvedImage} />
 
+<!-- Preconnect for Remote Image CDN & Fonts -->
+<link rel="preconnect" href="https://images.unsplash.com" />
+<link rel="dns-prefetch" href="https://images.unsplash.com" />
 <!-- Google Fonts Preconnect for Premium Corporate Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

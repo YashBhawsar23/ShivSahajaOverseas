@@ -20,8 +20,8 @@ packaging: "500g / 1kg / 5kg food-grade nitrogen-flushed foil bags, or 25kg bulk
 moq: "5 Metric Tons"
 featured: false
 seo:
-  title: "Authentic Indian Garam Masala Exporter | Bulk Spice Blend Supply"
-  description: "Exporting premium royal Garam Masala spice blend worldwide. Sourced and blended using whole, authentic Indian spices."
+  title: "Indian Garam Masala Exporter | Bulk Spice Blend Supply"
+  description: "Authentic Indian Garam Masala export blend formulated with freshly roasted whole spices. Laboratory certified purity with custom bulk food service packaging."
 ---
 
 ### Master Blend Formula

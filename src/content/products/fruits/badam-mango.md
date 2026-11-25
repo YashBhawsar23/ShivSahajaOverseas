@@ -20,8 +20,8 @@ packaging: "3kg / 4.5kg CFB export cartons with foam sleeves and partition inser
 moq: "Air Shipment: 1,500 kg / Sea Reefer: Subject to seasonal route"
 featured: true
 seo:
-  title: "Badami Mango Exporter India | Sweet Indian Banganapalli Mango"
-  description: "Exporting seasonal Indian Badam (Badami) mangoes worldwide. APEDA packhouse treated, fiberless sweet golden pulp."
+  title: "Badami Mango Exporter India | Sweet Banganapalli Mango"
+  description: "Source export-quality seasonal Indian Badam (Banganapalli) mangoes directly with Shivsahaja Overseas. APEDA certified packhouse grading with fast logistics."
 ---
 
 ### Phytosanitary Protocol

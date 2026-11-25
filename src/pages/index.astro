@@ -9,12 +9,45 @@ import WhyChooseUs from '../components/home/WhyChooseUs.astro';
 import CertificationsPreview from '../components/home/CertificationsPreview.astro';
 import FaqAccordion from '../components/home/FaqAccordion.astro';
 import ContactCtaSection from '../components/home/ContactCtaSection.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Corporation',
+  name: 'Shivsahaja Overseas',
+  legalName: 'Shivsahaja Overseas',
+  url: 'https://shivsahajaoverseas.com',
+  logo: 'https://shivsahajaoverseas.com/images/og-banner.png',
+  description: 'Premier Indian agricultural export enterprise supplying verified fresh fruits, vegetables, spices, grains, pulses, and cotton.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Indore',
+    addressRegion: 'Madhya Pradesh',
+    postalCode: '452001',
+    addressCountry: 'IN',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+91-99770-28934',
+    contactType: 'sales',
+    availableLanguage: ['English', 'Hindi'],
+  },
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Shivsahaja Overseas',
+  url: 'https://shivsahajaoverseas.com',
+};
 ---
 
 <BaseLayout
   title="Connecting Global Markets Through Trusted Trade"
   description="Shivsahaja Overseas is a premier Indian export and trading house supplying verified fresh fruits and vegetables, spices, pulses, grains, and raw cotton worldwide."
 >
+  <JsonLd slot="head" schema={organizationSchema} />
+  <JsonLd slot="head" schema={webSiteSchema} />
   <!-- 2. Hero Section -->
   <HeroSection />
 

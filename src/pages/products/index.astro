@@ -11,6 +11,19 @@ import { SITE_CONFIG } from '../../config/site';
 const allProducts = await getAllProducts();
 const { enableImport } = SITE_CONFIG.features;
 
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Indian Agricultural Commodities Export Directory',
+  description: 'Comprehensive directory of export commodities supplied by Shivsahaja Overseas.',
+  itemListElement: allProducts.map((p, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: p.data.name,
+    url: `https://shivsahajaoverseas.com/products/${p.data.slug}`,
+  })),
+};
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -36,6 +49,7 @@ const breadcrumbSchema = {
   description="Browse Shivsahaja Overseas complete export catalogue: fresh Indian fruits and vegetables, pure spices, non-GMO pulses, food grains, and raw cotton."
 >
   <JsonLd slot="head" schema={breadcrumbSchema} />
+  <JsonLd slot="head" schema={itemListSchema} />
 
   <!-- Hero Header -->
   <section class="py-16 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white">

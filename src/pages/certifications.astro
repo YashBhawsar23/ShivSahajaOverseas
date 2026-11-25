@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
 import Button from '../components/common/Button.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 
 const standards = [
   {
@@ -48,12 +49,21 @@ const standards = [
     verificationStatus: 'Independent Certification Available',
   },
 ];
+
+const certificationsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Certifications & Regulatory Adherence',
+  url: 'https://shivsahajaoverseas.com/certifications',
+  description: 'Quality compliance and statutory export standards governing Shivsahaja Overseas including APEDA, FSSAI, Spices Board, DGFT, and NPPO.',
+};
 ---
 
 <BaseLayout
   title="Certifications & Quality Compliance Framework"
   description="Review the regulatory credentials, food safety frameworks, and inspection protocols governing Shivsahaja Overseas international export shipments."
 >
+  <JsonLd slot="head" schema={certificationsSchema} />
   <!-- Hero Section -->
   <section class="py-20 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white relative">
     <Container>

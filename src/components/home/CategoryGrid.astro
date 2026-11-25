@@ -43,7 +43,7 @@ const enrichedCategories = categories.map((cat) => ({
           <img
             src={cat.image}
             alt={cat.name}
-            loading="eager"
+            width="800" height="600" loading="lazy"
             decoding="async"
             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
           />

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/common/Container.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
 import Button from '../components/common/Button.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { SITE_CONFIG } from '../config/site';
 
 const { enableImport } = SITE_CONFIG.features;
@@ -48,12 +49,37 @@ const milestones = [
     desc: 'Serving international buyers across the Middle East, Southeast Asia, Africa, Europe, and beyond under internationally recognized Incoterms.',
   },
 ];
+
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Shivsahaja Overseas',
+  url: 'https://shivsahajaoverseas.com/about',
+  description: 'Corporate profile, heritage, quality commitments, and agricultural sourcing capabilities of Shivsahaja Overseas.',
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Corporation',
+  name: 'Shivsahaja Overseas',
+  url: 'https://shivsahajaoverseas.com',
+  logo: 'https://shivsahajaoverseas.com/images/og-banner.png',
+  description: 'Premier Indian agricultural export enterprise supplying verified fresh fruits, vegetables, spices, grains, pulses, and cotton worldwide.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Indore',
+    addressRegion: 'Madhya Pradesh',
+    addressCountry: 'IN',
+  },
+};
 ---
 
 <BaseLayout
   title="About Us | Corporate Profile & Heritage"
   description="Discover Shivsahaja Overseas: a premier Indian agricultural trading house bridging prime farming clusters with international commodity markets."
 >
+  <JsonLd slot="head" schema={organizationSchema} />
+  <JsonLd slot="head" schema={aboutPageSchema} />
   <!-- Hero Banner -->
   <section class="py-20 bg-gradient-to-b from-[#102C50] to-[#183B63] text-white relative">
     <Container>
@@ -102,7 +128,7 @@ const milestones = [
           <div class="grid grid-cols-2 gap-4">
             <div class="rounded-2xl overflow-hidden shadow-lg border border-[#E8E5DC] aspect-4/5">
               <img
-                src="/images/about-produce.jpg"
+                src="/images/about-produce.webp" width="600" height="750"
                 alt="Fresh Indian fruits and vegetables including mangoes, bananas, pomegranate, sapota, onions, tomatoes, ginger, garlic, and green chillies"
                 class="w-full h-full object-cover"
                 loading="lazy"
@@ -110,7 +136,7 @@ const milestones = [
             </div>
             <div class="rounded-2xl overflow-hidden shadow-lg border border-[#E8E5DC] aspect-4/5 mt-8">
               <img
-                src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+                src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80" width="600" height="750" width="600" height="750"
                 alt="Pure Indian spices and turmeric harvest"
                 class="w-full h-full object-cover"
                 loading="lazy"
